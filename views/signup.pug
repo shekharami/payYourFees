@@ -1,0 +1,39 @@
+extends login_signup_base
+block content
+    .back_to_main
+        a(href="/")= 'Back to main'
+    #signup_div
+        form.form_signup
+            table
+                tr
+                    td
+                        span#span_1 &nbsp &nbsp &nbsp &nbsp Create an Account
+                        hr
+                tr
+                    td
+                        input#signup_name.signup_form(type="text" placeholder="Enter your Name")
+                        br
+                        br
+                tr
+                    td
+                        input#signup_email.signup_form(type="email" placeholder="Enter your Email")
+                        br
+                        br
+                tr
+                    td
+                        input#signup_password.signup_form(type="password" placeholder=" Enter your Password")
+                        br
+                        br
+                tr
+                    td
+                        input#signup_confirmPassword.signup_form(type="password" placeholder=" Confirm your Password")
+                        br
+                        br
+                        input.button.signup(type="submit" name="" value="         Sign Up         ")
+                        br
+                        br
+                tr
+                    td
+                        span Already have an account?
+                            a(href="/login")  Login
+                            span &nbsp&nbspInstead

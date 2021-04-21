@@ -1,0 +1,12 @@
+extends login_signup_base
+block content
+    if(flag === 1)
+        h2#greeting.signout_msg You are not logged in!
+        br
+        .div_view_create
+            input.login_btn_homepage.button(type="button" value="Log In Here")
+    else
+        h2#greeting.signout_msg You have been logged out successfully
+        br
+        .div_view_create
+            input.login_btn_homepage.button(type="button" value="Log In Again")
