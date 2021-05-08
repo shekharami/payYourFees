@@ -8940,7 +8940,7 @@ if (userSignup) {
               }
 
               alert('Please provide your name');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 18:
@@ -8950,7 +8950,7 @@ if (userSignup) {
               }
 
               alert('Please provide your phone number');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 22:
@@ -8960,7 +8960,7 @@ if (userSignup) {
               }
 
               alert('Invalid phone number');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 26:
@@ -8970,7 +8970,7 @@ if (userSignup) {
               }
 
               alert('Please provide password');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 30:
@@ -8980,7 +8980,7 @@ if (userSignup) {
               }
 
               alert('Please confirm your password');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 34:
@@ -8990,7 +8990,7 @@ if (userSignup) {
               }
 
               alert('Passwords do not match');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 38:
@@ -9000,7 +9000,7 @@ if (userSignup) {
               }
 
               alert('please provide your address');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 42:
@@ -9010,7 +9010,7 @@ if (userSignup) {
               }
 
               alert('please provide your district');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 46:
@@ -9020,7 +9020,7 @@ if (userSignup) {
               }
 
               alert('please provide your pincode');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 50:
@@ -9030,7 +9030,7 @@ if (userSignup) {
               }
 
               alert('incorrect pincode');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 54:
@@ -9040,7 +9040,7 @@ if (userSignup) {
               }
 
               alert('please provide your state');
-              _context.next = 63;
+              _context.next = 66;
               break;
 
             case 58:
@@ -9062,12 +9062,20 @@ if (userSignup) {
 
             case 60:
               response = _context.sent;
-              console.log(response); //after response is recieved set button text as before
+              console.log(response);
+
+              if (response.data.status === 'success') {
+                alert('Account created successfully!');
+              } //after response is recieved set button text as before
+
+
+              instituteSignup.value = 'Create an Account';
+              location.reload(); //after response is recieved set button text as before
 
               userSignup.value = 'Create an Account'; // redirect to logged in homepage to users
               //to do
 
-            case 63:
+            case 66:
             case "end":
               return _context.stop();
           }
@@ -9118,7 +9126,7 @@ if (instituteSignup) {
               }
 
               alert('Please select Institute Type');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 20:
@@ -9128,7 +9136,7 @@ if (instituteSignup) {
               }
 
               alert('Please provide your name');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 24:
@@ -9138,7 +9146,7 @@ if (instituteSignup) {
               }
 
               alert('Please provide your email');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 28:
@@ -9148,7 +9156,7 @@ if (instituteSignup) {
               }
 
               alert('Please provide your phone number');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 32:
@@ -9158,7 +9166,7 @@ if (instituteSignup) {
               }
 
               alert('Invalid phone number');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 36:
@@ -9168,7 +9176,7 @@ if (instituteSignup) {
               }
 
               alert('Please provide password');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 40:
@@ -9178,7 +9186,7 @@ if (instituteSignup) {
               }
 
               alert('Please confirm your password');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 44:
@@ -9188,7 +9196,7 @@ if (instituteSignup) {
               }
 
               alert('Passwords do not match');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 48:
@@ -9198,7 +9206,7 @@ if (instituteSignup) {
               }
 
               alert('please provide your address');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 52:
@@ -9208,7 +9216,7 @@ if (instituteSignup) {
               }
 
               alert('please provide your district');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 56:
@@ -9218,7 +9226,7 @@ if (instituteSignup) {
               }
 
               alert('please provide your pincode');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 60:
@@ -9228,7 +9236,7 @@ if (instituteSignup) {
               }
 
               alert('incorrect pincode');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 64:
@@ -9238,7 +9246,7 @@ if (instituteSignup) {
               }
 
               alert('please provide your state');
-              _context2.next = 76;
+              _context2.next = 77;
               break;
 
             case 68:
@@ -9275,10 +9283,11 @@ if (instituteSignup) {
               } //after response is recieved set button text as before
 
 
-              instituteSignup.value = 'Create an Account'; // redirect to logged in homepage to users
+              instituteSignup.value = 'Create an Account';
+              location.reload(); // redirect to logged in homepage to users
               //to do
 
-            case 76:
+            case 77:
             case "end":
               return _context2.stop();
           }

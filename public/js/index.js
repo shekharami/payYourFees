@@ -102,6 +102,12 @@ if(userSignup){
                 state 
             })
             console.log(response)
+            if(response.data.status === 'success'){
+                alert('Account created successfully!')
+            }
+            //after response is recieved set button text as before
+            instituteSignup.value = 'Create an Account'
+            location.reload()
             //after response is recieved set button text as before
             userSignup.value = 'Create an Account'
             // redirect to logged in homepage to users
@@ -193,6 +199,7 @@ if(instituteSignup){
             }
             //after response is recieved set button text as before
             instituteSignup.value = 'Create an Account'
+            location.reload()
             // redirect to logged in homepage to users
 
             //to do
