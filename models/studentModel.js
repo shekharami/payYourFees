@@ -1,49 +1,34 @@
 const mongoose = require('mongoose');
 
-const instituteSchema = new mongoose.Schema({
-    instituteType:{
-        type: String
-    },
-
+const studentSchema = new mongoose.Schema({
+   
     name: {
         type: String,
         required: [true, 'You should provide your name']
     },
 
     email: {
-        type: String//,
-        // required: [true, 'you must provide an email']
+        type: String,
+        required: [true, 'you must provide an email']
     },
 
     phone: {
         type: [String]
     },
 
-    addressLine1:{
+    address:{
         type: String
     },
 
-    addressLine2:{
+    institute:{
+        type: mongoose.Types.ObjectId
+    },
+
+    rollNo: {
         type: String
     },
 
-    addressLine3:{
-        type: String
-    },
-
-    addressCity:{
-        type: String
-    },
-
-    addressDistrict:{
-        type: String
-    },
-
-    addressPinCode:{
-        type: Number
-    },
-
-    addressState:{
+    registrationNo: {
         type: String
     },
 
@@ -59,6 +44,18 @@ const instituteSchema = new mongoose.Schema({
         type: [String]
     },
 
+    enrolledOn: {
+        type: Date
+    },
+
+    feesPaidTill: {
+        type: Date
+    },
+
+    lastPaymentMadeOn: {
+        type: Date
+    },
+
     addedAt:{
         type: Date,
         default: Date.now()
@@ -70,6 +67,6 @@ const instituteSchema = new mongoose.Schema({
 }) 
 
 
-const Institute = mongoose.model('Institute',instituteSchema );
+const Student = mongoose.model('Student', studentSchema );
 
-module.exports = Institute;
+module.exports = Student;

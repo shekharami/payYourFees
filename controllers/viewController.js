@@ -1,3 +1,37 @@
+exports.p_homepage = async (req, res, next) => {
+    res.status(200).render('p_home', {
+        title: 'Pay your Fees | Home'
+    });
+    next();
+};
+
+exports.p_userLogin = async (req, res, next) => {
+    res.status(200).render('p_userLogin', {
+        title: 'Pay your Fees | User Login'
+    });
+    next();
+};
+
+exports.p_instituteLogin = async (req, res, next) => {
+    res.status(200).render('p_instituteLogin', {
+        title: 'Pay your Fees | Institute Login'
+    });
+    next();
+};
+
+exports.p_userSignup = async (req, res, next) => {
+    res.status(200).render('p_userSignup', {
+        title: 'Pay your Fees | Student Signup'
+    });
+    next();
+};
+
+exports.p_instituteSignup = async (req, res, next) => {
+    res.status(200).render('p_instituteSignup', {
+        title: 'Pay your Fees | Institute Signup'
+    });
+    next();
+};
 
 exports.getHome = async (req, res, next) => {
     res.status(200).render('home', {

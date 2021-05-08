@@ -32,11 +32,16 @@ confirmPassword: {
 exports.signUp = async (req, res, next) => {
     try{
         const user = {
-            name: req.body.name,
+            name:  req.body.name,
             email: req.body.email,
             phone: req.body.phone,
-            address: req.body.address,
-            institute: req.body.institute,
+            addressLine1: req.body.address1,
+            addressLine2: req.body.address2,
+            addressLine3: req.body.address3,
+            addressCity : req.body.city,
+            addressDistrict : req.body.district,
+            addressPincode : req.body.pincode,
+            addressState : req.body.state,
             password: req.body.password,
             confirmPassword: req.body.confirmPassword
         }
@@ -48,8 +53,6 @@ exports.signUp = async (req, res, next) => {
         }
 
         const token = createTokenSendCookie(data._id, req, res)
-
-        
 
         res.status(201).json({
             status: 'success',

@@ -1,0 +1,45 @@
+extends p_home_base
+block content
+
+    .introduction-div 
+        h2.intro-h2 This is Pay your fees, Here we will be having introduction about "payyourfees.com"
+
+    .payment-login-signup-div
+        .payment-div.div-style
+            h2 Pay your Fees
+            hr
+            form(action="") 
+                label(for='institute') Choose a Institute :
+                select#institute(name='institute')
+                    // $0.selectedOptions[0].value
+                    optgroup(label='School')
+                    option(value='mongo-id1') School 1
+                    option(value='mongo-id2') School 2
+                input#reg-number(type='text' placeholder='Registration Number...')
+                input#mob-number(type='text' placeholder='Mobile Number...')
+                input#submit(type='submit' value='Continue')
+        .login-div.div-style
+            h2 Login 
+            hr
+            input(type='radio' name='login-radio' value='user')
+            label(for='radio-user') Student / User
+            br
+            input(type='radio' name='login-radio' value='institute')
+            label(for='radio-institute') Institute
+            a#login-redirect-link(href='/#')
+                input#login-redirect-btn(type='submit' value='Login')
+            
+            br
+            br
+            h3 New User ?
+            hr
+            br
+            input(type='radio' name='signup-radio' value='user')
+            label(for='radio-user') Student / User
+            br
+            input(type='radio' name='signup-radio' value='institute')
+            label(for='radio-institute') Institute
+            a#signup-redirect-link(href='/#')
+                input#signup-redirect-btn(type='submit' value='Create an Account')
+    .notification-div
+        h2 Notifications will be posted here

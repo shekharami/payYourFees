@@ -10,7 +10,7 @@ dotenv.config({path: './config.env'})
 //     res.send('hello frrom server');
 // })
 
-const DB = (process.env.DATABASE+'&W=majority').replace('<DATABASE_PASSWORD>', process.env.DATABASE_PASSWORD);
+const DB = (process.env.DATABASE/*+'&W=majority'*/)//.replace('<DATABASE_PASSWORD>', process.env.DATABASE_PASSWORD);
 
 mongoose.connect(DB, {
     useNewUrlParser: true,

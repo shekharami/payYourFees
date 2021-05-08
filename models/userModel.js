@@ -10,24 +10,49 @@ const userSchema = new mongoose.Schema({
     },
 
     email: {
-        type: String,
-        required: [true,'You must provide your name'],
-        unique: true,
-        lowerCase: true
+        type: String//, 
+        // required: [true,'You must provide your name'],
+        // unique: true,
+        // lowerCase: true
     },
 
     phone: {
         type: [String]
     },
 
-    address:{
+    addressLine1:{
         type: String
     },
 
-    institute: {
-        type: mongoose.Types.ObjectId,
-        ref: Institute
+    addressLine2:{
+        type: String
     },
+
+    addressLine3:{
+        type: String
+    },
+
+    addressCity:{
+        type: String
+    },
+
+    addressDistrict:{
+        type: String
+    },
+
+    addressPincode:{
+        type: Number
+    },
+
+    addressState:{
+        type: String
+    },
+
+    // institute: {
+    //     type: mongoose.Types.ObjectId,
+    //     ref: Institute,
+        
+    // },
 
     password: {
         type: String,

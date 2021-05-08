@@ -46,7 +46,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json({ limit : '10kb'  }));
 
 app.use('/api/v1/institute', instituteRouter);
-app.use('/api/notes/user', userRouter);
+app.use('/api/v1/user', userRouter);
 app.use('/', viewRouter);
 
 /*

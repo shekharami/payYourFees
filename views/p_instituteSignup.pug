@@ -1,0 +1,36 @@
+extends p_home_base
+block content
+    .institute-signup-div
+        h2 Institute  Signup
+        hr
+        form
+            //- label(for='email-or-mobile') Email or Mobile Number : 
+            br
+            br
+            input#radio-college.intitute-type(type='radio' name='institute' value='college')
+            label(for='radio-user') College &nbsp &nbsp &nbsp
+            //- br
+            input#radio-coaching.intitute-type(type='radio' name='institute' value='coaching')
+            label(for='radio-institute') Coaching &nbsp &nbsp &nbsp
+            //- br 
+            //-associate onchange handler in order to show list of classess/subjects/programs
+            input#radio-school.intitute-type(type='radio' name='institute' value='school')
+            label(for='radio-institute') School
+            br
+            br
+            input#full-name(type='text' placeholder='Full Name' required='true') 
+            input#email(type='email' placeholder='Email' )
+            input#phone-number(type='text' placeholder='Phone Number' required='true' ) 
+            input#alternate-phone-number(type='text' placeholder='Alternate Phone Number' ) 
+            input#user-password(type='password' placeholder='Password' required='true')
+            input#confirm-password(type='password' placeholder='Retype Password to Confirm')
+            input#address1(type='text' maxlength='30' placeholder='Address Line 1' required='true' ) 
+            input#address2(type='text' maxlength='30' placeholder='Address Line 2' ) 
+            input#address3(type='text' maxlength='30' placeholder='Address Line 3' )
+            input#address-city(type='text' maxlength='20' placeholder='City' required='true' )
+            input#address-district(type='text' maxlength='20' placeholder='District' required='true' )
+            input#pincode(type='text' maxlength='6' placeholder='Pin Code' required='true') 
+            input#address-state(type='text' maxlength='20' placeholder='State' required='true' )
+            
+            input#institute-signup(type='submit' value='Create an Account')
+

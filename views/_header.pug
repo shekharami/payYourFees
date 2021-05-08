@@ -1,15 +1,17 @@
-//- header
-header
-        
-    .header
+.header
+    input.logout_button.button(type="button" value="Log Out")
+    | 
+    input.profile.button(type="button" value=`First Last`)
+    
 
-        if(user)
-            input.logout_button.button(type="button" value="Log Out")
-            | 
-            input.profile.button(type="button" value=`Hello ${user.name}`)
-        else
-            input.login_btn_homepage.button(type="button" value="Login") 
-            | 
-            input.signup_btn_homepage.button(type="button" value="Sign Up")
 
-        //- implement hiding signup button on your own using class (.signup__hide), css available at the last of stylesheet file
+    //- if(user)
+    //-     input.logout_button.button(type="button" value="Log Out")
+    //-     | 
+    //-     input.profile.button(type="button" value=`${user.name}First Last`)
+    //- else
+    //-     input.login_btn_homepage.button(type="button" value="Login") 
+    //-     | 
+    //-     input.signup_btn_homepage.button(type="button" value="Sign Up")
+
+    //- implement hiding signup button on your own using class (.signup__hide), css available at the last of stylesheet file

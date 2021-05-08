@@ -1,0 +1,30 @@
+extends p_home_base
+block content
+    .institute-login-div
+        h2 Institute Login
+        hr
+        form
+            //- label(for='institute-id') Institute Id : 
+            input#institute-id(type='text' placeholder='Institute Id')
+            //- label(for='password') password : 
+            input#institute-password(type='password' placeholder='Password')
+            input#institute-login(type='submit' value='Login')
+            a.forgot-password(href="") Forgot Password 
+            |  
+            a.insttute-signup(href="/institute-signup") Institute Signup
+            br
+            br
+            p If you just want to pay your fees, click here : 
+            a(href='/')
+                input#user-login-but(type='button' value='pay fees')
+            p If you are a student, to view your profile, login here : 
+            a(href='/user-login/')
+                input#institute-login-but(type='button' value='Student Login')
+    
+    //- .login-div
+    //-     p If you just want to pay your fees, click here : 
+    //-     a(href='/')
+    //-         input#user-login-but(type='submit' value='pay fees')
+    //-     p If you are a student, to view your profile, login here : 
+    //-     a(href='/user-login/')
+    //-         input#institute-login-but(type='submit' value='Student Login')

@@ -4,19 +4,19 @@ const instituteController = require('../controllers/instituteController');
 const router = express.Router();
 
 router
-.route('/get')
-.post(instituteController.getNote);
+.route('/details/:instituteId')
+.get(instituteController.getInstituteDetails);
 
 router
-.route('/save')
+.route('/signup')
 .post(instituteController.saveInsitute);
 
 router
-.route('/delete/:id')
-.delete(instituteController.deleteNote);
+.route('/delete/:instituteId')
+.delete(instituteController.deleteInstitute);
 
 router
 .route('/update')
-.patch(instituteController.updateNote)
+.patch(instituteController.updateInstituteData)
 
 module.exports = router;
