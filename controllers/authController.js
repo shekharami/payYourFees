@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
+const { type } = require('os');
 const { promisify } = require('util');
+const Institute = require('../models/instituteModel');
 const User = require('../models/userModel');
 // const { use } = require('../routes/userRouter');
 
@@ -102,7 +104,7 @@ exports.updateUser = async (req, res, next) => {
     }
     
 };
-
+/*
 exports.logIn = async (req, res, next) => {
     try{
         const {email, password} = req.body ;
@@ -146,13 +148,88 @@ exports.logIn = async (req, res, next) => {
     }
     
 };
+*/
+
+exports.logIn = async (req, res, next) => {
+    try{
+        const {phone, email, password, type} = req.body ;
+        console.log(phone, email, password, type)
+
+        if((!phone && !email) || !password){
+            throw new Error('Provide email or phone and password')
+        }
+
+        let query;
+        switch(type){
+            case 'user' : {
+                query = User.find()
+                if(phone){
+                    query.find({ phone : phone })
+                }else{
+                    query.find({email : email })
+                }
+                break;
+            }
+            case 'institute' : {
+                // query = Institute.find()
+                //Implement Institute Auth logic
+                break;
+
+            }
+        }
+        const [user] = await query.select('+password')
+
+        console.log(user)
+        
+
+        if(!user){
+            throw new Error('User does not exist')
+        }
+
+        const checkPass = await user.correctPassword(password, user.password)
+    
+        if(!checkPass){
+            throw new Error('Invalid password')
+        }
+
+        const token = createTokenSendCookie(user._id, req, res)
+
+        res.status(200).json({
+            status: "success",
+            token
+        })
+
+        next();
+
+    }catch(err){
+        if('ValidationError' in err){
+            console.log('---------------------------------')
+        }
+        console.log(err.stack)
+        
+        res.status(401).json({
+            status:"fail",
+            error: err
+        })
+        
+    }
+    
+};
 
 exports.isLoggedIn = async (req, res, next) => {
     if(req.cookies.jwt){
         try{
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, 'MY-SECOND-WEB-APP-NOTES-HOSTED-AT-CREATEWEBNOTE@HEROKU');
 
-            const freshUser = await User.findById(decoded.id);
+            // const freshUser = await User.findById(decoded.id);
+
+            let freshUser = await User.findById(decoded.id);
+
+            if(!freshUser){
+                freshUser = await Institute.findById(decoded.id)
+            }
+
+            if(!freshUser)
 
             if(!freshUser){
                 return next();

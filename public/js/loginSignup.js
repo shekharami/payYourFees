@@ -30,9 +30,14 @@ export const signUp = async (type, data) => {
 export const login = async (data) => {
 
     try{
+
+        let url = '/api/v1/user/login'
+        // (data.type === 'user') ? url += 'user/login' : url += 'instute/login' 
+        //currently both user & intitute are usinbg same login endpoint
+
         const res = await axios({  
             method: 'POST',
-            url: '/api/notes/user/login',
+            url,
             data,
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -40,10 +45,7 @@ export const login = async (data) => {
 
         });
 
-        if(res.data.status === 'success'){
-            alert('Logged in succesfully!')
-            location.assign('/')
-        }
+        return res
         
     }catch(err){
         alert('Wrong Email or Password !')

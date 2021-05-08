@@ -11,8 +11,9 @@ const instituteSchema = new mongoose.Schema({
     },
 
     email: {
-        type: String//,
-        // required: [true, 'you must provide an email']
+        type: String,
+        unique: true,
+        required: [true, 'you must provide an email']
     },
 
     phone: {

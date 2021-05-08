@@ -5,7 +5,6 @@ const signupRedirectBtn = document.getElementById('signup-redirect-btn');
 if(signupRedirectBtn){
     
     signupRedirectBtn.addEventListener('click', ()=>{
-        
         let redirectlink
         document.getElementsByName('signup-radio').forEach(e => {
             if(e.checked){
@@ -91,7 +90,7 @@ if(userSignup){
             { 
                 name, 
                 email, 
-                phone:[phone], 
+                phone, 
                 password, 
                 confirmPassword, 
                 address1, 
@@ -112,7 +111,7 @@ if(userSignup){
     })
 }
 
-const instituteSignup = document.getElementById('institute-signup');
+const instituteSignup = document.getElementById('institute-signup'); 
 if(instituteSignup){
     instituteSignup.addEventListener('click', async e => {
         e.preventDefault()
@@ -143,6 +142,8 @@ if(instituteSignup){
             alert('Please select Institute Type')
         }else if(!name){
             alert('Please provide your name')
+        }else if(!email){
+            alert('Please provide your email')
         }else if(!phone){
             alert('Please provide your phone number') 
         }else if(isNaN(phone*1) || phone.length !== 10){
@@ -187,11 +188,56 @@ if(instituteSignup){
                 state 
             })
             console.log(response)
+            if(response.data.status === 'success'){
+                alert('Account created successfully!')
+            }
             //after response is recieved set button text as before
-            userSignup.value = 'Create an Account'
+            instituteSignup.value = 'Create an Account'
             // redirect to logged in homepage to users
 
             //to do
         }
+    })
+}
+
+const userLogin = document.getElementById('user-login')
+
+if(userLogin){
+    userLogin.addEventListener('click', async e => {
+        e.preventDefault();
+
+        let eorp = document.getElementById('email-or-mobile').value;
+        const password = document.getElementById('user-password').value;
+        let email = null, phone = null;
+
+        if(!password || !eorp){
+            alert('Please provide email or phone and password !')
+        }else{
+            if(isNaN( eorp * 1 ) && eorp.includes('@')){
+                email = eorp
+            }else{
+                if((eorp.length === 10) && !isNaN(eorp * 1)){
+                    phone = eorp
+                }else{
+                    alert('Incorrect Email or phone')
+                    return
+                }
+            }
+
+            const authRes = await login({ email, phone, password , type : 'user'})
+            if(authRes.data.status === 'success'){
+                location.assign('/dashboard')
+            }
+
+        }
+    })
+}
+
+const instituteLogin = document.getElementById('institute-login')
+
+if(instituteLogin){
+    instituteLogin.addEventListener('click', e => {
+        e.preventDefault();
+
     })
 }

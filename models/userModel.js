@@ -10,14 +10,15 @@ const userSchema = new mongoose.Schema({
     },
 
     email: {
-        type: String//, 
+        type: String, 
         // required: [true,'You must provide your name'],
-        // unique: true,
+        unique: true
         // lowerCase: true
     },
 
     phone: {
-        type: [String]
+        type: String,
+        unique: true
     },
 
     addressLine1:{

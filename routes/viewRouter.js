@@ -38,4 +38,6 @@ router.get('/institute-signup', viewController.p_instituteSignup)
 
 router.use(authController.isLoggedIn)
 
+router.get('/dashboard', viewController.p_dashboard)
+
 module.exports = router;
