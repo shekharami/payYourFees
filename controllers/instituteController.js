@@ -1,5 +1,23 @@
 const Institute = require("../models/instituteModel");
 
+exports.getInstitutes = async (req, res, next) =>{
+
+    try{
+        
+        const institutes = await Institute.find().select('name')//.sort({name: -1 })
+        
+        res.locals.institutes = institutes.map(i => {
+            return { name: i.name, id : i._id }
+        })
+
+    }catch(err){
+
+        // res.locals.institutes = ['Error fetching institute names']
+    }
+    
+    next();
+};
+
 exports.getNoteforTemplate = async (req, res, next) =>{
 
     try{

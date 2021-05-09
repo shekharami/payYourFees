@@ -4,12 +4,15 @@ block content
         h2 Student / User  Signup
         hr
         form
-            //- label(for='email-or-mobile') Email or Mobile Number : 
             input#full-name(type='text' placeholder='Full Name' ) 
             input#email(type='email' placeholder='Email' )
-            input#phone-number(type='text' placeholder='Phone Number' ) 
+            input#phone-number(type='text' maxlength='10' placeholder='Phone Number' ) 
             input#user-password(type='password' placeholder='Password')
             input#confirm-password(type='password' placeholder='Retype Password to Confirm')
+            select#institute(name='institute')
+                option(value="") Choose an Institute 
+                each i in institutes 
+                    option(value=`${i.id}`)=i.name
             input#address1(type='text' maxlength='30' placeholder='Address Line 1' ) 
             input#address2(type='text' maxlength='30' placeholder='Address Line 2' ) 
             input#address3(type='text' maxlength='30' placeholder='Address Line 3' )

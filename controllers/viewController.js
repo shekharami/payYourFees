@@ -1,4 +1,5 @@
 exports.p_homepage = async (req, res, next) => {
+    // console.log(res.locals.institutes)
     res.status(200).render('p_home', {
         title: 'Pay your Fees | Home'
     });

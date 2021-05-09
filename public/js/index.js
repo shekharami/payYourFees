@@ -1,5 +1,5 @@
 import '@babel/polyfill';
-import { signUp, login, logout } from './loginSignup'
+import { signUp, login, logout } from './loginSignup';
 
 const signupRedirectBtn = document.getElementById('signup-redirect-btn');
 if(signupRedirectBtn){
@@ -52,6 +52,7 @@ if(userSignup){
         const phone = document.getElementById('phone-number').value
         const password = document.getElementById('user-password').value 
         const confirmPassword = document.getElementById('confirm-password').value 
+        const institute = document.getElementById('institute').value
         const address1 = document.getElementById('address1').value 
         const address2 = document.getElementById('address2').value  
         const address3 = document.getElementById('address3').value 
@@ -62,7 +63,6 @@ if(userSignup){
 
         if(!name){
             alert('Please provide your name')
-            
         }else if(!phone){
             alert('Please provide your phone number') 
         }else if(isNaN(phone*1) || phone.length !== 10){
@@ -93,6 +93,7 @@ if(userSignup){
                 phone, 
                 password, 
                 confirmPassword, 
+                institute,
                 address1, 
                 address2, 
                 address3, 
@@ -101,19 +102,18 @@ if(userSignup){
                 pincode, 
                 state 
             })
-            console.log(response)
+
             if(response.data.status === 'success'){
                 alert('Account created successfully!')
             }
             //after response is recieved set button text as before
-            instituteSignup.value = 'Create an Account'
-            location.reload()
-            //after response is recieved set button text as before
             userSignup.value = 'Create an Account'
-            // redirect to logged in homepage to users
-
-            //to do
+            // redirect to dasshboard
+            location.reload() // replce later
+            
         }
+
+        userSignup.value = 'Create an Account'
     })
 }
 

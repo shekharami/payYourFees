@@ -44,6 +44,7 @@ exports.signUp = async (req, res, next) => {
             addressDistrict : req.body.district,
             addressPincode : req.body.pincode,
             addressState : req.body.state,
+            institute : req.body.institute,
             password: req.body.password,
             confirmPassword: req.body.confirmPassword
         }

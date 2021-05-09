@@ -9,12 +9,12 @@ block content
             h2 Pay your Fees
             hr
             form(action="") 
-                label(for='institute') Choose a Institute :
                 select#institute(name='institute')
                     // $0.selectedOptions[0].value
-                    optgroup(label='School')
-                    option(value='mongo-id1') School 1
-                    option(value='mongo-id2') School 2
+                    //- optgroup(label='School')
+                    option(value="") Choose an Institute 
+                    each i in institutes 
+                        option(value=`${i.id}`)=i.name 
                 input#reg-number(type='text' placeholder='Registration Number...')
                 input#mob-number(type='text' placeholder='Mobile Number...')
                 input#submit(type='submit' value='Continue')

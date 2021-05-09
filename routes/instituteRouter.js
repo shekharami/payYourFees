@@ -8,6 +8,10 @@ router
 .get(instituteController.getInstituteDetails);
 
 router
+.route('/list')
+.get(instituteController.getInstitutes);
+
+router
 .route('/signup')
 .post(instituteController.saveInsitute);
 

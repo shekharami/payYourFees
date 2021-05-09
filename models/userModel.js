@@ -49,11 +49,10 @@ const userSchema = new mongoose.Schema({
         type: String
     },
 
-    // institute: {
-    //     type: mongoose.Types.ObjectId,
-    //     ref: Institute,
-        
-    // },
+    institute: {
+        type: mongoose.Types.ObjectId,
+        ref: Institute,
+    },
 
     password: {
         type: String,

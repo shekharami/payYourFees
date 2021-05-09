@@ -8914,7 +8914,7 @@ var userSignup = document.getElementById('user-signup');
 if (userSignup) {
   userSignup.addEventListener('click', /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-      var name, email, phone, password, confirmPassword, address1, address2, address3, city, district, pincode, state, response;
+      var name, email, phone, password, confirmPassword, institute, address1, address2, address3, city, district, pincode, state, response;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -8926,6 +8926,7 @@ if (userSignup) {
               phone = document.getElementById('phone-number').value;
               password = document.getElementById('user-password').value;
               confirmPassword = document.getElementById('confirm-password').value;
+              institute = document.getElementById('institute').value;
               address1 = document.getElementById('address1').value;
               address2 = document.getElementById('address2').value;
               address3 = document.getElementById('address3').value;
@@ -8935,122 +8936,123 @@ if (userSignup) {
               state = document.getElementById('address-state').value;
 
               if (name) {
-                _context.next = 18;
+                _context.next = 19;
                 break;
               }
 
               alert('Please provide your name');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 18:
+            case 19:
               if (phone) {
-                _context.next = 22;
+                _context.next = 23;
                 break;
               }
 
               alert('Please provide your phone number');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 22:
+            case 23:
               if (!(isNaN(phone * 1) || phone.length !== 10)) {
-                _context.next = 26;
+                _context.next = 27;
                 break;
               }
 
               alert('Invalid phone number');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 26:
+            case 27:
               if (password) {
-                _context.next = 30;
+                _context.next = 31;
                 break;
               }
 
               alert('Please provide password');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 30:
+            case 31:
               if (confirmPassword) {
-                _context.next = 34;
+                _context.next = 35;
                 break;
               }
 
               alert('Please confirm your password');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 34:
+            case 35:
               if (!(password !== confirmPassword)) {
-                _context.next = 38;
+                _context.next = 39;
                 break;
               }
 
               alert('Passwords do not match');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 38:
+            case 39:
               if (address1) {
-                _context.next = 42;
+                _context.next = 43;
                 break;
               }
 
               alert('please provide your address');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 42:
+            case 43:
               if (district) {
-                _context.next = 46;
+                _context.next = 47;
                 break;
               }
 
               alert('please provide your district');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 46:
+            case 47:
               if (pincode) {
-                _context.next = 50;
+                _context.next = 51;
                 break;
               }
 
               alert('please provide your pincode');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 50:
+            case 51:
               if (!(isNaN(pincode * 1) || pincode.length !== 6)) {
-                _context.next = 54;
+                _context.next = 55;
                 break;
               }
 
               alert('incorrect pincode');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 54:
+            case 55:
               if (state) {
-                _context.next = 58;
+                _context.next = 59;
                 break;
               }
 
               alert('please provide your state');
-              _context.next = 66;
+              _context.next = 65;
               break;
 
-            case 58:
-              _context.next = 60;
+            case 59:
+              _context.next = 61;
               return (0, _loginSignup.signUp)('user', {
                 name: name,
                 email: email,
                 phone: phone,
                 password: password,
                 confirmPassword: confirmPassword,
+                institute: institute,
                 address1: address1,
                 address2: address2,
                 address3: address3,
@@ -9060,20 +9062,20 @@ if (userSignup) {
                 state: state
               });
 
-            case 60:
+            case 61:
               response = _context.sent;
-              console.log(response);
 
               if (response.data.status === 'success') {
                 alert('Account created successfully!');
               } //after response is recieved set button text as before
 
 
-              instituteSignup.value = 'Create an Account';
-              location.reload(); //after response is recieved set button text as before
+              userSignup.value = 'Create an Account'; // redirect to dasshboard
 
-              userSignup.value = 'Create an Account'; // redirect to logged in homepage to users
-              //to do
+              location.reload(); // replce later
+
+            case 65:
+              userSignup.value = 'Create an Account';
 
             case 66:
             case "end":
@@ -9414,7 +9416,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50632" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50668" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
