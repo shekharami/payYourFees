@@ -1,4 +1,73 @@
-extends p_authorizedBase 
-block content 
-    h2 Student / Institute Dasboard Dashboard
-    
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='css/userDashboard.css')
+    title Document
+    style.
+      
+  body
+    div
+      section.welcome
+        br
+        h5
+          | Welcome 
+          | 
+          em
+            a(href='#profile')=user.name
+          | &nbsp;|&nbsp;
+          a(href='#logout') Log Out
+      header
+        ul
+          li
+            a.active(href='#home') Home
+          li
+            a(href='#payfees') Pay Fees
+          li
+            a(href='#notification') Notification
+          li
+            a(href='#contact-us') Contact Us
+    section.main-content
+      .content-div
+        h3 Welcome to payyourfees.com
+        p You can add a maximum of 5students to this account
+      .proceed-to-payment
+        a(href='#proceed_to_payment')
+          button Click to Continue 
+      .associated-students(style)
+        h2 Associated students with this account
+        h4 Select students for which fees to be paid
+        #mongodb-id1.students-card
+            input(type='checkbox' name='card')
+            h3 Student 1
+            p School/Institute/Coaching
+            p Class : X
+            p Section : A
+            p Roll No.: 1
+            p Fees paid upto : May - 2021
+        #mongodb-id2.students-card
+            input(type='checkbox' name='card')
+            h3 Student 2
+            p School/Institute/Coaching
+            p Class : II
+            p Section : B
+            p Roll No.: 2
+            p Fees paid upto : May - 2021
+        #mongodb-id3.students-card
+            input(type='checkbox' name='card')
+            h3 Student 3
+            p School/Institute/Coaching
+            p Class : V
+            p Section : A
+            p Roll No.: 3
+            p Fees paid upto : May - 2021
+        #mongodb-id3
+            img(src="/img/plus.png", alt="Add students")
+    div
+        a(href='#proceed_to_payment')
+            button Click to Continue 
+    footer
+        h3 Footer of the page
+    script(src='/js/bundle.js')

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const Institute = require('./instituteModel');
+const Student = require('./studentModel');
 
 const userSchema = new mongoose.Schema({
 
@@ -52,6 +53,11 @@ const userSchema = new mongoose.Schema({
     institute: {
         type: mongoose.Types.ObjectId,
         ref: Institute,
+    },
+
+    student: {
+        type: [mongoose.Types.ObjectId],
+        ref: Student,
     },
 
     password: {

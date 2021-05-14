@@ -1,0 +1,78 @@
+/*------------------------ User Dashboard ------------------------*/
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #f3f3f3;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+li a.active {
+  color: white;
+  background-color: #4caf50;
+}
+
+.float-right {
+  float: right;
+}
+
+.associated-students {
+  padding: 10px;
+  background-color: #ddd;
+  /* width: max-content; */
+  margin: 10px;
+}
+.students-card {
+  background-color: beige;
+  width: min-content;
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+}
+
+footer {
+  background-color: black;
+  height: 100px;
+}
+div {
+  border-radius: 10px;
+  text-align: center;
+}
+.content-div {
+  background-color: #ddd;
+  height: 200px;
+}
+input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  float: right;
+}
+.welcome {
+  text-align: right;
+  padding-right: 10px;
+  height: min-content;
+}
+h5 {
+  margin: 0%;
+}
+.content-div {
+  padding: 10px;
+  margin: 10px;
+}

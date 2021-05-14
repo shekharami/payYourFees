@@ -35,7 +35,7 @@ exports.p_instituteSignup = async (req, res, next) => {
 };
 
 exports.p_dashboard = async (req, res, next) => {
-    res.status(200).render('p_dashboard')
+    res.status(200).render('p_userDashboard')
 }
 
 exports.getHome = async (req, res, next) => {
