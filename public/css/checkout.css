@@ -1,4 +1,8 @@
-/*------------------------ User Dashboard ------------------------*/
+.border_bottom {
+  border-collapse: collapse;
+  border-bottom: 1px solid black;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -41,7 +45,7 @@ li a.active {
 }
 .students-card {
   background-color: beige;
-  width: max-content;
+  width: min-content;
   display: inline-block;
   padding: 10px;
   margin: 10px;
@@ -52,6 +56,8 @@ footer {
   height: 100px;
 }
 div {
+  margin-top: 10px;
+  margin-bottom: 10px;
   border-radius: 10px;
   text-align: center;
 }
@@ -69,7 +75,9 @@ input[type="checkbox"] {
   padding-right: 10px;
   height: min-content;
 }
-h5 {
+h5,
+h3,
+p {
   margin: 0%;
 }
 .content-div {

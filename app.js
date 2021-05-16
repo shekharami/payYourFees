@@ -11,6 +11,8 @@ const cookieParser= require('cookie-parser');
 const instituteRouter = require('./routes/instituteRouter');
 const viewRouter = require('./routes/viewRouter');
 const userRouter = require('./routes/userRouter');
+const paymentRouter = require('./routes/paymentRouter');
+const studentRouter = require('./routes/studentRouter');
 
 const app = express();
 
@@ -47,6 +49,9 @@ app.use(express.json({ limit : '10kb'  }));
 
 app.use('/api/v1/institute', instituteRouter);
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/payment', paymentRouter);
+app.use('/api/v1/student', studentRouter);
+
 app.use('/', viewRouter);
 
 /*

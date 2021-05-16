@@ -55,7 +55,7 @@ const userSchema = new mongoose.Schema({
         ref: Institute,
     },
 
-    student: {
+    students: {
         type: [mongoose.Types.ObjectId],
         ref: Student,
     },

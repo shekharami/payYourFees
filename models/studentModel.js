@@ -7,13 +7,20 @@ const studentSchema = new mongoose.Schema({
         required: [true, 'You should provide your name']
     },
 
+    father : {
+        type: String
+    },
+
+    mother : {
+        type: String
+    },
+
     email: {
-        type: String,
-        required: [true, 'you must provide an email']
+        type: String
     },
 
     phone: {
-        type: [String]
+        type: String
     },
 
     address:{
@@ -33,19 +40,19 @@ const studentSchema = new mongoose.Schema({
     },
 
     class: {
-        type: [String]
+        type: String
+    },
+
+    section:{
+        type: String
     },
 
     programme:{
-        type: [String]
+        type: String
     },
 
     course:{
-        type: [String]
-    },
-
-    enrolledOn: {
-        type: Date
+        type: String
     },
 
     feesPaidTill: {

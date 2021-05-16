@@ -15,22 +15,7 @@ const createTokenSendCookie = function(id, req, res){
     });
     return token
 }
-/*
-name: {
-    type: String,
-email: {
-    type: String
-phone: {
-    type: [String]
-address:{
-    type: String
-institute: {
-    type: mongoose.Types.ObjectId
-password: {
-    type: String,   
-confirmPassword: {
-    type: String,
-*/
+
 exports.signUp = async (req, res, next) => {
     try{
         const user = {
@@ -74,37 +59,37 @@ exports.signUp = async (req, res, next) => {
     
 };
 
-exports.updateUser = async (req, res, next) => {
-    try{
+// exports.updateUser = async (req, res, next) => {
+//     try{
 
-        const data = {
-            name : req.body.name,
-            email : req.body.email
-        }
+//         const data = {
+//             name : req.body.name,
+//             email : req.body.email
+//         }
 
-        if(!data){
-            throw new Error('Something went wrong')
-        }
+//         if(!data){
+//             throw new Error('Something went wrong')
+//         }
 
-        const user = await User.findByIdAndUpdate(req.body.id, data ,{new: true, runValidators: true})
+//         const user = await User.findByIdAndUpdate(req.body.id, data ,{new: true, runValidators: true})
 
-        res.status(201).json({
-            status: 'success',
-            user
-        })
+//         res.status(201).json({
+//             status: 'success',
+//             user
+//         })
 
-        next();
+//         next();
 
-    }catch(err){
-        console.log(err)
+//     }catch(err){
+//         console.log(err)
         
-        res.status(401).json({
-            status:"fail",
-            error: err.stack
-        })
-    }
+//         res.status(401).json({
+//             status:"fail",
+//             error: err.stack
+//         })
+//     }
     
-};
+// };
 /*
 exports.logIn = async (req, res, next) => {
     try{

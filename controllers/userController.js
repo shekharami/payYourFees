@@ -1,6 +1,6 @@
 const Institute = require("../models/instituteModel");
 const User = require("../models/userModel");
-
+const Student = require("../models/studentModel");
 
 exports.getUser = async (req, res, next) =>{
 
@@ -22,9 +22,6 @@ exports.getUser = async (req, res, next) =>{
             });
 
         }
-
-        
-
     }catch(err){
         console.log(err);
     }
@@ -53,40 +50,49 @@ exports.saveInsitute = async (req, res, next) =>{
     next();
 };
 
-exports.updateNote = async(req, res, next) => {
+exports.updateUser = async (req, res, next) => {
     try{
-        
-        //const note = await Institute.findOneAndUpdate({_id: req.body.id},{$set:{item: req.body.item}, createdAt: Date.now()},{new:true});
-        const note = await Institute.findByIdAndUpdate({_id: req.body.id},{$set:{item: req.body.item}, createdAt: Date.now()},{new:true});
 
-        res.status(200).json({
-            status: "success",
-            data: {
-                note
-            }
-        });
-    
+        const data = {
+            name : req.body.name,
+            email : req.body.email
+        }
+
+        if(!data){
+            throw new Error('Something went wrong')
+        }
+
+        const user = await User.findByIdAndUpdate(req.body.id, data ,{new: true, runValidators: true})
+
+        res.status(201).json({
+            status: 'success',
+            user
+        })
+
+        next();
 
     }catch(err){
         console.log(err)
+        
+        res.status(401).json({
+            status:"fail",
+            error: err.stack
+        })
     }
-
-    next();
-}
-
-exports.deleteNote = async(req, res, next) =>{
-    try{
-        await Institute.findOneAndDelete({_id: req.params.id});
-
-        res.status(204).json({
-            status: "success",
-            data: null
-        });
-
-    }catch(err){
-        console.log(err);
-    }
-
-    next();
-
+    
 };
+
+exports.addStudent = async (req, res, next) => {
+
+    try{
+
+        // findstudentfrom database
+    }catch(err){
+
+        res.status(200).json({
+            status: 'fail',
+            error: err.message
+        })
+    }
+    next()
+}

@@ -1,4 +1,4 @@
-exports.p_homepage = async (req, res, next) => {
+exports.p_homepage = (req, res, next) => {
     // console.log(res.locals.institutes)
     res.status(200).render('p_home', {
         title: 'Pay your Fees | Home'
@@ -6,52 +6,47 @@ exports.p_homepage = async (req, res, next) => {
     next();
 };
 
-exports.p_userLogin = async (req, res, next) => {
+exports.p_userLogin = (req, res, next) => {
     res.status(200).render('p_userLogin', {
         title: 'Pay your Fees | User Login'
     });
     next();
 };
 
-exports.p_instituteLogin = async (req, res, next) => {
+exports.p_instituteLogin = (req, res, next) => {
     res.status(200).render('p_instituteLogin', {
         title: 'Pay your Fees | Institute Login'
     });
     next();
 };
 
-exports.p_userSignup = async (req, res, next) => {
+exports.p_userSignup = (req, res, next) => {
     res.status(200).render('p_userSignup', {
         title: 'Pay your Fees | Student Signup'
     });
     next();
 };
 
-exports.p_instituteSignup = async (req, res, next) => {
+exports.p_instituteSignup = (req, res, next) => {
     res.status(200).render('p_instituteSignup', {
         title: 'Pay your Fees | Institute Signup'
     });
     next();
 };
 
-exports.p_dashboard = async (req, res, next) => {
+exports.p_dashboard = (req, res, next) => {
     res.status(200).render('p_userDashboard')
-}
-
-exports.getHome = async (req, res, next) => {
-    res.status(200).render('home', {
-        title: 'Notes | Home'
-    });
-    next();
+    next()
 };
 
-exports.getNotes = async (req, res, next) => {
+exports.getCheckout =  (req, res, next) => {
+    res.header({ 'Content-Security-Policy': '*' }).status(200).render('p_checkout', { key : process.env.RAZORPAY_KEY })
+    next()
+};
 
-    res.status(200).render('myNotes', {
-        title: 'My Notes'
-    });
-    
-    next();
+exports.addStudent = (req, res, next) => {
+    res.status(200).render('p_addStudent')
+    next()
 };
 
 

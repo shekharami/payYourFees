@@ -16,7 +16,7 @@ html(lang='en')
           | Welcome 
           | 
           em
-            a(href='#profile')=user.name
+            a(href='#profile' class='user-detail' id=`${user._id}`)=user.name
           | &nbsp;|&nbsp;
           a(href='#logout') Log Out
       header
@@ -34,39 +34,50 @@ html(lang='en')
         h3 Welcome to payyourfees.com
         p You can add a maximum of 5students to this account
       .proceed-to-payment
-        a(href='#proceed_to_payment')
+        a(href='/checkout')
           button Click to Continue 
-      .associated-students(style)
+      .associated-students
         h2 Associated students with this account
         h4 Select students for which fees to be paid
-        #mongodb-id1.students-card
+        .students-card(style='display:none;')
             input(type='checkbox' name='card')
-            h3 Student 1
-            p School/Institute/Coaching
-            p Class : X
-            p Section : A
-            p Roll No.: 1
-            p Fees paid upto : May - 2021
-        #mongodb-id2.students-card
+            h3 
+            p 
+            p 
+            p 
+            p
+        .students-card(style='display:none;')
             input(type='checkbox' name='card')
-            h3 Student 2
-            p School/Institute/Coaching
-            p Class : II
-            p Section : B
-            p Roll No.: 2
-            p Fees paid upto : May - 2021
-        #mongodb-id3.students-card
+            h3 
+            p 
+            p 
+            p 
+            p
+        .students-card(style='display:none;')
             input(type='checkbox' name='card')
-            h3 Student 3
-            p School/Institute/Coaching
-            p Class : V
-            p Section : A
-            p Roll No.: 3
-            p Fees paid upto : May - 2021
-        #mongodb-id3
-            img(src="/img/plus.png", alt="Add students")
+            h3 
+            p 
+            p 
+            p 
+            p
+        .students-card(style='display:none;')
+            input(type='checkbox' name='card')
+            h3 
+            p 
+            p 
+            p 
+            p
+        .students-card(style='display:none;')
+            input(type='checkbox' name='card')
+            h3 
+            p 
+            p 
+            p 
+            p 
+        br
+        img(src="/img/plus.png" id='addStudent-img' alt="Add students")
     div
-        a(href='#proceed_to_payment')
+        a(href='/checkout')
             button Click to Continue 
     footer
         h3 Footer of the page

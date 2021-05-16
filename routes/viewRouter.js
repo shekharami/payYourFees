@@ -41,4 +41,8 @@ router.use(authController.isLoggedIn)
 
 router.get('/dashboard', viewController.p_dashboard)
 
+router.get('/checkout', viewController.getCheckout)
+
+router.get('/add-student', viewController.addStudent)
+
 module.exports = router;

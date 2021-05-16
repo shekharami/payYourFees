@@ -1,0 +1,102 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='css/checkout.css')
+    title Document
+  
+  body
+    
+    div
+      section.welcome
+        br
+        h5
+          | Welcome
+          em
+            a(href='#profile')=user.name
+          | &nbsp;|&nbsp;
+          a(href='#logout') Log Out
+      header
+        ul
+          li
+            a.active(href='#home') Home
+          li
+            a(href='#payfees') Pay Fees
+          li
+            a(href='#notification') Notification
+          li
+            a(href='#contact-us') Contact Us
+    
+    section.content
+      .proceed-to-payment
+        a(href='#proceed_to_payment')
+          button#pay Proceed to pay
+          | 
+        button#generate Generate Order Id
+      h4#orderId 
+      h5#key Razor Pay key : #{key}
+  
+      h4#1 
+      h4#2 
+      h4#3
+      .main-content
+        table
+          tr
+            td
+              h4 Students
+            td
+              h4 Fees
+          tr
+            td
+              #mongodb-id1.students-card.checkout-card
+                h3 Student 1
+                p School/Institute/Coaching
+                p X (A), Roll: 1
+            td
+              .amount
+                h4 500.00
+          tr
+            td
+              #mongodb-id1.students-card.checkout-card
+                h3 Student 2
+                //- p School/Institute/Coaching
+                //- p II (B), Roll: 2
+            td
+              .amount
+                h4 600.00
+          tr
+            td
+              // <div class='students-card checkout-card' id = 'mongodb-id1'>
+              h3 Student 3
+            //-   p School/Institute/Coaching | V (A), Roll: 3
+              // </div>
+            td
+              .amount
+                h4 700.00
+          tr
+            td
+              h4 Total Fees:
+            td
+              h4  1800.00
+          tr
+            td
+              h4 Other Charges:
+            td
+              h4 46
+          tr
+            td
+              h4 Total Amount: 
+            td
+              h4  1846.00
+        h6 Note: Any Charges extra is taken by the payment gateway/Bank.
+        .proceed-to-payment
+        a(href='#proceed_to_payment')
+            button Proceed to pay
+            
+        footer
+            h3 Footer of the page
+  
+  script(src='/js/bundle.js')
+  script(src="https://checkout.razorpay.com/v1/checkout.js")
