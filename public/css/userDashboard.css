@@ -47,6 +47,10 @@ li a.active {
   margin: 10px;
 }
 
+.selected {
+  background-color: lightgreen;
+}
+
 footer {
   background-color: black;
   height: 100px;
