@@ -1,201 +1,4 @@
-/* .main {
-  background-image: url("/img/green.jpg");
-  background-size: 30% 130%;
-  background-repeat: no-repeat;
-} */
 
-/* .header {
-  text-align: right;
-  color: white;
-  font-size: 30px;
-} */
-
-.main_page_heading {
-  padding: 60px;
-  text-align: center;
-  background: /*#1abc9c*/ #4caf50;
-  color: white;
-  font-size: 30px;
-}
-
-.back_to_main {
-  width: 120px;
-  height: 20px;
-  background-color: white;
-}
-
-.back_to_main a {
-  text-emphasis: bold;
-}
-
-span {
-  color: #013220;
-  font-weight: bold;
-  text-align: center;
-}
-.main_div {
-  height: 600px;
-  width: 700px;
-  background-color: white;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1px 30px;
-  box-shadow: 3px 3px 5px 5px #888888;
-}
-
-#signup_div {
-  height: 330px;
-  width: 200px;
-  background-color: white;
-  margin-top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1px 30px;
-  padding-top: 10px;
-  box-shadow: 3px 3px 5px 5px #888888;
-}
-
-#login_div {
-  height: 320px;
-  width: 200px;
-  background-color: white;
-  margin-top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1px 30px;
-  padding-top: 10px;
-  box-shadow: 3px 3px 5px 5px #888888;
-}
-
-#profile_div {
-  height: 180px;
-  width: 300px;
-  background-color: white;
-  margin-top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1px 30px;
-  padding-top: 10px;
-  box-shadow: 3px 3px 5px 5px #888888;
-}
-
-.main_div_view {
-  height: 125px;
-  width: 700px;
-  background-color: white;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1px 30px;
-  box-shadow: 3px 3px 5px 5px #888888;
-}
-
-.hr_class {
-  border-top: 0.5px dotted #8c8b8b;
-}
-
-hr {
-  border-bottom: 1px dotted #88ff00;
-}
-
-.heading {
-  background-color: #88ff00;
-  width: 10%;
-}
-
-.saved_note {
-  background-color: white;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-
-.text_link {
-  color: green;
-}
-
-.button {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  padding: 15px 28px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.button_note {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.signup_form {
-  background-color: #f5e7f3;
-  border: none;
-  color: #013220;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.logout_button {
-  text-align: right;
-}
-.footer {
-  position: relative;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
-
-.footer__nav {
-  list-style: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  text-align: center;
-}
-
-.fa {
-  padding: 20px;
-  font-size: 30px;
-  width: 20px;
-  text-align: center;
-  text-decoration: none;
-  margin: px 2px;
-  border-radius: 50%;
-}
-.fa:hover {
-  opacity: 0.7;
-}
-.fa-google {
-  background: #dd4b39;
-  color: white;
-}
-.fa-linkedin {
-  background: #007bb5;
-  color: white;
-}
-.fa-github {
-  background: black;
-  color: white;
-}
-
-/* h2 {
-  background-color: #4caf50;
-  text-align: center;
-  color: white;
-} */
-
-.div_view_create {
-  text-align: center;
-}
 
 /*--------------------------newly added ----------------------------*/
 
@@ -203,7 +6,8 @@ body {
   /* background-image: url("/img/green.jpg");
   background-size: 40% 130%;
   background-repeat: no-repeat; */
-  margin: 0;
+  margin : 0;
+  padding: 0;
 }
 
 input[type="text"],
@@ -237,28 +41,22 @@ input[type="button"]:hover {
   background-color: #45a049;
 }
 
-h2,
-h3 {
-  /* background-color: f2f2f2; */
-  color: #45a049;
-  margin: 0 0;
+/* --- should be made a separte class c--------*/
+/* div { */
+  /* display: inline-block; */ /* was already commented out */
+  /* border: solid 2px black; */ /* was already commented out */
+  /* width: 345px; */
+  /* padding: 5px; */
+  /* float: left; */
+  /* position: relative; */ /* was already commented out */
+  /* margin-right: 120px; */
+  /* margin-left: 30px; */
+  /* margin-top: 100px; */ /* was already commented out */
 
-  /* text-decoration: underline; */
-}
+  /*margin-bottom: 10px; */ /* was already commented out */
+/* } */ 
+/*--------------------------*/
 
-div {
-  /* display: inline-block; */
-  /* border: solid 2px black; */
-  width: 345px;
-  padding: 5px;
-  float: left;
-  position: relative;
-  margin-right: 120px;
-  margin-left: 30px;
-  /* margin-top: 100px; */
-
-  /*margin-bottom: 10px; */
-}
 
 .intro-h2 {
   color: tomato;
@@ -287,43 +85,15 @@ div {
   text-align: right;
 }
 
-.header {
-  display: block;
-  margin-left: 80%;
-  /* margin-right: 5%; */
-  width: max-content;
-  height: 150px;
-  text-align: right;
-}
-
-.footer {
-  /* display: inline; */
-  /* position: relative;
-  margin-top: 20px;
-  margin-left: 0px;
-  /* width: 100%; 
-  height: 300px;
-  background-color: #252839;
-  text-align: center; */
-  margin: 0px;
-  /* margin-top: 1200px; */
-  padding: 0px;
-  height: 300px;
-  min-width: 100%;
-  max-width: 100%;
-  background: black;
-}
-
-.user-login-div {
-  display: inline-block;
-  margin-left: 40%;
+.user-login-div ,.institute-login-div{
+  margin: 30px auto 30px auto;
   width: 300px;
 }
 
 .user-signup-div,
-.institute-login-div,
 .institute-signup-div {
-  display: inline-block;
-  margin-left: 40%;
+  /* display: inline-block; */
+  position: relative;
+  margin-left: 20%;
   width: 300px;
 }

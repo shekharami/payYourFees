@@ -18,7 +18,7 @@ window.onload = () => {
             o = JSON.parse(o_str);
 
         html += `<div class='students-card' id=${o.id}>
-                    <input type='checkbox' name='card'>
+                    <input type='checkbox' name='card' >
                     <h3> Name : ${o.name}</h3> 
                     <p>Class : ${o.class}</p> 
                     <p>Registration No. : ${o.regNo}</p>
@@ -31,12 +31,16 @@ window.onload = () => {
     }
 
     document.getElementById('added-students').innerHTML = html;
-}
 
-// const c = document.getElementsByName('card')[0];
-// c.onchange = () => { 
-//     if(c.parentElement.classList.length===2)
-//     {c.parentElement.classList.remove('selected')}
-//     else if(c.parentElement.classList.length===1)
-//     {c.parentElement.classList.add('selected')}; 
-//     console.log(c.parentElement.classList) }
+    document.getElementsByName('card')
+    .forEach(c => {
+        c.onchange = () => {
+            if(c.parentElement.classList.length === 2){
+                c.parentElement.classList.remove('selected')
+            }else if(c.parentElement.classList.length===1){
+                c.parentElement.classList.add('selected')
+            } 
+        }
+    })
+
+}

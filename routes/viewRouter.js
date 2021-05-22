@@ -45,4 +45,8 @@ router.get('/checkout', viewController.getCheckout)
 
 router.get('/add-student', viewController.addStudent)
 
+router.get('/my-profile', viewController.p_myProfile)
+
+router.get('/logout', authController.logout ,viewController.p_logout)
+
 module.exports = router;

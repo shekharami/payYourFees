@@ -1,51 +1,22 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset='UTF-8')
-    meta(http-equiv='X-UA-Compatible' content='IE=edge')
-    meta(name='viewport' content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet' href='css/userDashboard.css')
-    title Document
-    style.
-      
-  body
-    div
-      section.welcome
-        br
-        h5
-          | Welcome 
-          | 
-          em
-            a(href='#profile' class='user-detail' id=`${user._id}`)=user.name
-          | &nbsp;|&nbsp;
-          a(href='#logout') Log Out
-      header
-        ul
-          li
-            a.active(href='#home') Home
-          li
-            a(href='#payfees') Pay Fees
-          li
-            a(href='#notification') Notification
-          li
-            a(href='#contact-us') Contact Us
+extends p_home_base 
+block content 
+  if (user)
     section.main-content
-      .content-div
-        h3 Welcome to payyourfees.com
-        p You can add a maximum of 5students to this account
-      .proceed-to-payment
-        a(href='/checkout')
-          button Click to Continue 
-      .associated-students
-        h2 Associated students with this account
-        h4 Select students for which fees to be paid
-        #added-students
-        //- Added students will be shown up here   
-        br
-        img(src="/img/plus.png" id='addStudent-img' alt="Add students")
-    div
-        a(href='/checkout')
+        .content-div.common-style
+          h3 Welcome to payyourfees.com
+          p You can add a maximum of 5students to this account
+        .proceed-to-payment.common-style
+          a(href='/checkout')
             button Click to Continue 
-    footer
-        h3 Footer of the page
-    script(src='/js/bundle.js')
+        .associated-students.common-style
+          h2 Associated students with this account
+          h4 Select students for which fees to be paid
+          #added-students
+          //- Added students will be shown up here   
+          br
+          img(src="/img/plus.png" id='addStudent-img' alt="Add students")
+    .common-style
+      a(href='/checkout')
+      button Click to Continue
+  else 
+    h1 Please Login To Continue

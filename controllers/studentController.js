@@ -104,8 +104,6 @@ exports.addStudent = async (req, res, next) => {
             { $set : { students: req.body.students } },
             { new : true } )
 
-            console.log(students)
-
         res.status(200).json({
             status :'success'
         })

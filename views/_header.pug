@@ -1,17 +1,31 @@
 .header
-    //- input.logout_button.button(type="button" value="Log Out")
-    //- | 
-    //- input.profile.button(type="button" value=`First Last`)
-    
-
-
+    //- if(user)
+    //-     input.logout_button.button(type="button" value="Log Out")
+    //-     | 
+    //-     input.profile.button(type="button" value=`${user.name}`)
+    //- else
+    //-     input.login_btn_homepage.button(type="button" value="Login") 
+    //-     | 
+    //-     input.signup_btn_homepage.button(type="button" value="Sign Up")
     if(user)
-        input.logout_button.button(type="button" value="Log Out")
-        | 
-        input.profile.button(type="button" value=`${user.name}`)
-    else
-        input.login_btn_homepage.button(type="button" value="Login") 
-        | 
-        input.signup_btn_homepage.button(type="button" value="Sign Up")
+        section.welcome
+        br
+        h5(style='text-align:right;')
+            | Welcome 
+            | 
+            em
+            a(href='my-profile' class='user-detail' id=`${user._id}`)=user.name
+            | &nbsp;|&nbsp;
+            a(href='/logout') Log Out
+    header
+      ul
+        li
+          a.active(href='/') Home
+        li
+          a(href='/') Pay Fees
+        li
+          a(href='/') Notification
+        li
+          a(href='#footer') Contact Us
 
     //- implement hiding signup button on your own using class (.signup__hide), css available at the last of stylesheet file

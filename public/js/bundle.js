@@ -9272,20 +9272,23 @@ window.onload = function () {
 
     if (o_str) {
       o = JSON.parse(o_str);
-      html += "<div class='students-card' id=".concat(o.id, ">\n                    <input type='checkbox' name='card'>\n                    <h3> Name : ").concat(o.name, "</h3> \n                    <p>Class : ").concat(o.class, "</p> \n                    <p>Registration No. : ").concat(o.regNo, "</p>\n                    <p>Roll No. : ").concat(o.roll, "</p>\n                    <p>Fees Paid Upto : ").concat(o.feesPaidUpto, "</p>\n                 </div>");
+      html += "<div class='students-card' id=".concat(o.id, ">\n                    <input type='checkbox' name='card' >\n                    <h3> Name : ").concat(o.name, "</h3> \n                    <p>Class : ").concat(o.class, "</p> \n                    <p>Registration No. : ").concat(o.regNo, "</p>\n                    <p>Roll No. : ").concat(o.roll, "</p>\n                    <p>Fees Paid Upto : ").concat(o.feesPaidUpto, "</p>\n                 </div>");
     }
 
     localStorage.removeItem("".concat(i));
   }
 
   document.getElementById('added-students').innerHTML = html;
-}; // const c = document.getElementsByName('card')[0];
-// c.onchange = () => { 
-//     if(c.parentElement.classList.length===2)
-//     {c.parentElement.classList.remove('selected')}
-//     else if(c.parentElement.classList.length===1)
-//     {c.parentElement.classList.add('selected')}; 
-//     console.log(c.parentElement.classList) }
+  document.getElementsByName('card').forEach(function (c) {
+    c.onchange = function () {
+      if (c.parentElement.classList.length === 2) {
+        c.parentElement.classList.remove('selected');
+      } else if (c.parentElement.classList.length === 1) {
+        c.parentElement.classList.add('selected');
+      }
+    };
+  });
+};
 },{}],"addStudent.js":[function(require,module,exports) {
 "use strict";
 
@@ -9687,7 +9690,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52958" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33365" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

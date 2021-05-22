@@ -39,6 +39,16 @@ exports.p_dashboard = (req, res, next) => {
     next()
 };
 
+exports.p_myProfile = (req, res, next) => {
+    res.status(200).render('p_myProfile')
+    next()
+};
+
+exports.p_logout = (req, res, next) => {
+    res.status(200).render('p_logout')
+    next()
+};
+
 exports.getCheckout =  (req, res, next) => {
     res.header({ 'Content-Security-Policy': '*' }).status(200).render('p_checkout', { key : process.env.RAZORPAY_KEY })
     next()

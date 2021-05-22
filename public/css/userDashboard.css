@@ -1,4 +1,9 @@
 /*------------------------ User Dashboard ------------------------*/
+body{
+  margin: 0;
+  padding: 0;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -51,11 +56,18 @@ li a.active {
   background-color: lightgreen;
 }
 
-footer {
-  background-color: black;
-  height: 100px;
-}
-div {
+/* .footer {
+  border-radius: 0px;
+	text-align:right;
+	padding: 30px 0;
+	width:auto;
+  height: 323px;
+	margin: 20px 0 0 0;
+	background-color: darkslategray;
+	color: #fff;
+	position: sticky;
+} */
+.common-style {
   border-radius: 10px;
   text-align: center;
 }

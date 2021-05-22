@@ -139,7 +139,6 @@ exports.logIn = async (req, res, next) => {
 exports.logIn = async (req, res, next) => {
     try{
         const {phone, email, password, type} = req.body ;
-        console.log(phone, email, password, type)
 
         if((!phone && !email) || !password){
             throw new Error('Provide email or phone and password')
@@ -164,10 +163,7 @@ exports.logIn = async (req, res, next) => {
             }
         }
         const [user] = await query.select('+password')
-
-        console.log(user)
         
-
         if(!user){
             throw new Error('User does not exist')
         }
@@ -238,8 +234,8 @@ exports.logout = (req, res, next) => {
             expires: new Date(Date.now() + 5 * 1000),
             httpOnly: true
         })
-        .status(200)
-        .json({ status: 'success' });
+        // .status(200)
+        // .json({ status: 'success' });
 
     next()
 }
