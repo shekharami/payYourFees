@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    style.
+      table {
+      border-collapse: collapse;
+      width: 100%;
+      }
+      
+      th, td {
+      text-align: left;
+      padding: 8px;
+      }
+      
+      tr:nth-child(even){background-color: #f2f2f2}
+      
+      th {
+      background-color: #4CAF50;
+      color: white;
+      }
+      
+      .student-table{
+      width: 60%;
+      margin: auto
+      }
+  body
+    .student-table
+      .student-search(style='margin: 20px 0 20px 0; text-align: center;')
+        h3 Search using only Registration Number or Using combination of Name or Class and Section.
+        form
+          input#regno(type='text' placeholder='Registration NUmber')
+          p OR
+          input#name(type='text' placeholder='Name')
+          br
+          br
+          input#class(type='text' placeholder='Class (Example: I or II)')
+          br
+          br
+          input#section(type='text' placeholder='Section (Example : A or B)')
+          br
+          br
+          input#search-student(type='submit' value='Search')
+      div#result-table(style='display:none;')
+    script(src='/js/bundle.js')

@@ -2,51 +2,31 @@ const express = require('express');
 const viewController = require('./../controllers/viewController');
 const authController = require('./../controllers/authController');
 const instituteController = require('./../controllers/instituteController');
-// const noteController = require('./../controllers/noteController');
-
 
 const router = express.Router();
 
-// router.get('/logout', viewController.getLogout );
+router.get('/', instituteController.getInstitutes ,viewController.homepage)
 
-// router.use(authController.isLoggedIn)
+router.get('/user-login', viewController.userLogin)
 
-// router.get('/', viewController.getHome )
+router.get('/institute-login', viewController.instituteLogin)
 
-// router.get('/my_profile', viewController.getProfile );
+router.get('/user-signup', instituteController.getInstitutes ,viewController.userSignup)
 
-// router.get('/signup', viewController.signup );
-
-// router.get('/login', viewController.login );
-
-// router.use(noteController.getNoteforTemplate);
-
-// router.get('/myNotes',viewController.getNotes );
-
-//new - routes -----------------------------------------------------------
-
-router.get('/', instituteController.getInstitutes ,viewController.p_homepage)
-
-router.get('/user-login', viewController.p_userLogin)
-
-router.get('/institute-login', viewController.p_instituteLogin)
-
-router.get('/user-signup', instituteController.getInstitutes ,viewController.p_userSignup)
-
-router.get('/institute-signup', viewController.p_instituteSignup)
+router.get('/institute-signup', viewController.instituteSignup)
 
 // Protected Routes
 
 router.use(authController.isLoggedIn)
 
-router.get('/dashboard', viewController.p_dashboard)
+router.get('/dashboard', viewController.dashboard)
 
 router.get('/checkout', viewController.getCheckout)
 
 router.get('/add-student', viewController.addStudent)
 
-router.get('/my-profile', viewController.p_myProfile)
+router.get('/my-profile', viewController.myProfile)
 
-router.get('/logout', authController.logout ,viewController.p_logout)
+router.get('/logout', authController.logout ,viewController.logout)
 
 module.exports = router;

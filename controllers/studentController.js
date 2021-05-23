@@ -60,6 +60,46 @@ exports.test = async (req, res, next) => {
     next()
 }
 
+exports.searchStudent = async (req, res, next) => {
+
+    try{
+        //implement refining the results using institute
+        let query = Student.find(/* { institute: res.locals.institute }*/);
+
+
+        if(req.query.regno){
+            query = query.find({ registrationNo: req.query.regno });
+        }else if(req.query.class && req.query.section && req.query.name){
+            query = query.find({  name:new RegExp(req.query.name), class : req.query.class , section : req.query.section });
+        }else if(req.query.class && req.query.section ){
+            query = query.find({ class : req.query.class , section : req.query.section });
+        }else if(req.query.class ){
+            query = query.find({ class : req.query.class });
+        }else if(req.query.name){
+            query = query.find({ name: new RegExp(req.query.name) });
+        }
+        query = query.sort('name')
+        const students = await query;
+        
+        res.status(200).json({
+            status :'success',
+            data : {
+                length : students.length,
+                students
+            }
+        })
+
+    }catch(err){
+
+        res.status(200).json({
+
+            status :'fail',
+            error: err.message
+        })
+    }
+
+    next()
+}
 
 exports.getStudent = async (req, res, next) => {
 
