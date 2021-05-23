@@ -1,4 +1,4 @@
 exports.dashboard = (req, res, next) => {
-    res.status(200).render('p_instituteDashboard')
+    res.status(200).render('instituteDashboard')
     next()
 }
