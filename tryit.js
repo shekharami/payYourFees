@@ -1,1 +1,5 @@
-console.log(new RegExp('amit'))
+let a = '';
+
+if(a){
+    console.log('aaaaaa')
+}

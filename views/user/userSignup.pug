@@ -9,14 +9,14 @@ block content
             input#phone-number(type='text' maxlength='10' placeholder='Phone Number' ) 
             input#user-password(type='password' placeholder='Password')
             input#confirm-password(type='password' placeholder='Retype Password to Confirm')
-            select#institute(name='institute')
-                option(value="") Choose an Institute 
-                each i in institutes 
-                    option(value=`${i.id}`)=i.name
-            input#address1(type='text' maxlength='30' placeholder='Address Line 1' ) 
-            input#address2(type='text' maxlength='30' placeholder='Address Line 2' ) 
-            input#address3(type='text' maxlength='30' placeholder='Address Line 3' )
-            input#address-city(type='text' maxlength='20' placeholder='City' )
+            //- select#institute(name='institute')
+            //-     option(value="") Choose an Institute 
+            //-     each i in institutes 
+            //-         option(value=`${i.id}`)=i.name
+            input#address(type='text' maxlength='150' placeholder='Address' ) 
+            //- input#address2(type='text' maxlength='30' placeholder='Address Line 2' ) 
+            //- input#address3(type='text' maxlength='30' placeholder='Address Line 3' )
+            //- input#address-city(type='text' maxlength='20' placeholder='City' )
             input#address-district(type='text' maxlength='20' placeholder='District' )
             input#pincode(type='text' maxlength='6' placeholder='Pin Code' ) 
             input#address-state(type='text' maxlength='20' placeholder='State' )

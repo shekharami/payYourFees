@@ -12,11 +12,11 @@ if(userSignup){
         const phone = document.getElementById('phone-number').value
         const password = document.getElementById('user-password').value 
         const confirmPassword = document.getElementById('confirm-password').value 
-        const institute = document.getElementById('institute').value
-        const address1 = document.getElementById('address1').value 
-        const address2 = document.getElementById('address2').value  
-        const address3 = document.getElementById('address3').value 
-        const city = document.getElementById('address-city').value 
+        // const institute = document.getElementById('institute').value
+        const address = document.getElementById('address').value 
+        // const address2 = document.getElementById('address2').value  
+        // const address3 = document.getElementById('address3').value 
+        // const city = document.getElementById('address-city').value 
         const district = document.getElementById('address-district').value 
         const pincode = document.getElementById('pincode').value 
         const state = document.getElementById('address-state').value 
@@ -33,7 +33,7 @@ if(userSignup){
             alert('Please confirm your password')
         }else if( password !== confirmPassword ){
             alert('Passwords do not match')
-        }else if( !address1 ){
+        }else if( !address ){
             alert('please provide your address')
         }else if( !district ){
             alert('please provide your district')
@@ -46,18 +46,16 @@ if(userSignup){
         }else{
 
             // server request
-            const response = await signUp('user', 
-            { 
+            const response = await signUp( 
+            {   
+                type : 'user',
                 name, 
                 email, 
                 phone, 
                 password, 
                 confirmPassword, 
-                institute,
-                address1, 
-                address2, 
-                address3, 
-                city, 
+                // institute,
+                address, 
                 district, 
                 pincode, 
                 state 
@@ -69,7 +67,7 @@ if(userSignup){
             //after response is recieved set button text as before
             userSignup.value = 'Create an Account'
             // redirect to dasshboard
-            location.reload() // replce later
+            location.reload() // replace later
             
         }
 
@@ -96,10 +94,7 @@ if(instituteSignup){
         const alternatePhone = document.getElementById('alternate-phone-number').value 
         const password = document.getElementById('user-password').value 
         const confirmPassword = document.getElementById('confirm-password').value 
-        const address1 = document.getElementById('address1').value 
-        const address2 = document.getElementById('address2').value  
-        const address3 = document.getElementById('address3').value 
-        const city = document.getElementById('address-city').value 
+        const address = document.getElementById('address').value 
         const district = document.getElementById('address-district').value 
         const pincode = document.getElementById('pincode').value 
         const state = document.getElementById('address-state').value 
@@ -120,7 +115,7 @@ if(instituteSignup){
             alert('Please confirm your password')
         }else if( password !== confirmPassword ){
             alert('Passwords do not match')
-        }else if( !address1 ){
+        }else if( !address ){
             alert('please provide your address')
         }else if( !district ){
             alert('please provide your district')
@@ -137,22 +132,21 @@ if(instituteSignup){
                 numbers.push(alternatePhone)
             }
             // server request
-            const response = await signUp('institute', 
+            const response = await signUp( 
             { 
+                type: 'institute',
                 instituteType,
                 name, 
                 email, 
                 phone: numbers,
                 password, 
                 confirmPassword, 
-                address1, 
-                address2, 
-                address3, 
-                city, 
+                address, 
                 district, 
                 pincode, 
                 state 
             })
+
             console.log(response)
             if(response.data.status === 'success'){
                 alert('Account created successfully!')
@@ -203,8 +197,24 @@ if(userLogin){
 const instituteLogin = document.getElementById('institute-login')
 
 if(instituteLogin){
-    instituteLogin.addEventListener('click', e => {
+    instituteLogin.addEventListener('click',async e => {
         e.preventDefault();
+
+        const email = document.getElementById('institute-id').value;
+        const password = document.getElementById('institute-password').value;
+
+        if(!password || !email){
+            alert('Please provide email and password !')
+
+        }else{
+
+            const authRes = await login({ email, password , type : 'institute'})
+
+            if(authRes.data.status === 'success'){
+                location.assign('/institute/dashboard')
+            }
+
+        }
 
     })
 }

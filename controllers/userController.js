@@ -30,25 +30,25 @@ exports.getUser = async (req, res, next) =>{
 };
 
 
-exports.saveInsitute = async (req, res, next) =>{
-    try{
-        const item = {... req.body};
-        const data = await Institute.create(item);
+// exports.saveInsitute = async (req, res, next) =>{
+//     try{
+//         const item = {... req.body};
+//         const data = await Institute.create(item);
 
-        res.status(201).json({
-            status: "success",
-            data: {
-                data
-            }
+//         res.status(201).json({
+//             status: "success",
+//             data: {
+//                 data
+//             }
 
-        });
+//         });
     
-    }catch(err){
-        console.log(err);
-    }
+//     }catch(err){
+//         console.log(err);
+//     }
 
-    next();
-};
+//     next();
+// };
 
 exports.updateUser = async (req, res, next) => {
     try{

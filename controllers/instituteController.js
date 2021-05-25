@@ -59,38 +59,6 @@ exports.getInstituteDetails = async (req, res, next) =>{
     next();
 };
 
-exports.saveInsitute = async (req, res, next) =>{
-    try{
-        const item = {
-            instituteType: req.body.instituteType,
-            name: req.body.name,
-            email: req.body.email ,
-            phone: req.body.phone,
-            addressLine1: req.body.address1,
-            addressLine2: req.body.address2,
-            addressLine3: req.body.address3,
-            addressCity: req.body.city,
-            addressDistrict: req.body.district,
-            addressPinCode: req.body.pincode,
-            addressState: req.body.state
-        };
-        const data = await Institute.create(item);
-
-        res.status(201).json({
-            status: "success",
-            data: {
-                data
-            }
-
-        });
-    
-    }catch(err){
-        console.log(err);
-    }
-
-    next();
-};
-
 exports.updateInstituteData = async(req, res, next) => {
     try{
         

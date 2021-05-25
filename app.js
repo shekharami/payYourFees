@@ -14,6 +14,7 @@ const userRouter = require('./routes/userRouter');
 const paymentRouter = require('./routes/paymentRouter');
 const studentRouter = require('./routes/studentRouter');
 const instituteViewRouter = require('./routes/instituteViewRouter');
+const authRouter = require('./routes/authRouter');
 
 const app = express();
 
@@ -52,7 +53,9 @@ app.use('/api/v1/institute', instituteRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/payment', paymentRouter);
 app.use('/api/v1/student', studentRouter);
+app.use('/api/v1/auth', authRouter);
 app.use('/institute', instituteViewRouter);
+
 app.use('/', viewRouter);
 
 /*

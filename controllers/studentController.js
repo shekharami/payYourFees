@@ -65,12 +65,13 @@ exports.searchStudent = async (req, res, next) => {
     try{
         //implement refining the results using institute
         let query = Student.find(/* { institute: res.locals.institute }*/);
-
-
+   
         if(req.query.regno){
             query = query.find({ registrationNo: req.query.regno });
         }else if(req.query.class && req.query.section && req.query.name){
-            query = query.find({  name:new RegExp(req.query.name), class : req.query.class , section : req.query.section });
+            query = query.find({  name: new RegExp(req.query.name), class : req.query.class , section : req.query.section });
+        }else if(req.query.class && req.query.name){
+            query = query.find({  name: new RegExp(req.query.name), class : req.query.class });
         }else if(req.query.class && req.query.section ){
             query = query.find({ class : req.query.class , section : req.query.section });
         }else if(req.query.class ){

@@ -22,21 +22,21 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
 
-    addressLine1:{
+    address:{
         type: String
     },
 
-    addressLine2:{
-        type: String
-    },
+    // addressLine2:{
+    //     type: String
+    // },
 
-    addressLine3:{
-        type: String
-    },
+    // addressLine3:{
+    //     type: String
+    // },
 
-    addressCity:{
-        type: String
-    },
+    // addressCity:{
+    //     type: String
+    // },
 
     addressDistrict:{
         type: String
@@ -50,10 +50,10 @@ const userSchema = new mongoose.Schema({
         type: String
     },
 
-    institute: {
-        type: mongoose.Types.ObjectId,
-        ref: Institute,
-    },
+    // institute: {
+    //     type: mongoose.Types.ObjectId,
+    //     ref: Institute,
+    // },
 
     students: {
         type: [mongoose.Types.ObjectId],

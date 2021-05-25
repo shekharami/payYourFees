@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const instituteSchema = new mongoose.Schema({
     instituteType:{
-        type: String
+        type: String,
+        enum: ['school','coaching','college'],
     },
 
     name: {
@@ -20,19 +22,7 @@ const instituteSchema = new mongoose.Schema({
         type: [String]
     },
 
-    addressLine1:{
-        type: String
-    },
-
-    addressLine2:{
-        type: String
-    },
-
-    addressLine3:{
-        type: String
-    },
-
-    addressCity:{
+    address:{
         type: String
     },
 
@@ -60,6 +50,25 @@ const instituteSchema = new mongoose.Schema({
         type: [String]
     },
 
+    password: {
+        type: String,
+        required:  [true,'Please enter a password'],
+        minlength: 5,
+        select: false
+    },
+
+    confirmPassword: {
+        type: String,
+        required:  [true,'Please confirm your password'],
+        validate:{
+            //This only works on CREATE OR SAVE!
+            validator: function(val){
+                return val === this.password;
+            }
+        },
+        message: 'You typed something different than above.'
+    },
+
     addedAt:{
         type: Date,
         default: Date.now()
@@ -70,6 +79,18 @@ const instituteSchema = new mongoose.Schema({
     toObject: { virtuals: true }
 }) 
 
+instituteSchema.pre('save', async function(next){
+    if(!this.isModified('password')) return next();
+
+    this.password = await bcrypt.hash(this.password, 10);
+
+    this.confirmPassword = undefined;
+    next();
+});
+
+instituteSchema.methods.correctPassword = async function(candidatePassword, userPassword){
+    return await bcrypt.compare(candidatePassword, userPassword)
+};
 
 const Institute = mongoose.model('Institute',instituteSchema );
 

@@ -7,7 +7,7 @@ const User = require('../models/userModel');
 
 const createTokenSendCookie = function(id, req, res){
 
-    const token =  jwt.sign({ id }, 'MY-SECOND-WEB-APP-NOTES-HOSTED-AT-CREATEWEBNOTE@HEROKU')
+    const token =  jwt.sign({ id }, 'This is pay your fees secret key for JWT')
     res.cookie('jwt', token, { /*
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 *  1000),*/
         httpOnly: true,
@@ -18,29 +18,65 @@ const createTokenSendCookie = function(id, req, res){
 
 exports.signUp = async (req, res, next) => {
     try{
-        const user = {
-            name:  req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            addressLine1: req.body.address1,
-            addressLine2: req.body.address2,
-            addressLine3: req.body.address3,
-            addressCity : req.body.city,
-            addressDistrict : req.body.district,
-            addressPincode : req.body.pincode,
-            addressState : req.body.state,
-            institute : req.body.institute,
-            password: req.body.password,
-            confirmPassword: req.body.confirmPassword
-        }
-    
-        const data = await User.create(user);
+        
+        let data, token;
+        switch (req.body.type){
 
-        if(!data){
-            throw new Error('Something went wrong')
-        }
+            case ('user') : {
 
-        const token = createTokenSendCookie(data._id, req, res)
+                const user = {
+                    name:  req.body.name,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    address: req.body.address,
+                    addressDistrict : req.body.district,
+                    addressPincode : req.body.pincode,
+                    addressState : req.body.state,
+                    // institute : req.body.institute,
+                    password: req.body.password,
+                    confirmPassword: req.body.confirmPassword
+                }
+            
+                data = await User.create(user);
+        
+                if(!data){
+                    throw new Error('Something went wrong')
+                }
+        
+                token = createTokenSendCookie(data._id, req, res)
+
+                break;
+
+            }
+
+            case ('institute') : {
+                
+                const institute = {
+                    instituteType : req.body.instituteType,
+                    name:  req.body.name,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    address: req.body.address,
+                    addressDistrict : req.body.district,
+                    addressPincode : req.body.pincode,
+                    addressState : req.body.state,
+                    password: req.body.password,
+                    confirmPassword: req.body.confirmPassword
+                }
+            
+                data = await Institute.create(institute);
+        
+                if(!data){
+                    throw new Error('Something went wrong')
+                }
+        
+                token = createTokenSendCookie(data._id, req, res)
+
+                break;
+
+            }
+        }
+        
 
         res.status(201).json({
             status: 'success',
@@ -138,44 +174,63 @@ exports.logIn = async (req, res, next) => {
 
 exports.logIn = async (req, res, next) => {
     try{
-        const {phone, email, password, type} = req.body ;
 
-        if((!phone && !email) || !password){
-            throw new Error('Provide email or phone and password')
-        }
+        let token, query;
 
-        let query;
-        switch(type){
-            case 'user' : {
+        switch(req.body.type){
+
+            case ('user') : {
+                const { phone, email, password } = req.body;
+
+                if((!phone && !email) || !password){
+                    throw new Error('Provide email or phone and password')
+                }
+
                 query = User.find()
                 if(phone){
                     query.find({ phone : phone })
-                }else{
+                }else if(email){
                     query.find({email : email })
                 }
-                break;
-            }
-            case 'institute' : {
-                // query = Institute.find()
-                //Implement Institute Auth logic
-                break;
 
-            }
-        }
-        const [user] = await query.select('+password')
+                const [user] = await query.select('+password')
         
-        if(!user){
-            throw new Error('User does not exist')
+                if(!user){
+                    throw new Error('User does not exist')
+                }
+
+                const checkPass = await user.correctPassword(password, user.password)
+            
+                if(!checkPass){
+                    throw new Error('Invalid password')
+                }
+
+                token = createTokenSendCookie(user._id, req, res)
+
+                break;
+            }
+            case ('institute') : {
+                query = Institute.find({ email : req.body.email })
+
+                const [institute] = await query.select('+password')
+        
+                if(!institute){
+                    throw new Error('Institute does not exist')
+                }
+
+                const checkPass = await institute.correctPassword(req.body.password, institute.password)
+            
+                if(!checkPass){
+                    throw new Error('Invalid password')
+                }
+
+                token = createTokenSendCookie(institute._id, req, res)
+                
+                break;
+
+            }
         }
-
-        const checkPass = await user.correctPassword(password, user.password)
-    
-        if(!checkPass){
-            throw new Error('Invalid password')
-        }
-
-        const token = createTokenSendCookie(user._id, req, res)
-
+        
         res.status(200).json({
             status: "success",
             token
@@ -201,7 +256,7 @@ exports.logIn = async (req, res, next) => {
 exports.isLoggedIn = async (req, res, next) => {
     if(req.cookies.jwt){
         try{
-            const decoded = await promisify(jwt.verify)(req.cookies.jwt, 'MY-SECOND-WEB-APP-NOTES-HOSTED-AT-CREATEWEBNOTE@HEROKU');
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, 'This is pay your fees secret key for JWT');
 
             // const freshUser = await User.findById(decoded.id);
 

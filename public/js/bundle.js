@@ -8507,7 +8507,7 @@ module.exports = require('./lib/axios');
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logout = exports.login = exports.signUp = void 0;
+exports.login = exports.signUp = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -8518,42 +8518,41 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var signUp = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(type, data) {
-    var url, res;
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data) {
+    var res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            type === 'user' ? url = '/api/v1/user/signup' : url = '/api/v1/institute/signup';
-            _context.next = 4;
+            _context.next = 3;
             return (0, _axios.default)({
               method: 'POST',
-              url: url,
+              url: '/api/v1/auth/signup',
               data: data,
               headers: {
                 "Content-type": "application/json; charset=UTF-8"
               }
             });
 
-          case 4:
+          case 3:
             res = _context.sent;
             return _context.abrupt("return", res);
 
-          case 8:
-            _context.prev = 8;
+          case 7:
+            _context.prev = 7;
             _context.t0 = _context["catch"](0);
             alert('Error :\n* password should be min 5 characters long *\nor\n*User with this email already exists!*');
 
-          case 11:
+          case 10:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 7]]);
   }));
 
-  return function signUp(_x, _x2) {
+  return function signUp(_x) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -8562,90 +8561,45 @@ exports.signUp = signUp;
 
 var login = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(data) {
-    var url, res;
+    var res;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            url = '/api/v1/user/login'; // (data.type === 'user') ? url += 'user/login' : url += 'instute/login' 
-            //currently both user & intitute are usinbg same login endpoint
-
-            _context2.next = 4;
+            _context2.next = 3;
             return (0, _axios.default)({
               method: 'POST',
-              url: url,
+              url: '/api/v1/auth/login',
               data: data,
               headers: {
                 "Content-type": "application/json; charset=UTF-8"
               }
             });
 
-          case 4:
+          case 3:
             res = _context2.sent;
             return _context2.abrupt("return", res);
 
-          case 8:
-            _context2.prev = 8;
+          case 7:
+            _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
             alert('Wrong Email or Password !');
 
-          case 11:
+          case 10:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 8]]);
+    }, _callee2, null, [[0, 7]]);
   }));
 
-  return function login(_x3) {
+  return function login(_x2) {
     return _ref2.apply(this, arguments);
   };
 }();
 
 exports.login = login;
-
-var logout = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var res;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            _context3.prev = 0;
-            _context3.next = 3;
-            return (0, _axios.default)({
-              method: 'GET',
-              url: '/api/notes/user/logout',
-              headers: {
-                "Content-type": "application/json; charset=UTF-8"
-              }
-            });
-
-          case 3:
-            res = _context3.sent;
-            _context3.next = 9;
-            break;
-
-          case 6:
-            _context3.prev = 6;
-            _context3.t0 = _context3["catch"](0);
-            alert(_context3.t0.message);
-
-          case 9:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3, null, [[0, 6]]);
-  }));
-
-  return function logout() {
-    return _ref3.apply(this, arguments);
-  };
-}();
-
-exports.logout = logout;
 },{"axios":"../../node_modules/axios/index.js"}],"loginSignupHandler.js":[function(require,module,exports) {
 "use strict";
 
@@ -8660,7 +8614,7 @@ var userSignup = document.getElementById('user-signup');
 if (userSignup) {
   userSignup.addEventListener('click', /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-      var name, email, phone, password, confirmPassword, institute, address1, address2, address3, city, district, pincode, state, response;
+      var name, email, phone, password, confirmPassword, address, district, pincode, state, response;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -8671,144 +8625,142 @@ if (userSignup) {
               email = document.getElementById('email').value;
               phone = document.getElementById('phone-number').value;
               password = document.getElementById('user-password').value;
-              confirmPassword = document.getElementById('confirm-password').value;
-              institute = document.getElementById('institute').value;
-              address1 = document.getElementById('address1').value;
-              address2 = document.getElementById('address2').value;
-              address3 = document.getElementById('address3').value;
-              city = document.getElementById('address-city').value;
+              confirmPassword = document.getElementById('confirm-password').value; // const institute = document.getElementById('institute').value
+
+              address = document.getElementById('address').value; // const address2 = document.getElementById('address2').value  
+              // const address3 = document.getElementById('address3').value 
+              // const city = document.getElementById('address-city').value 
+
               district = document.getElementById('address-district').value;
               pincode = document.getElementById('pincode').value;
               state = document.getElementById('address-state').value;
 
               if (name) {
-                _context.next = 19;
+                _context.next = 15;
                 break;
               }
 
               alert('Please provide your name');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 19:
+            case 15:
               if (phone) {
-                _context.next = 23;
+                _context.next = 19;
                 break;
               }
 
               alert('Please provide your phone number');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 23:
+            case 19:
               if (!(isNaN(phone * 1) || phone.length !== 10)) {
-                _context.next = 27;
+                _context.next = 23;
                 break;
               }
 
               alert('Invalid phone number');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 27:
+            case 23:
               if (password) {
-                _context.next = 31;
+                _context.next = 27;
                 break;
               }
 
               alert('Please provide password');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 31:
+            case 27:
               if (confirmPassword) {
-                _context.next = 35;
+                _context.next = 31;
                 break;
               }
 
               alert('Please confirm your password');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 35:
+            case 31:
               if (!(password !== confirmPassword)) {
-                _context.next = 39;
+                _context.next = 35;
                 break;
               }
 
               alert('Passwords do not match');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 39:
-              if (address1) {
-                _context.next = 43;
+            case 35:
+              if (address) {
+                _context.next = 39;
                 break;
               }
 
               alert('please provide your address');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 43:
+            case 39:
               if (district) {
-                _context.next = 47;
+                _context.next = 43;
                 break;
               }
 
               alert('please provide your district');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 47:
+            case 43:
               if (pincode) {
-                _context.next = 51;
+                _context.next = 47;
                 break;
               }
 
               alert('please provide your pincode');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 51:
+            case 47:
               if (!(isNaN(pincode * 1) || pincode.length !== 6)) {
-                _context.next = 55;
+                _context.next = 51;
                 break;
               }
 
               alert('incorrect pincode');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 55:
+            case 51:
               if (state) {
-                _context.next = 59;
+                _context.next = 55;
                 break;
               }
 
               alert('please provide your state');
-              _context.next = 65;
+              _context.next = 61;
               break;
 
-            case 59:
-              _context.next = 61;
-              return (0, _loginSignup.signUp)('user', {
+            case 55:
+              _context.next = 57;
+              return (0, _loginSignup.signUp)({
+                type: 'user',
                 name: name,
                 email: email,
                 phone: phone,
                 password: password,
                 confirmPassword: confirmPassword,
-                institute: institute,
-                address1: address1,
-                address2: address2,
-                address3: address3,
-                city: city,
+                // institute,
+                address: address,
                 district: district,
                 pincode: pincode,
                 state: state
               });
 
-            case 61:
+            case 57:
               response = _context.sent;
 
               if (response.data.status === 'success') {
@@ -8818,12 +8770,12 @@ if (userSignup) {
 
               userSignup.value = 'Create an Account'; // redirect to dasshboard
 
-              location.reload(); // replce later
+              location.reload(); // replace later
 
-            case 65:
+            case 61:
               userSignup.value = 'Create an Account';
 
-            case 66:
+            case 62:
             case "end":
               return _context.stop();
           }
@@ -8842,7 +8794,7 @@ var instituteSignup = document.getElementById('institute-signup');
 if (instituteSignup) {
   instituteSignup.addEventListener('click', /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
-      var instituteType, name, email, phone, alternatePhone, password, confirmPassword, address1, address2, address3, city, district, pincode, state, numbers, response;
+      var instituteType, name, email, phone, alternatePhone, password, confirmPassword, address, district, pincode, state, numbers, response;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -8860,144 +8812,141 @@ if (instituteSignup) {
               alternatePhone = document.getElementById('alternate-phone-number').value;
               password = document.getElementById('user-password').value;
               confirmPassword = document.getElementById('confirm-password').value;
-              address1 = document.getElementById('address1').value;
-              address2 = document.getElementById('address2').value;
-              address3 = document.getElementById('address3').value;
-              city = document.getElementById('address-city').value;
+              address = document.getElementById('address').value;
               district = document.getElementById('address-district').value;
               pincode = document.getElementById('pincode').value;
               state = document.getElementById('address-state').value;
 
               if (instituteType) {
-                _context2.next = 20;
+                _context2.next = 17;
                 break;
               }
 
               alert('Please select Institute Type');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 20:
+            case 17:
               if (name) {
-                _context2.next = 24;
+                _context2.next = 21;
                 break;
               }
 
               alert('Please provide your name');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 24:
+            case 21:
               if (email) {
-                _context2.next = 28;
+                _context2.next = 25;
                 break;
               }
 
               alert('Please provide your email');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 28:
+            case 25:
               if (phone) {
-                _context2.next = 32;
+                _context2.next = 29;
                 break;
               }
 
               alert('Please provide your phone number');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 32:
+            case 29:
               if (!(isNaN(phone * 1) || phone.length !== 10)) {
-                _context2.next = 36;
+                _context2.next = 33;
                 break;
               }
 
               alert('Invalid phone number');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 36:
+            case 33:
               if (password) {
-                _context2.next = 40;
+                _context2.next = 37;
                 break;
               }
 
               alert('Please provide password');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 40:
+            case 37:
               if (confirmPassword) {
-                _context2.next = 44;
+                _context2.next = 41;
                 break;
               }
 
               alert('Please confirm your password');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 44:
+            case 41:
               if (!(password !== confirmPassword)) {
-                _context2.next = 48;
+                _context2.next = 45;
                 break;
               }
 
               alert('Passwords do not match');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 48:
-              if (address1) {
-                _context2.next = 52;
+            case 45:
+              if (address) {
+                _context2.next = 49;
                 break;
               }
 
               alert('please provide your address');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 52:
+            case 49:
               if (district) {
-                _context2.next = 56;
+                _context2.next = 53;
                 break;
               }
 
               alert('please provide your district');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 56:
+            case 53:
               if (pincode) {
-                _context2.next = 60;
+                _context2.next = 57;
                 break;
               }
 
               alert('please provide your pincode');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 60:
+            case 57:
               if (!(isNaN(pincode * 1) || pincode.length !== 6)) {
-                _context2.next = 64;
+                _context2.next = 61;
                 break;
               }
 
               alert('incorrect pincode');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 64:
+            case 61:
               if (state) {
-                _context2.next = 68;
+                _context2.next = 65;
                 break;
               }
 
               alert('please provide your state');
-              _context2.next = 77;
+              _context2.next = 74;
               break;
 
-            case 68:
+            case 65:
               numbers = [phone];
 
               if (alternatePhone) {
@@ -9005,24 +8954,22 @@ if (instituteSignup) {
               } // server request
 
 
-              _context2.next = 72;
-              return (0, _loginSignup.signUp)('institute', {
+              _context2.next = 69;
+              return (0, _loginSignup.signUp)({
+                type: 'institute',
                 instituteType: instituteType,
                 name: name,
                 email: email,
                 phone: numbers,
                 password: password,
                 confirmPassword: confirmPassword,
-                address1: address1,
-                address2: address2,
-                address3: address3,
-                city: city,
+                address: address,
                 district: district,
                 pincode: pincode,
                 state: state
               });
 
-            case 72:
+            case 69:
               response = _context2.sent;
               console.log(response);
 
@@ -9035,7 +8982,7 @@ if (instituteSignup) {
               location.reload(); // redirect to logged in homepage to users
               //to do
 
-            case 77:
+            case 74:
             case "end":
               return _context2.stop();
           }
@@ -9130,9 +9077,53 @@ if (userLogin) {
 var instituteLogin = document.getElementById('institute-login');
 
 if (instituteLogin) {
-  instituteLogin.addEventListener('click', function (e) {
-    e.preventDefault();
-  });
+  instituteLogin.addEventListener('click', /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(e) {
+      var email, password, authRes;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              e.preventDefault();
+              email = document.getElementById('institute-id').value;
+              password = document.getElementById('institute-password').value;
+
+              if (!(!password || !email)) {
+                _context4.next = 7;
+                break;
+              }
+
+              alert('Please provide email and password !');
+              _context4.next = 11;
+              break;
+
+            case 7:
+              _context4.next = 9;
+              return (0, _loginSignup.login)({
+                email: email,
+                password: password,
+                type: 'institute'
+              });
+
+            case 9:
+              authRes = _context4.sent;
+
+              if (authRes.data.status === 'success') {
+                location.assign('/institute/dashboard');
+              }
+
+            case 11:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }());
 }
 },{"./loginSignup":"loginSignup.js"}],"payment.js":[function(require,module,exports) {
 "use strict";
