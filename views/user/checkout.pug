@@ -1,51 +1,54 @@
 extends ../home_base 
 block content 
-    
-  section.content
-    .proceed-to-payment
-      a(href='#proceed_to_payment')
-        button#pay Proceed to pay
-        | 
-      button#generate Generate Order Id
-    h4#orderId 
-    h5#key Razor Pay key : #{key}
+  if(user) 
+    section.content
+      .proceed-to-payment
+        a(href='#proceed_to_payment')
+          button#pay Proceed to pay
+          | 
+        button#generate Generate Order Id
+      h4#orderId 
+      h5#key Razor Pay key : #{key}
 
-    h4#1 
-    h4#2 
-    h4#3
-    .checkout-table
-      h4(style='color:green;') Students
-        span.price(style='color:Green')
-          b Fees
-      hr
-      h3(style='color:blue;') Student 1
-      p
-        span.detail Jan,Feb,Mar
-        span.price $15
-      p
-        span.detail Exam fees
-        span.price $5
-      hr
-      h3(style='color:blue;') Student 2
-      p
-        span.detail Mar
-        span.price $5
-      
-        span.detail Exam fees
-        span.price $5
-      hr
-      p Total 
-        span.price
-          b $30
-      p Other Charges 
-        span.price
-          b + $3
-      hr
-      p Amount Payable
-        span.price(style='color:black')
-          b $33
-      
-      h6 Note: Any Charges extra is taken by the payment gateway/Bank.
-      
-      input(type='button' value='Proceed to pay' )
+      h4#1 
+      h4#2 
+      h4#3
+      .checkout-table
+        h4(style='color:green;') Students
+          span.price(style='color:Green')
+            b Fees
+        hr
+        h3(style='color:blue;') Student 1
+        p
+          span.detail Jan,Feb,Mar
+          span.price $15
+        p
+          span.detail Exam fees
+          span.price $5
+        hr
+        h3(style='color:blue;') Student 2
+        p
+          span.detail Mar
+          span.price $5
+        
+          span.detail Exam fees
+          span.price $5
+        hr
+        p Total 
+          span.price
+            b $30
+        p Other Charges 
+          span.price
+            b + $3
+        hr
+        p Amount Payable
+          span.price(style='color:black')
+            b $33
+        
+        h6 Note: Any Charges extra is taken by the payment gateway/Bank.
+        
+        input(type='button' value='Proceed to pay' )
+  else 
+    h1#redirect-to-main Please Login To Continue
+
           

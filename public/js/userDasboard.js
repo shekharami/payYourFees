@@ -1,4 +1,3 @@
-
 const addStudentImg = document.getElementById('addStudent-img');
 if(addStudentImg){
     addStudentImg.addEventListener('click', ()=>{
@@ -10,6 +9,7 @@ if(addStudentImg){
 }
 
 window.onload = () => {
+    if(document.location.pathname === '/dashboard'){
     let o_str, o, div;
     let html = '';
     for(let i = 0 ; i< 5; i++){
@@ -42,5 +42,5 @@ window.onload = () => {
             } 
         }
     })
-
+}
 }

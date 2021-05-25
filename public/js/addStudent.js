@@ -23,7 +23,7 @@ if(searchStudent){
             res.data.data.forEach( s => {
                 let date = new Date(new Date(s.feesPaidTill).getMonth()+'-27-'+new Date(Date.now()).getFullYear());
                 date = date.toLocaleString('en-us',{month: 'short'})+'-'+new Date(Date.now()).getFullYear()
-                html += `<div style="background-color: beige;width: max-content;display: inline-block;padding: 10px;margin: 10px;">        
+                html += `<div class='students-card'>        
                             <input id ='${s.id}' type='checkbox' name='addStudent'style="float:right;width:20px;height:20px">
                             <p>Nmae : ${s.name}</p>
                             <p>Registration No. : ${s.registrationNo}</p>
@@ -36,6 +36,17 @@ if(searchStudent){
             html += '<br></div>'
 
             document.getElementById('returned-students').innerHTML = html;
+
+            document.getElementsByName('addStudent')
+            .forEach(c => {
+                c.onchange = () => {
+                    if(c.parentElement.classList.length === 2){
+                        c.parentElement.classList.remove('selected')
+                    }else if(c.parentElement.classList.length===1){
+                        c.parentElement.classList.add('selected')
+                    } 
+                }
+            })
         }
     })
 }
