@@ -9405,6 +9405,26 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -9459,7 +9479,7 @@ if (searchStudent) {
                     _section.push(o.section);
                   }
 
-                  html3 += "<tr>\n                <td>".concat(o.rollNo, "</td>\n                <td>").concat(o.name, "</td>\n                <td>").concat(o.class, "</td>\n                <td>").concat(o.section, "</td>\n                <td>").concat(o.feesPaidTill, "</td>\n                <td><a href='#'>View Details</a></td>\n            </tr>\n      <div id='student-detail' style='display:none;'>\n                <p>Registration No. : ").concat(o.registrationNo, "</p>\n                <p>Father's Name : ").concat(o.father, "</p>\n                <p>Mother's Name : ").concat(o.mother, "</p>\n                <p>Email : ").concat(o.email, "</p>\n      <div>");
+                  html3 += "<tr>\n                <td>".concat(o.rollNo, "</td>\n                <td>").concat(o.name, "</td>\n                <td>").concat(o.class, "</td>\n                <td>").concat(o.section, "</td>\n                <td>").concat(o.feesPaidTill, "</td>\n                <td><button name=").concat(o.id, ">View Details</button></td>\n                </tr>\n                <div id=").concat(o.id, " style='display:none;background-color:yellow;'>\n                <p>Registration No. : ").concat(o.registrationNo, "</p>\n                <p>Father's Name : ").concat(o.father, "</p>\n                <p>Mother's Name : ").concat(o.mother, "</p>\n                <p>Email : ").concat(o.email, "</p>\n                <div>");
                 });
                 html3 += '</table>';
                 html1 += "<table>\n                            <tr>\n                                <th>Roll No.</th>\n                                <th>Name</th><th>Class : <select>";
@@ -9473,11 +9493,30 @@ if (searchStudent) {
                   html2 += "<option>".concat(s, "</option>");
                 });
 
-                html2 += "</select>\n            </th>\n            <th>Fees paid upto</th>\n            <th>Action</th>\n        </tr>";
+                html2 += "</select>\n            </th>\n            <th>Fees paid upto</th>\n            <th>Action</th>\n            </tr>";
                 html = html1 + html2 + html3;
                 a = document.getElementById('result-table');
                 a.innerHTML = html;
                 a.style.display = '';
+
+                _toConsumableArray(document.getElementsByTagName('button')).forEach(function (b) {
+                  b.onclick = function () {
+                    var _document$getElements = document.getElementsByClassName('on'),
+                        _document$getElements2 = _slicedToArray(_document$getElements, 1),
+                        previousDispalyedDiv = _document$getElements2[0];
+
+                    console.log(previousDispalyedDiv);
+
+                    if (previousDispalyedDiv) {
+                      previousDispalyedDiv.style.display = 'none';
+                      previousDispalyedDiv.classList.remove('on');
+                    }
+
+                    var showingDiv = document.getElementById(b.name);
+                    showingDiv.classList.add('on');
+                    showingDiv.style.display = '';
+                  };
+                });
               }
 
             case 12:
@@ -9799,7 +9838,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56609" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50156" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

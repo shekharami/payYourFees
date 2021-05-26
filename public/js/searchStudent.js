@@ -41,14 +41,14 @@ if(searchStudent){
                 <td>${o.class}</td>
                 <td>${o.section}</td>
                 <td>${o.feesPaidTill}</td>
-                <td><a href='#'>View Details</a></td>
-            </tr>
-      <div id='student-detail' style='display:none;'>
+                <td><button name=${o.id}>View Details</button></td>
+                </tr>
+                <div id=${o.id} style='display:none;background-color:yellow;'>
                 <p>Registration No. : ${o.registrationNo}</p>
                 <p>Father's Name : ${o.father}</p>
                 <p>Mother's Name : ${o.mother}</p>
                 <p>Email : ${o.email}</p>
-      <div>`;
+                <div>`;
             });
 
             html3 += '</table>';
@@ -71,14 +71,31 @@ if(searchStudent){
             </th>
             <th>Fees paid upto</th>
             <th>Action</th>
-        </tr>`;
+            </tr>`;
 
             const html = html1 + html2 + html3;
             const a = document.getElementById('result-table');
             a.innerHTML = html;
             a.style.display = '';
 
+            [...document.getElementsByTagName('button')].forEach(b => {
+                b.onclick = () =>{
+                    const [previousDispalyedDiv] = document.getElementsByClassName('on');
+                    console.log(previousDispalyedDiv)
+                    if(previousDispalyedDiv){
+                        previousDispalyedDiv.style.display = 'none';
+                        previousDispalyedDiv.classList.remove('on');
+
+                    }
+                    const showingDiv = document.getElementById(b.name);
+                    showingDiv.classList.add('on');
+                    showingDiv.style.display = '';
+                    
+                }
+            });
+
         }
 
     })
 }
+

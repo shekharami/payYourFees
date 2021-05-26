@@ -5,9 +5,9 @@ const Institute = require('../models/instituteModel');
 const User = require('../models/userModel');
 // const { use } = require('../routes/userRouter');
 
-const createTokenSendCookie = function(id, req, res){
+const createTokenSendCookie = function(id, type, req, res){
 
-    const token =  jwt.sign({ id }, 'This is pay your fees secret key for JWT')
+    const token =  jwt.sign({ id, type }, 'This is pay your fees secret key for JWT')
     res.cookie('jwt', token, { /*
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 *  1000),*/
         httpOnly: true,
@@ -43,7 +43,7 @@ exports.signUp = async (req, res, next) => {
                     throw new Error('Something went wrong')
                 }
         
-                token = createTokenSendCookie(data._id, req, res)
+                token = createTokenSendCookie(data._id, 'user', req, res)
 
                 break;
 
@@ -70,7 +70,7 @@ exports.signUp = async (req, res, next) => {
                     throw new Error('Something went wrong')
                 }
         
-                token = createTokenSendCookie(data._id, req, res)
+                token = createTokenSendCookie(data._id, 'institute', req, res)
 
                 break;
 
@@ -126,51 +126,7 @@ exports.signUp = async (req, res, next) => {
 //     }
     
 // };
-/*
-exports.logIn = async (req, res, next) => {
-    try{
-        const {email, password} = req.body ;
 
-        if(!email || !password){
-            throw new Error('Provide email and password')
-        }
-        
-        const user = await User.findOne({email}).select('+password');
-
-        if(!user){
-            throw new Error('User does not exist')
-        }
-
-        const checkPass = await user.correctPassword(password, user.password)
-    
-        if(!checkPass){
-            throw new Error('Invalid password')
-        }
-
-        const token = createTokenSendCookie(user._id, req, res)
-
-        res.status(200).json({
-            status: "success",
-            token
-        })
-
-        next();
-
-    }catch(err){
-        if('ValidationError' in err){
-            console.log('---------------------------------')
-        }
-        console.log(err.stack)
-        
-        res.status(401).json({
-            status:"fail",
-            error: err
-        })
-        
-    }
-    
-};
-*/
 
 exports.logIn = async (req, res, next) => {
     try{
@@ -205,7 +161,7 @@ exports.logIn = async (req, res, next) => {
                     throw new Error('Invalid password')
                 }
 
-                token = createTokenSendCookie(user._id, req, res)
+                token = createTokenSendCookie(user._id, 'user' ,req, res)
 
                 break;
             }
@@ -224,7 +180,7 @@ exports.logIn = async (req, res, next) => {
                     throw new Error('Invalid password')
                 }
 
-                token = createTokenSendCookie(institute._id, req, res)
+                token = createTokenSendCookie(institute._id,'institute' , req, res)
                 
                 break;
 
@@ -256,24 +212,23 @@ exports.logIn = async (req, res, next) => {
 exports.isLoggedIn = async (req, res, next) => {
     if(req.cookies.jwt){
         try{
-            const decoded = await promisify(jwt.verify)(req.cookies.jwt, 'This is pay your fees secret key for JWT');
 
-            // const freshUser = await User.findById(decoded.id);
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, 'This is pay your fees secret key for JWT'); 
 
-            let freshUser = await User.findById(decoded.id);
+            let freshUser;  
 
-            if(!freshUser){
+            if(decoded.type === 'user'){
+                freshUser = await User.findById(decoded.id);
+                res.locals.user = freshUser;
+            }else if(decoded.type === 'institute'){
                 freshUser = await Institute.findById(decoded.id)
+                res.locals.institute = freshUser;
             }
-
-            if(!freshUser)
 
             if(!freshUser){
                 return next();
             }
 
-            res.locals.user = freshUser;
-            
         }catch(err){
             return next()
         }

@@ -7,6 +7,7 @@ const hpp = require('hpp');
 const compression = require('compression');
 const cors = require('cors');
 const cookieParser= require('cookie-parser');
+const morgan = require('morgan');
 
 const instituteRouter = require('./routes/instituteRouter');
 const viewRouter = require('./routes/viewRouter');
@@ -19,6 +20,9 @@ const authRouter = require('./routes/authRouter');
 const app = express();
 
 app.enable('trust proxy');
+
+// Logger
+app.use(morgan('dev'))
 
 //implement CORS
 app.use(cors());
