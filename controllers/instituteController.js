@@ -18,22 +18,6 @@ exports.getInstitutes = async (req, res, next) =>{
     next();
 };
 
-exports.getNoteforTemplate = async (req, res, next) =>{
-
-    try{
-        user = res.locals.user
-        if(user){
-            const data = await Institute.find({email: user.email}).sort({ createdAt:  -1 });
-            res.locals.data = data
-        }
-
-    }catch(err){
-        console.log(err);
-    }
-    
-    next();
-};
-
 exports.getInstituteDetails = async (req, res, next) =>{
 
     try{

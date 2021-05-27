@@ -1,3 +1,4 @@
+const Institute = require('../models/instituteModel')
 const Student = require('./../models/studentModel')
 const User = require('./../models/userModel')
 
@@ -11,8 +12,10 @@ exports.test = async (req, res, next) => {
         'brajesh','pranav','vikash','vivek'] //13
         
 
-        const school = ['6096c3c605d05a0015fba2ed','6096c49a0710ac0015c2574b', 
-        '60974b31b4ffd3001503d33e','6097b3ca266dcb0015cdf652'] //4
+        const school = ["60acd2645b1c3916c4fdeea2","60ae12dfe0a6fb00159612de","60ae1344e0a6fb00159612df",
+        "60ae13bbe0a6fb00159612e0","60ae1634e0a6fb00159612e1","60ae17c5e0a6fb00159612e2","60ae1847e0a6fb00159612e3",
+        "60ae1909e0a6fb00159612e6","60ae1a92e0a6fb00159612e7","60ae1ad6e0a6fb00159612e9","60ae1b84e0a6fb00159612ea",
+        "60ae1c38e0a6fb00159612ec","60ae1cdce0a6fb00159612ed"] //13
 
         const classes = ['I','II','III','IV','V','VI','VI','VII','VIII','IX','X','XI','XII']//12
 
@@ -24,7 +27,7 @@ exports.test = async (req, res, next) => {
             return arr[Math.round(Math.random()*(l))]
         }
         const students = []
-        let t = 100;
+        let t = 500;
         while(t--){
             const student = {
                 name: random(names, 12),
@@ -43,11 +46,9 @@ exports.test = async (req, res, next) => {
             students.push(a)
 
         }
-        
-*/
+        */
         res.status(200).json({
-            status: 'success'//,
-            // data: students
+            status: 'success'
         })
 
     }catch(err){
@@ -64,8 +65,7 @@ exports.searchStudent = async (req, res, next) => {
 
     try{
         //implement refining the results using institute
-        let query = Student.find(/* { institute: res.locals.institute }*/);
-   
+        let query = Student.find( { institute: res.locals.institute._id });
         if(req.query.regno){
             query = query.find({ registrationNo: req.query.regno });
         }else if(req.query.class && req.query.section && req.query.name){

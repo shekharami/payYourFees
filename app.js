@@ -25,7 +25,7 @@ app.enable('trust proxy');
 app.use(morgan('dev'))
 
 //implement CORS
-app.use(cors());
+// app.use(cors());
 
 app.options('*', cors());
 

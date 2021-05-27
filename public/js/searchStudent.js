@@ -9,7 +9,7 @@ if(searchStudent){
         const clas = document.getElementById('class').value;
         const section = document.getElementById('section').value;
         // Make network request
-        if(!(regno || name || ( clas || section))) {
+        if(!(regno || name || clas)) {
             alert('Please provide the details first.');
             return;
         }
@@ -22,6 +22,8 @@ if(searchStudent){
         });
         
         if(res.data.status === 'success'){
+
+            document.getElementById('num-results').textContent = `${res.data.data.students.length} Results Found.`
 
             let html1 = '', html3 = '', html2 = '';
 

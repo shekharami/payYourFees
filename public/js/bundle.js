@@ -9446,7 +9446,7 @@ if (searchStudent) {
               clas = document.getElementById('class').value;
               section = document.getElementById('section').value; // Make network request
 
-              if (regno || name || clas || section) {
+              if (regno || name || clas) {
                 _context.next = 8;
                 break;
               }
@@ -9468,6 +9468,7 @@ if (searchStudent) {
               res = _context.sent;
 
               if (res.data.status === 'success') {
+                document.getElementById('num-results').textContent = "".concat(res.data.data.students.length, " Results Found.");
                 html1 = '', html3 = '', html2 = '';
                 classes = [], _section = [];
                 res.data.data.students.forEach(function (o) {
@@ -9838,7 +9839,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50156" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55976" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
