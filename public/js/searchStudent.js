@@ -59,7 +59,18 @@ if(searchStudent){
                             <tr>
                                 <th>Roll No.</th>
                                 <th>Name</th><th>Class : <select>`;
-            classes.forEach(c => {
+
+            const wts_r = { 1:'I', 2:'II', 3:'III', 4:'IV', 5:'V', 6:'VI', 7:'VII',8:'VIII', 9:'IX', 10:'X', 11:'XI', 12:'XII' };
+            const wts = { 'I':1, 'II':2, 'III':3, 'IV':4, 'V':5, 'VI':6, 'VII':7, 'VIII':8, 'IX': 9, 'X':10, 'XI':11, 'XII':12 };
+            html1 += '<option>All</option>';
+            classes.map(c => {
+                return wts[c]
+            })
+            .sort((a,b) => a-b)
+            .map(a => {
+                return wts_r[a]
+            })
+            .forEach(c => {
                 html1 += `<option>${c}</option>`;
             })
             html1 += ' </select></th>';
@@ -95,6 +106,8 @@ if(searchStudent){
                     
                 }
             });
+
+
 
         }
 

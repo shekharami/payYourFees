@@ -7,3 +7,6 @@ require('./userDasboard');
 require('./addStudent');
 require('./searchStudent');
 
+
+// keep this at the end
+require('./errorHandler')

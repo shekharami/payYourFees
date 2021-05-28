@@ -1,4 +1,6 @@
+const XLSX = require('xlsx');
 const Institute = require("../models/instituteModel");
+
 
 exports.getInstitutes = async (req, res, next) =>{
 
@@ -81,4 +83,28 @@ exports.deleteInstitute = async(req, res, next) =>{
 
     next();
 
+};
+
+exports.fileUpload = async (req, res, next) =>{
+
+    try{
+
+        let redirectLink = '/institute/dashboard'
+        console.log(req.file)
+        if(req.file.mimetype.includes('spreadsheet')){
+            const workbook = XLSX.readFile(req.file.path)
+            var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+            console.log(xlData);
+        }else{
+            redirectLink += '?error=error-parsing-file'
+        }
+
+        res.redirect(redirectLink)
+
+    }catch(err){
+
+        console.log(err)
+    }
+    
+    next();
 };

@@ -1,4 +1,8 @@
 exports.dashboard = (req, res, next) => {
-    res.status(200).render('./institute/instituteDashboard')
+    let template = './institute/addInstituteDetails';
+    if(res.locals.institute.class.length){
+        template = './institute/instituteDashboard'
+    }
+    res.status(200).render(template)
     next()
 }
