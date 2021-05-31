@@ -5,6 +5,7 @@ const multer = require('multer')
 const dest = path.join(__dirname, './../uploads')
 const upload = multer({ dest })
 const instituteController = require('../controllers/instituteController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -21,15 +22,19 @@ router
 // .post(instituteController.saveInsitute);
 
 router
+.route('/delete/:instituteId')
+.delete(instituteController.deleteInstitute);
+
+
+router.use(authController.isLoggedIn)
+
+
+router
 .route('/upload')
 .post(upload.single('myfile'), instituteController.fileUpload);
 
 router
-.route('/delete/:instituteId')
-.delete(instituteController.deleteInstitute);
-
-router
 .route('/update')
-.patch(instituteController.updateInstituteData)
+.patch(instituteController.updateInstituteData);
 
 module.exports = router;

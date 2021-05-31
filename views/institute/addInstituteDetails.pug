@@ -1,13 +1,108 @@
 extends ../home_base
 block content
-    h1 add details here
-    form(action="http://localhost:3000/api/v1/institute/upload" method="post" enctype="multipart/form-data")
-        label(for="myfile") Select a file:
-        input(type="file" id="myfile" name="myfile")
-        p#error
-        br 
-        br
-        input( type="submit")
-        
-        
-    
+    #addInstituteDetails.institute-login-div
+        h2 Add Institute Details
+        hr
+        form(action="") 
+            label(for="class-table") Select all that apply
+                span(style='color:red;') &nbsp *
+            br
+            br
+            table(id='class-table')
+                tr 
+                    td 
+                        input#select-all(type="checkbox" value='all' style='float:left;')
+                    td 
+                        label(for="select-all") Select All
+                    td
+                tr 
+                tr 
+                tr 
+                tr 
+                tr 
+                    td 
+                        input#pre-nur(type="checkbox" name='class' value='PRE-NUR' style='float:left;')
+                    td 
+                        label(for="pre-nur") Pre-Nursery
+                    td 
+                    td 
+                        input#nur(type="checkbox" name='class' value='NUR' style='float:left;')
+                    td 
+                        label(for="nur") Nursery
+                    td
+                    td 
+                        input#lkg(type="checkbox" name='class' value='L.K.G' style='float:left;')
+                    td 
+                        label(for="lkg") L.K.G
+                tr 
+                    td 
+                        input#ukg(type="checkbox" name='class' value='U.K.G' style='float:left;')
+                    td 
+                        label(for="ukg") U.K.G
+                    td 
+                    td 
+                        input#1(type="checkbox" name='class' value='I' style='float:left;')
+                    td 
+                        label(for="1") I
+                    td  
+                    td 
+                        input#2(type="checkbox" name='class' value='II' style='float:left;')
+                    td 
+                        label(for="2") II
+                tr 
+                    td 
+                        input#3(type="checkbox" name='class' value='III' style='float:left;')
+                    td 
+                        label(for="3") III
+                    td 
+                    td 
+                        input#4(type="checkbox" name='class' value='IV' style='float:left;')
+                    td 
+                        label(for="4") IV
+                    td 
+                    td 
+                        input#5(type="checkbox" name='class' value='V' style='float:left;')
+                    td 
+                        label(for="5") V 
+                tr 
+                    td 
+                        input#6(type="checkbox" name='class' value='VI' style='float:left;')
+                    td 
+                        label(for="6") VI 
+                    td 
+                    td 
+                        input#7(type="checkbox" name='class' value='VII' style='float:left;')
+                    td 
+                        label(for="7") VII 
+                    td 
+                    td 
+                        input#8(type="checkbox" name='class' value='VIII' style='float:left;')
+                    td 
+                        label(for="8") VIII 
+                tr  
+                    td 
+                        input#9(type="checkbox" name='class' value='IX' style='float:left;')
+                    td 
+                        label(for="9") IX 
+                    td 
+                    td 
+                        input#10(type="checkbox" name='class' value='X' style='float:left;')
+                    td 
+                        label(for="10") X 
+                    td 
+                    td 
+                        input#11(type="checkbox" name='class' value='XI' style='float:left;')
+                    td 
+                        label(for="11") XI
+                tr
+                    td 
+                        input#12(type="checkbox" name='class' value='XII' style='float:left;')
+                    td 
+                        label(for="12") XII
+           
+            br
+            hr
+            input(id='pan' type="text" placeholder='PAN Number')
+            br
+            input(id='gst' type="text" placeholder='GST No.')
+            input(id='add-details' type="submit" value ='submit')

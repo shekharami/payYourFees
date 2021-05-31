@@ -80,7 +80,7 @@ if(instituteSignup){
     instituteSignup.addEventListener('click', async e => {
         e.preventDefault()
 
-        instituteSignup.value = 'Please Wait !'
+        // instituteSignup.value = 'Please Wait !'
 
         let instituteType
         document.getElementsByName('institute').forEach(p => {
@@ -152,7 +152,7 @@ if(instituteSignup){
                 alert('Account created successfully!')
             }
             //after response is recieved set button text as before
-            instituteSignup.value = 'Create an Account'
+            // instituteSignup.value = 'Create an Account'
             location.reload()
             // redirect to logged in homepage to users
 

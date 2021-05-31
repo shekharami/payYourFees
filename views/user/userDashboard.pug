@@ -1,22 +1,19 @@
 extends ../home_base 
 block content 
-  if (user)
-    section.main-content
-        .content-div.common-style
-          h3 Welcome to payyourfees.com
-          p You can add a maximum of 5students to this account
-        .proceed-to-payment.common-style
-          a(href='/checkout')
-            button Click to Continue 
-        .associated-students.common-style
-          h2 Associated students with this account
-          h4 Select students for which fees to be paid
-          #added-students
-          //- Added students will be shown up here   
-          br
-          img(src="/img/plus.png" id='addStudent-img' alt="Add students")
-    .common-style
-      a(href='/checkout')
-      button Click to Continue
-  else 
-    h1#redirect-to-main Please Login To Continue
+  section.main-content
+      .content-div.common-style
+        h3 Welcome to payyourfees.com
+        p You can add a maximum of 5students to this account
+      .proceed-to-payment.common-style
+        a(href='/checkout')
+          button Click to Continue 
+      .associated-students.common-style
+        h2 Associated students with this account
+        h4 Select students for which fees to be paid
+        #added-students
+        //- Added students will be shown up here   
+        br
+        img(src="/img/plus.png" id='addStudent-img' alt="Add students")
+  .common-style
+    a(href='/checkout')
+    button Click to Continue

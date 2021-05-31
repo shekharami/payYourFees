@@ -1,5 +1,7 @@
+const { unlink } = require('fs');
 const XLSX = require('xlsx');
 const Institute = require("../models/instituteModel");
+const Student = require("../models/studentModel");
 
 
 exports.getInstitutes = async (req, res, next) =>{
@@ -47,20 +49,32 @@ exports.getInstituteDetails = async (req, res, next) =>{
 
 exports.updateInstituteData = async(req, res, next) => {
     try{
-        
-        //const note = await Institute.findOneAndUpdate({_id: req.body.id},{$set:{item: req.body.item}, createdAt: Date.now()},{new:true});
-        const note = await Institute.findByIdAndUpdate({_id: req.body.id},{$set:{item: req.body.item}, createdAt: Date.now()},{new:true});
+        const note = await Institute
+        .findByIdAndUpdate({
+            _id: res.locals.institute._id
+        },
+        {
+            $set:{
+                class : req.body.classes,
+                gst: req.body.gst,
+                pan : req.body.pan
+            }, 
+            createdAt: Date.now()
+        },
+        {
+            new:true
+        });
+        console.log(note)
 
         res.status(200).json({
-            status: "success",
-            data: {
-                note
-            }
+            status: "success"
         });
     
-
     }catch(err){
-        console.log(err)
+        res.status(200).json({
+            status : 'fail',
+            error : err.message
+        })
     }
 
     next();
@@ -94,7 +108,30 @@ exports.fileUpload = async (req, res, next) =>{
         if(req.file.mimetype.includes('spreadsheet')){
             const workbook = XLSX.readFile(req.file.path)
             var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
-            console.log(xlData);
+            // upload those files in database
+            // console.log(xlData);
+            xlData.forEach(async o => {
+                await Student
+                .create({ 
+                    name: o.Name,
+                    father : o.Father,
+                    mother : o.Mother,
+                    email : o.Email,
+                    phone : o.Phone,
+                    address : o.Address,
+                    registrationNo : o['Registration No.'],
+                    class : o.Class,
+                    section : o.Section,
+                    rollNo : o['Roll No.'],
+                    institute : res.locals.institute._id //fill in institute from res.locals.institute
+                 })
+            });
+
+            //delete file from file system
+            unlink(req.file.path, err => {
+                if(err) throw err;
+            })
+
         }else{
             redirectLink += '?error=error-parsing-file'
         }

@@ -6,6 +6,11 @@ const instituteController = require('./../controllers/instituteController');
 
 const router = express.Router();
 
-router.get('/dashboard', authController.isLoggedIn ,instituteViewController.dashboard)
+
+router.use(authController.isLoggedIn)
+
+router.get('/dashboard',  instituteViewController.dashboard)
+
+router.get('/add-students', instituteViewController.addStudents)
 
 module.exports = router;

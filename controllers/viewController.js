@@ -35,12 +35,16 @@ exports.instituteSignup = (req, res, next) => {
 };
 
 exports.dashboard = (req, res, next) => {
-    res.status(200).render('./user/userDashboard')
+    let template = './errorPage';
+    if(res.locals.user) template = './user/userDashboard';
+    res.status(200).render(template)
     next()
 };
 
 exports.myProfile = (req, res, next) => {
-    res.status(200).render('./user/myProfile')
+    let template = './errorPage';
+    if(res.locals.user) template = './user/myProfile';
+    res.status(200).render(template)
     next()
 };
 
@@ -50,11 +54,15 @@ exports.logout = (req, res, next) => {
 };
 
 exports.getCheckout =  (req, res, next) => {
-    res.header({ 'Content-Security-Policy': '*' }).status(200).render('./user/checkout', { key : process.env.RAZORPAY_KEY })
+    let template = './errorPage';
+    if(res.locals.user) template = './user/checkout';
+    res.header({ 'Content-Security-Policy': '*' }).status(200).render(template, { key : process.env.RAZORPAY_KEY })
     next()
 };
 
 exports.addStudent = (req, res, next) => {
-    res.status(200).render('./user/addStudent')
+    let template = './errorPage';
+    if(res.locals.user) template = './user/addStudent';
+    res.status(200).render(template)
     next()
 };

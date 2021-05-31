@@ -69,6 +69,14 @@ const instituteSchema = new mongoose.Schema({
         message: 'You typed something different than above.'
     },
 
+    gst: {
+        type: String
+    },
+
+    pan: {
+        type: String
+    },
+
     addedAt:{
         type: Date,
         default: Date.now()
