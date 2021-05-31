@@ -103,8 +103,7 @@ exports.fileUpload = async (req, res, next) =>{
 
     try{
 
-        let redirectLink = '/institute/dashboard'
-        console.log(req.file)
+        let redirectLink = '/institute/add-students'
         if(req.file.mimetype.includes('spreadsheet')){
             const workbook = XLSX.readFile(req.file.path)
             var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);

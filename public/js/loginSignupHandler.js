@@ -149,14 +149,9 @@ if(instituteSignup){
 
             console.log(response)
             if(response.data.status === 'success'){
-                alert('Account created successfully!')
+                alert('Account created successfully!');
+                location.assign('/institute/dashboard')
             }
-            //after response is recieved set button text as before
-            // instituteSignup.value = 'Create an Account'
-            location.reload()
-            // redirect to logged in homepage to users
-
-            //to do
         }
     })
 }

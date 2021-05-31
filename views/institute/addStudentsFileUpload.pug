@@ -1,13 +1,15 @@
-extends ../home_base
+extends ./_instituteBase
 block content
-    h1 Add students : 
-    form(action="http://localhost:3000/api/v1/institute/upload" method="post" enctype="multipart/form-data")
-        label(for="myfile") Select a file:
-        input(type="file" id="myfile" name="myfile")
-        p#error
-        br 
-        br
-        input( type="submit")
+    .add-students.institute-login-div
+        h1 Add students : 
+        hr
+        form(action="http://localhost:3000/api/v1/institute/upload" method="post" enctype="multipart/form-data")
+            label(for="myfile") Select a file:
+            input(type="file" id="myfile" name="myfile")
+            p#error
+            br 
+            br
+            input( type="submit")
         
         
     

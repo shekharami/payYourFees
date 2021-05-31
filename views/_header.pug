@@ -9,13 +9,14 @@
             a(href='my-profile' class='user-detail' id=`${user._id}`)=user.name
             | &nbsp;|&nbsp;
             a(href='/logout') Log Out
-    header
-      ul
-        li
-          a.active(href='/') Home
-        li
-          a(href='/') Pay Fees
-        li
-          a(href='/') Notification
-        li
-          a(href='#footer') Contact Us
+    block header_content
+    //- header
+    //-   ul
+    //-     li
+    //-       a.active(href='/') Home
+    //-     li
+    //-       a(href='/dashboard') Pay Fees
+    //-     li
+    //-       a(href='/') Notification
+    //-     li
+    //-       a(href='#footer') Contact Us

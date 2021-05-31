@@ -8823,7 +8823,7 @@ if (instituteSignup) {
               }
 
               alert('Please select Institute Type');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 16:
@@ -8833,7 +8833,7 @@ if (instituteSignup) {
               }
 
               alert('Please provide your name');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 20:
@@ -8843,7 +8843,7 @@ if (instituteSignup) {
               }
 
               alert('Please provide your email');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 24:
@@ -8853,7 +8853,7 @@ if (instituteSignup) {
               }
 
               alert('Please provide your phone number');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 28:
@@ -8863,7 +8863,7 @@ if (instituteSignup) {
               }
 
               alert('Invalid phone number');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 32:
@@ -8873,7 +8873,7 @@ if (instituteSignup) {
               }
 
               alert('Please provide password');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 36:
@@ -8883,7 +8883,7 @@ if (instituteSignup) {
               }
 
               alert('Please confirm your password');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 40:
@@ -8893,7 +8893,7 @@ if (instituteSignup) {
               }
 
               alert('Passwords do not match');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 44:
@@ -8903,7 +8903,7 @@ if (instituteSignup) {
               }
 
               alert('please provide your address');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 48:
@@ -8913,7 +8913,7 @@ if (instituteSignup) {
               }
 
               alert('please provide your district');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 52:
@@ -8923,7 +8923,7 @@ if (instituteSignup) {
               }
 
               alert('please provide your pincode');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 56:
@@ -8933,7 +8933,7 @@ if (instituteSignup) {
               }
 
               alert('incorrect pincode');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 60:
@@ -8943,7 +8943,7 @@ if (instituteSignup) {
               }
 
               alert('please provide your state');
-              _context2.next = 72;
+              _context2.next = 71;
               break;
 
             case 64:
@@ -8975,14 +8975,10 @@ if (instituteSignup) {
 
               if (response.data.status === 'success') {
                 alert('Account created successfully!');
-              } //after response is recieved set button text as before
-              // instituteSignup.value = 'Create an Account'
+                location.assign('/institute/dashboard');
+              }
 
-
-              location.reload(); // redirect to logged in homepage to users
-              //to do
-
-            case 72:
+            case 71:
             case "end":
               return _context2.stop();
           }
@@ -10033,7 +10029,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51990" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63861" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
