@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
     "build:js": "parcel build ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
@@ -31,7 +31,6 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "parcel-bundler": "^1.12.5",
-    "pdfkit": "^0.12.1",
     "pug": "^3.0.0",
     "razorpay": "^2.0.6",
     "xlsx": "^0.17.0",
