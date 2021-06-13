@@ -9409,6 +9409,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9421,16 +9425,67 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+var filterByClass = function filterByClass(cls) {
+  var tr = _toConsumableArray(document.getElementsByTagName('tr'));
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+  tr = tr.splice(1, tr.length);
+
+  var sect = _toConsumableArray(document.getElementById('sectionFilter').options);
+
+  sect = sect.splice(1, sect.length);
+
+  if (cls === 'All') {
+    tr.forEach(function (t) {
+      return t.style.display = '';
+    });
+    sect.forEach(function (o) {
+      return o.style.display = '';
+    });
+    return;
+  } else {
+    var sections = [];
+    tr.forEach(function (t) {
+      if (!(t.children[2].innerText === cls)) {
+        t.style.display = 'none';
+      } else {
+        t.style.display = '';
+        var sec = t.children[3].innerText;
+
+        if (!sections.includes(sec)) {
+          sections.push(sec);
+        }
+      }
+    });
+    sect.forEach(function (o) {
+      if (!sections.includes(o.innerText)) {
+        o.style.display = 'none';
+      } else {
+        o.style.display = '';
+      }
+    });
+  }
+};
+
+var filterBySection = function filterBySection(sec) {
+  var tr = _toConsumableArray(document.getElementsByTagName('tr')).filter(function (t) {
+    return t.style.display = '';
+  });
+
+  tr.forEach(function (t) {
+    if (!t.children[2].innerText.includes(sec)) {
+      t.style.display = 'none';
+    } else {
+      t.style.display = '';
+    }
+  });
+};
 
 var searchStudent = document.getElementById('search-student');
 
 if (searchStudent) {
   searchStudent.addEventListener('click', /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-      var regno, name, clas, section, res, html1, html3, html2, classes, _section, wts_r, wts, html, a;
+      var regno, name, clas, section, res, html1, html3, html2, classes, _section, wts_r, wts, html, a, _document$getElements3, _document$getElements4, cls, sec, classFilter, sectionFilter;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -9478,8 +9533,11 @@ if (searchStudent) {
 
                   html3 += "<tr>\n                <td>".concat(o.rollNo, "</td>\n                <td>").concat(o.name, "</td>\n                <td>").concat(o.class, "</td>\n                <td>").concat(o.section, "</td>\n                <td>").concat(o.feesPaidTill, "</td>\n                <td><button name=").concat(o.id, ">View Details</button></td>\n                </tr>\n                <div id=").concat(o.id, " style='display:none;background-color:yellow;'>\n                <p>Registration No. : ").concat(o.registrationNo, "</p>\n                <p>Father's Name : ").concat(o.father, "</p>\n                <p>Mother's Name : ").concat(o.mother, "</p>\n                <p>Email : ").concat(o.email, "</p>\n                <div>");
                 });
+
+                _section.sort();
+
                 html3 += '</table>';
-                html1 += "<table>\n                            <tr>\n                                <th>Roll No.</th>\n                                <th>Name</th><th>Class : <select>";
+                html1 += "<table>\n                            <tr>\n                                <th>Roll No.</th>\n                                <th>Name</th><th>Class : <select id='classFilter'>";
                 wts_r = {
                   1: 'I',
                   2: 'II',
@@ -9519,7 +9577,7 @@ if (searchStudent) {
                   html1 += "<option>".concat(c, "</option>");
                 });
                 html1 += ' </select></th>';
-                html2 += "<th>Section : \n            <select>";
+                html2 += "<th>Section : \n            <select id='sectionFilter'><option>All</option>";
 
                 _section.forEach(function (s) {
                   html2 += "<option>".concat(s, "</option>");
@@ -9549,6 +9607,17 @@ if (searchStudent) {
                     showingDiv.style.display = '';
                   };
                 });
+
+                _document$getElements3 = document.getElementsByTagName('select'), _document$getElements4 = _slicedToArray(_document$getElements3, 2), cls = _document$getElements4[0], sec = _document$getElements4[1];
+                classFilter = document.getElementById('classFilter');
+                sectionFilter = document.getElementById('sectionFilter');
+
+                classFilter.onclick = function () {
+                  filterByClass(cls[cls.selectedIndex].innerText);
+                }; // sectionFilter.onchange = () => {
+                //     filterBySection(sec[sec.selectedIndex].innerText);
+                // }
+
               }
 
             case 12:
@@ -9563,7 +9632,9 @@ if (searchStudent) {
       return _ref.apply(this, arguments);
     };
   }());
-}
+} // const resultTable = document.getElementById('result-table');
+// if(resultTable){
+// }
 },{"axios":"../../node_modules/axios/index.js"}],"apiCalls.js":[function(require,module,exports) {
 "use strict";
 
@@ -10029,7 +10100,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63861" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61555" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

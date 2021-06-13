@@ -1,5 +1,50 @@
 import axios from 'axios';
 
+const filterByClass = cls => {
+    let tr = [...document.getElementsByTagName('tr')];
+    tr = tr.splice(1,tr.length);
+    let sect = [...document.getElementById('sectionFilter').options];
+    sect = sect.splice(1,sect.length);
+    if(cls === 'All'){
+        tr.forEach(t => t.style.display = '')
+        sect.forEach(o => o.style.display = '')
+        return
+    }else{
+        const sections = []
+        tr.forEach(t => { 
+            if(!(t.children[2].innerText === cls)){ 
+                t.style.display = 'none' ;
+            } else {
+                t.style.display = '';
+                let sec = t.children[3].innerText;
+                if(!sections.includes(sec)){
+                    sections.push(sec)
+                }
+            }
+        })
+
+        sect.forEach(o => {
+            if(!sections.includes(o.innerText)){
+                o.style.display = 'none';
+            }else{
+                o.style.display = '';
+            }
+        })
+    }
+}
+
+const filterBySection = sec => {
+    const tr = [...document.getElementsByTagName('tr')].filter(t => t.style.display ='');
+    
+        tr.forEach(t => { 
+            if(!t.children[2].innerText.includes(sec)){ 
+                t.style.display = 'none' ;
+            } else {
+                t.style.display = '';
+            }
+        })
+}
+
 const searchStudent = document.getElementById('search-student');
 if(searchStudent){
     searchStudent.addEventListener('click', async e =>{
@@ -53,12 +98,14 @@ if(searchStudent){
                 <div>`;
             });
 
+            section.sort()
+
             html3 += '</table>';
 
             html1 += `<table>
                             <tr>
                                 <th>Roll No.</th>
-                                <th>Name</th><th>Class : <select>`;
+                                <th>Name</th><th>Class : <select id='classFilter'>`;
 
             const wts_r = { 1:'I', 2:'II', 3:'III', 4:'IV', 5:'V', 6:'VI', 7:'VII',8:'VIII', 9:'IX', 10:'X', 11:'XI', 12:'XII' };
             const wts = { 'I':1, 'II':2, 'III':3, 'IV':4, 'V':5, 'VI':6, 'VII':7, 'VIII':8, 'IX': 9, 'X':10, 'XI':11, 'XII':12 };
@@ -76,7 +123,7 @@ if(searchStudent){
             html1 += ' </select></th>';
 
             html2 += `<th>Section : 
-            <select>`;
+            <select id='sectionFilter'><option>All</option>`;
             section.forEach(s => {
                 html2 += `<option>${s}</option>`
             });
@@ -106,11 +153,22 @@ if(searchStudent){
                     
                 }
             });
-
-
-
+            
+            const [cls,sec] = document.getElementsByTagName('select');
+            const classFilter = document.getElementById('classFilter');
+            const sectionFilter = document.getElementById('sectionFilter');
+            classFilter.onclick = () => {
+                filterByClass(cls[cls.selectedIndex].innerText);
+            }
+            // sectionFilter.onchange = () => {
+            //     filterBySection(sec[sec.selectedIndex].innerText);
+            // }
         }
-
+        
     })
 }
 
+// const resultTable = document.getElementById('result-table');
+// if(resultTable){
+    
+// }
