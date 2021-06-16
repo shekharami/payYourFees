@@ -7,6 +7,6 @@ require('./userDasboard');
 require('./addStudent');
 require('./searchStudent');
 require('./addInstituteDetails');
-
+require('./downloadDocument');
 // keep this at the end
-require('./errorHandler')
+require('./errorHandler');

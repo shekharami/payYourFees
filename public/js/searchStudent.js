@@ -34,19 +34,41 @@ const filterByClass = cls => {
 }
 
 const filterBySection = sec => {
-    const tr = [...document.getElementsByTagName('tr')].filter(t => t.style.display ='');
-    
-        tr.forEach(t => { 
-            if(!t.children[2].innerText.includes(sec)){ 
-                t.style.display = 'none' ;
-            } else {
-                t.style.display = '';
-            }
-        })
+    let tr = [...document.getElementsByTagName('tr')];
+    tr = tr.splice(1,tr.length);
+    if(sec === 'All'){
+        tr.forEach(t => t.style.display = '')
+        return
+    }
+    tr.forEach(t => { 
+       if(!t.children[3].innerText.includes(sec)){
+           t.style.display = 'none'
+       } else {
+           t.style.display = ''
+       }
+    })
 }
+
+// const sortStudents = (students) => {
+//     const 
+//     return students
+// }
 
 const searchStudent = document.getElementById('search-student');
 if(searchStudent){
+    const months = { 1 : 'JAN',
+                     2 : 'FEB',
+                     3 : 'Mar',
+                     4 : 'APR',
+                     5 : 'MAY',
+                     6 : 'JUN',
+                     7 : 'JUL',
+                     8 : 'AUG',
+                     9 : 'SEP',
+                     10: 'OCT',
+                     11: 'NOV',
+                     12: 'DEC'
+                    }
     searchStudent.addEventListener('click', async e =>{
         e.preventDefault();
         const regno = document.getElementById('regno').value;
@@ -67,27 +89,37 @@ if(searchStudent){
         });
         
         if(res.data.status === 'success'){
+            const numResult = res.data.data.students.length *1;
+            document.getElementById('num-results').textContent = `${numResult} Results Found.`
+            if(numResult){
+                document.getElementById('export').style.display = ''
+            }
 
-            document.getElementById('num-results').textContent = `${res.data.data.students.length} Results Found.`
+            res.data.data.students.sort()
 
             let html1 = '', html3 = '', html2 = '';
 
             const classes = [], section = [];
-            
-            res.data.data.students.forEach(o => {
+            let feesPaidTill, month, year;
+
+            res.data.data.students
+            .sort((a,b) => a.rollNo*1 - b.rollNo*1)
+            .forEach(o => {
                 if(!classes.includes(o.class)){
                     classes.push(o.class)
                 }
                 if(!section.includes(o.section)){
                     section.push(o.section)
                 }
-
+                feesPaidTill = o.feesPaidTill.split('-')
+                year = feesPaidTill[0]
+                month = feesPaidTill[1]*1
                 html3 += `<tr>
                 <td>${o.rollNo}</td>
                 <td>${o.name}</td>
                 <td>${o.class}</td>
                 <td>${o.section}</td>
-                <td>${o.feesPaidTill}</td>
+                <td>${months[month]} ${year}</td>
                 <td><button name=${o.id}>View Details</button></td>
                 </tr>
                 <div id=${o.id} style='display:none;background-color:yellow;'>
@@ -141,7 +173,6 @@ if(searchStudent){
             [...document.getElementsByTagName('button')].forEach(b => {
                 b.onclick = () =>{
                     const [previousDispalyedDiv] = document.getElementsByClassName('on');
-                    console.log(previousDispalyedDiv)
                     if(previousDispalyedDiv){
                         previousDispalyedDiv.style.display = 'none';
                         previousDispalyedDiv.classList.remove('on');
@@ -157,18 +188,13 @@ if(searchStudent){
             const [cls,sec] = document.getElementsByTagName('select');
             const classFilter = document.getElementById('classFilter');
             const sectionFilter = document.getElementById('sectionFilter');
-            classFilter.onclick = () => {
+            classFilter.onchange = () => {
                 filterByClass(cls[cls.selectedIndex].innerText);
             }
-            // sectionFilter.onchange = () => {
-            //     filterBySection(sec[sec.selectedIndex].innerText);
-            // }
+            sectionFilter.onchange = () => {
+                filterBySection(sec[sec.selectedIndex].innerText);
+            }
         }
         
     })
 }
-
-// const resultTable = document.getElementById('result-table');
-// if(resultTable){
-    
-// }

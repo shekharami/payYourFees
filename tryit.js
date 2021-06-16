@@ -1,6 +1,4 @@
-const path = require('path')
-const fs = require('fs');/*
-const PDFDocument = require('pdfkit');
+
 // const { unlinkSync } = require('fs');
 // // const cron = require('node-cron');
 
@@ -31,22 +29,22 @@ const PDFDocument = require('pdfkit');
 //     }
 // }
 
-// console.log(JSON.stringify(obj))
+// console.log(JSON.stringify(obj)
 
-// Create a document
-const doc = new PDFDocument();
+// const arr = [{ a : '3' , b : 'B'}, { a :  '1', b : 'A'}, { a :  '2', b : 'A'}, { a :  '5', b : 'B'}, { a :  '6', b : 'A'}, { a : '4', b : 'B'}]
+  
+//   console.log(arr.map(o => Object.entries(o))
+//   .sort(
+//       (a, b) => a[0][1] - b[0][1]
+//     )
+// //   .sort(
+// //       (a,b) => a[1][1] - b[1][1]
+// //     )
+//   .map(o=>Object.fromEntries(o)))
 
-// Pipe its output somewhere, like to a file or HTTP response
-// See below for browser usage
-doc.pipe(fs.createWriteStream('output.pdf'));
+// // console.log([1,5,4,3,7].sort((a,b) => a-b))
 
-// Embed a font, set the font size, and render some text
-doc
-  .font('fonts/PalatinoBold.ttf')
-  .fontSize(25)
-  .text('Some text with an embedded font!', 100, 100);
 
-//   '<table><tr><td>Hello</td><td>World</td></tr></table>'
-*/
-
-console.log(['A','D','E','C','B'].sort())
+const d = new Date('01-MAY-2021')
+console.log(d.getMonth() +1)
+  
