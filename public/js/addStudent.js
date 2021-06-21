@@ -5,13 +5,14 @@ const searchStudent = document.getElementById('searchStudent');
 if(searchStudent){
     searchStudent.addEventListener('click', async e => {
         e.preventDefault()
-        const father = document.getElementById('father').value;
-        const mother = document.getElementById('mother').value;
-        const regNo = document.getElementById('regNo').value;
+        const name = document.getElementById('name').value.toLowerCase()
+        const father = document.getElementById('father').value.toLowerCase()
+        const mother = document.getElementById('mother').value.toLowerCase()
+        const regNo = document.getElementById('regNo').value.toLowerCase()
         const res = await axios({
             method: 'POST',
             url : '/api/v1/student/search',
-            data : { father, mother, regNo },
+            data : { name,father, mother, regNo },
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
@@ -25,7 +26,7 @@ if(searchStudent){
                 date = date.toLocaleString('en-us',{month: 'short'})+'-'+new Date(Date.now()).getFullYear()
                 html += `<div class='students-card'>        
                             <input id ='${s.id}' type='checkbox' name='addStudent'style="float:right;width:20px;height:20px">
-                            <p>Nmae : ${s.name}</p>
+                            <p>Name : ${s.name}</p>
                             <p>Registration No. : ${s.registrationNo}</p>
                             <p> Class : ${s.class} ( ${s.section} )</p>
                             <p>Roll No. : ${s.rollNo}</p>
@@ -46,7 +47,7 @@ if(searchStudent){
                         c.parentElement.classList.add('selected')
                     } 
                 }
-            })
+            }) 
         }
     })
 }
@@ -54,8 +55,7 @@ if(searchStudent){
 const selectedStudents = [];
 const addStudentBtn = document.getElementById('addStudent-btn');
 if(addStudentBtn){
-    
-    addStudentBtn.addEventListener('click', ()=>{
+    addStudentBtn.addEventListener('click', async ()=>{
         document.getElementsByName('addStudent').forEach(o => { 
             if(o.checked){
                 selectedStudents.push(o);
@@ -74,8 +74,28 @@ if(addStudentBtn){
                 localStorage.setItem(`${i}`, JSON.stringify(o))
             }
         }
+        let students = [...document.getElementsByClassName('selected')]
+        .splice(0,5)
+        .map(s => s.children[0].id )
+
+        const res = await axios({
+            method: 'PATCH',
+            url : '/api/v1/user/update?students=true',
+            data : {students},
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        
+        if(res.data.status === 'success'){
+            alert('Data saved succefully')
+        }else{
+            alert(`something went wrong while tagging \nselected students to your account`)
+        }
+
         opener.location.reload();
         window.close();
+        
     })
 }
 

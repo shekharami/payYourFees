@@ -1,6 +1,7 @@
 const express = require('express');
 const viewController = require('./../controllers/viewController');
 const authController = require('./../controllers/authController');
+const userController = require('./../controllers/userController');
 const instituteController = require('./../controllers/instituteController');
 
 const router = express.Router();
@@ -19,7 +20,7 @@ router.get('/institute-signup', viewController.instituteSignup)
 
 router.use(authController.isLoggedIn)
 
-router.get('/dashboard', viewController.dashboard)
+router.get('/dashboard', userController.taggedStudentDetails, viewController.dashboard)
 
 router.get('/checkout', viewController.getCheckout)
 

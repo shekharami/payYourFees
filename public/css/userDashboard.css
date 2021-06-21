@@ -92,3 +92,48 @@ h5 {
   padding: 10px;
   margin: 10px;
 }
+
+/*----students - card --- */
+
+.student-card {
+  display: inline-block;
+  box-shadow: 1px 5px 6px -2px #777;
+  background-color: #f8f8ff;
+  margin: 10px 20px 30px 12px;
+  width: 285px;
+  padding: 10px;
+  text-align: left;
+}
+.student-name {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 20px;
+}
+.student-class {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.student-school {
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.std-schl-add {
+  display: inline-block;
+  margin-right: 100px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.std-chkbx {
+  float: right;
+  width: 20px;
+  height: 20px;
+}
+.std-paid {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: green;
+}

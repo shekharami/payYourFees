@@ -5,9 +5,15 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.route('/test').get(studentController.test)
+
 router.route('/add-student').patch(studentController.addStudent)
+
+router.use(authController.isLoggedIn)
+
 router.route('/search')
-.get(authController.isLoggedIn , studentController.searchStudent)
+.get(studentController.searchStudent)
 .post(studentController.getStudent)
+
+router.route('/fees').post(studentController.getFeesDetails)
 
 module.exports = router;

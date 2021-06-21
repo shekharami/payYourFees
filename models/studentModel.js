@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Institute = require('./instituteModel')
 
 const studentSchema = new mongoose.Schema({
    
@@ -28,7 +29,8 @@ const studentSchema = new mongoose.Schema({
     },
 
     institute:{
-        type: mongoose.Types.ObjectId
+        type: mongoose.Types.ObjectId,
+        ref : Institute
     },
 
     rollNo: {

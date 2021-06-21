@@ -45,6 +45,10 @@
 // // console.log([1,5,4,3,7].sort((a,b) => a-b))
 
 
-const d = new Date('01-MAY-2021')
-console.log(d.getMonth() +1)
-  
+// const d1 = new Date('01-MAY-2021')
+// const d2 = new Date('02-MAY-2021')
+// console.log(d1<d2)
+
+// console.log(new Date('2021-06-09T18:30:00.000Z').toDateString())
+
+console.log(['abc', 'def'].join('|'))

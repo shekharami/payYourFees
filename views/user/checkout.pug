@@ -1,52 +1,41 @@
 extends ../home_base 
 block content  
   section.content
-    .proceed-to-payment
-      a(href='#proceed_to_payment')
-        button#pay Proceed to pay
-        | 
-      button#generate Generate Order Id
-    h4#orderId 
-    h5#key Razor Pay key : #{key}
-
-    h4#1 
-    h4#2 
-    h4#3
+    script(src="https://checkout.razorpay.com/v1/checkout.js")
+    .common-style 
+      h4#orderId 
+    h5#key(style='display:none;') Razor Pay key : #{key}
     .checkout-table
-      h4(style='color:green;') Students
-        span.price(style='color:Green')
-          b Fees
+      div 
+        h4(style='color:green;') Students
+          span.price(style='color:Green')
+            b Fees
+        hr
+        .common-style#spinner(style='display:;')
+          img(src="/img/spinner.gif", alt="Loading")
+        .checkout-content(style='display:none;')
+          h3(style='color:blue;') Student 1
+          p
+            span.detail Jan, Feb, Mar
+            span.price ₹ 15
+          p
+            span.detail Exam fees
+            span.price ₹ 5
+          hr
+          p Total 
+            span.price
+              b#sum ₹ 30
+          p Other Charges 
+            span.price
+              b#oc + ₹ 3
+          hr
+          p Amount Payable
+            span.price(style='color:black')
+              b#total ₹ 33
+          h6 Note: Any Charges extra is taken by the payment gateway/Bank.
       hr
-      h3(style='color:blue;') Student 1
-      p
-        span.detail Jan,Feb,Mar
-        span.price $15
-      p
-        span.detail Exam fees
-        span.price $5
-      hr
-      h3(style='color:blue;') Student 2
-      p
-        span.detail Mar
-        span.price $5
-      
-        span.detail Exam fees
-        span.price $5
-      hr
-      p Total 
-        span.price
-          b $30
-      p Other Charges 
-        span.price
-          b + $3
-      hr
-      p Amount Payable
-        span.price(style='color:black')
-          b $33
-      
-      h6 Note: Any Charges extra is taken by the payment gateway/Bank.
-      
-      input(type='button' value='Proceed to pay' )
+      div.common-style 
+        input#pay(type='button' value='Proceed to pay' style='width:200px;' )
   
 
           

@@ -1,12 +1,14 @@
+const mongoose = require('mongoose')
 const Institute = require('../models/instituteModel')
 const Student = require('./../models/studentModel')
 const User = require('./../models/userModel')
+const Fees = require('./../models/feesModel')
 
 
 exports.test = async (req, res, next) => {
 
     try{
-        /*
+
         const names = ['amit','sumit','guddu','deepak',
         'mukesh','rajdev','mayank','ajay','rajeev',
         'brajesh','pranav','vikash','vivek'] //13
@@ -26,6 +28,8 @@ exports.test = async (req, res, next) => {
         const random = (arr, l)=>{
             return arr[Math.round(Math.random()*(l))]
         }
+        /*
+        //Add some students to table
         const students = []
         let t = 500;
         while(t--){
@@ -47,8 +51,30 @@ exports.test = async (req, res, next) => {
 
         }
         */
+
+        /*
+        // Add som efees data to database
+        const fees = []
+        for(let i = 0 ; i< 12; i++){
+            const o =  {
+                institute : mongoose.Types.ObjectId('60acd2645b1c3916c4fdeea2'),
+                name : `${month[i]}-2021`,
+                desc : 'Description text',
+                amount : 500,
+                classes ,
+                payBy :  ((i+1) === 12)? (new Date(`10-${month[0]}-2022`)) :new Date(`10-${month[i+1]}-2021`)
+            }
+            const fee = await Fees.create(o)
+            fees.push(fee)
+        }
+        */
+
         res.status(200).json({
-            status: 'success'
+            status: 'success'//,
+            // data : {
+            //     length : fees.length,
+            //     fees
+            // }
         })
 
     }catch(err){
@@ -108,12 +134,14 @@ exports.getStudent = async (req, res, next) => {
 
         let query ;
         
-        if(req.body.father){
-            query = Student.find({ father: req.body.father })
+        if(req.body.regNo){
+            query = Student.find({ registrationNo: new RegExp(req.body.regNo) })
+        }else if(req.body.name){
+            query = Student.find({ name: new RegExp(req.body.name) })
+        }else if(req.body.father){
+            query = Student.find({ father: new RegExp(req.body.father) })
         }else if(req.body.mother){
-            query = Student.find({ mother: req.body.mother })
-        }else if(req.body.regNo){
-            query = Student.find({ registrationNo: req.body.regNo })
+            query = Student.find({ mother: new RegExp(req.body.mother) })
         }
 
         query = query.select('-__v -father -mother -email -addedAt')
@@ -156,6 +184,62 @@ exports.addStudent = async (req, res, next) => {
             status :'fail',
             error: err.message
         })
+    }
+
+    next()
+}
+
+exports.getFeesDetails = async (req, res, next) => {
+    try{
+
+        if(!res.locals.user) throw new Error('Please login to continue !')
+
+        let feesDetails = {}
+        const names = []
+
+        for ( o of req.body){
+            names.push(o.name)
+            feesDetails[o.name] =  { 
+                institute : o.institute,
+                details : await Fees.find( 
+                        { 
+                            institute : mongoose.Types.ObjectId(o.institute), 
+                            payBy : { $gt : new Date(o.nextPay) },
+                            classes : o.class.split(' ')[0],//{ $in : o.class.split(' ')[0] },
+                            active : true
+                        }
+                    )
+                    .sort('payBy')
+                    .limit(2)
+                    .select('-active -__v -addedAt -classes -programme -course -institute').lean()
+                }
+        }
+
+        fesDetails = Object.keys(feesDetails)
+        .map( name => {
+                feesDetails[name].details = feesDetails[name].details
+                .map(o => {
+                    delete o.id
+                    delete o._id
+                    return o
+                })
+        })
+        
+        res.locals.feesDetails = feesDetails
+        // console.log(feesDetails)
+        // console.log(feesDetails['amit'].details)
+
+        // res.status(200).json({ 
+        //     status : 'success',
+        //     data : feesDetails
+        //  })
+
+    }catch(err){
+        console.log(err.stack)
+        // res.status(200).json({
+        //     status : 'fail',
+        //     message : err.message
+        // })
     }
 
     next()

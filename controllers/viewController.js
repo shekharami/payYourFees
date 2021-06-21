@@ -56,7 +56,7 @@ exports.logout = (req, res, next) => {
 exports.getCheckout =  (req, res, next) => {
     let template = './errorPage';
     if(res.locals.user) template = './user/checkout';
-    res.header({ 'Content-Security-Policy': '*' }).status(200).render(template, { key : process.env.RAZORPAY_KEY })
+    res.header({ 'Content-Security-Policy': 'https://checkout.razorpay.com' }).status(200).render(template)
     next()
 };
 

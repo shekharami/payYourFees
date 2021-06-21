@@ -1,19 +1,43 @@
 extends ../home_base 
 block content 
   section.main-content
-      .content-div.common-style
-        h3 Welcome to payyourfees.com
-        p You can add a maximum of 5students to this account
       .proceed-to-payment.common-style
-        a(href='/checkout')
-          button Click to Continue 
+        //- a(href='/checkout')
+          button.checkout Click to Continue
+        button.checkout Click to Continue 
+         
       .associated-students.common-style
         h2 Associated students with this account
         h4 Select students for which fees to be paid
-        #added-students
-        //- Added students will be shown up here   
-        br
+
+        //- Added students will be shown up here
+        #added-students(style='text-align:none;')
+          each stud in user.students 
+            //- p=stud.name
+            .student-card(id=`${stud._id}`)
+              h3.student-name=`${stud.name}`
+              h5.student-class=`${stud.class} (${stud.section})`
+              br
+              h5.student-school(id=`${stud.institute._id}`)=`${stud.institute.name} ,`
+              br
+              h5.std-schl-add=`${stud.institute.addressDistrict}`
+              input.std-chkbx(type='checkbox' name='card')
+              br
+              h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
+              br
+              button More details
+              .details(style='display:none ;')
+                p=`Father's Name : ${stud.father}` 
+                p=`Mother's Name : ${stud.mother}` 
+                p=`Roll Number : ${stud.rollNo}`
+                p=`Registration No. : ${stud.registrationNo}` 
+        
         img(src="/img/plus.png" id='addStudent-img' alt="Add students")
   .common-style
-    a(href='/checkout')
-    button Click to Continue
+    //- a(href='/checkout')
+      button.checkout Click to Continue
+    button.checkout Click to Continue
+
+  .content-div.common-style
+    h3 Welcome to payyourfees.com
+    p You can add a maximum of 5 students to this account
