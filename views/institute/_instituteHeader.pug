@@ -1,14 +1,18 @@
-extends ../_header
-block header_content 
+.header
     header
       ul
-        li
-          a.active(href='/institute/dashboard') Home
-        li
-          a(href='/institute/dashboard') Get Report
-        li
-          a(href='/institute/add-students') Add Students
-        li
-          a(href='#footer') Contact Us
-        li(style='float:right;')
-          a(href='/logout') Log Out
+        li 
+          .sidepanel#mySidepanel
+            a.closebtn#close-btn ×
+            a(href='/institute/dashboard') Home
+            a(href='/institute/dashboard') Get Report
+            a(href='/institute/add-students') Add Students
+            a(href='#footer') Contact Us
+            if(institute)
+                a(href='institute-profile' class='institute-detail' id=`${institute._id}`)=`Welcome ${institute.name}`
+                a(href='/logout') Log Out
+
+          button#burger(class="openbtn" ) ☰
+
+        li( style='float:right;margin-right:10px;margin-top:8px;') 
+            a.active(href='/') LOGO

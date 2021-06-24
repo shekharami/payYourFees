@@ -25687,6 +25687,24 @@ require("core-js/modules/web.dom.iterable.js");
 
 require("regenerator-runtime/runtime.js");
 
+var open = document.getElementById('burger');
+
+if (open) {
+  open.onclick = function () {
+    document.getElementById("mySidepanel").style.width = "200px";
+  };
+}
+
+var close = document.getElementById('close-btn');
+
+if (close) {
+  close.href = 'javascript:void(0)';
+
+  close.onclick = function () {
+    document.getElementById("mySidepanel").style.width = "0";
+  };
+}
+
 require('./redirectToMain');
 
 require('./loginSignupRedirect');
@@ -25735,7 +25753,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65105" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56939" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

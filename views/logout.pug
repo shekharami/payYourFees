@@ -3,6 +3,7 @@ html(lang="en" dir="ltr")
     head
         meta(charset="utf-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="/css/sidepanel.css")
         link(rel="stylesheet" href="/css/style.css")
         link(rel="stylesheet" href="/css/userDashboard.css")
         link(rel="stylesheet" href="/css/checkout.css")
@@ -11,17 +12,8 @@ html(lang="en" dir="ltr")
             | #{title}
     body.main
 
+        include _header
         
-        header
-            ul
-                li
-                    a.active(href='/') Home
-                li
-                    a(href='/') Pay Fees
-                li
-                    a(href='/') Notification
-                li
-                    a(href='/') Contact Us
         div(id='redirect-to-main' style='text-align:center;margin-bottom:220px')
             h1 You have been logged out successfully!
 
