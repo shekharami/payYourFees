@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/public/css/checkout.css'>
+
+    <title>Document</title>
+    <style>
+        /*------------------------ User Dashboard ------------------------*/
+
+
+    </style>
+</head>
+<body>
+    <div >
+        <section class='welcome' ><br>
+        <h5 >
+            Welcome <em><a href="#profile">First Last</a></em> &nbsp;|&nbsp;<a href="#logout">Log Out</a>
+        </h5>
+        </section>
+        <header>
+            <ul>
+                <li><a class="active" href="#home">Home</a></li>
+                <li><a href="#payfees">Pay Fees</a></li> 
+                <li><a href="#notification">Notification</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+            </ul>
+            
+        </header>
+    </div>
+    <section class='content'>
+        
+        <div class='proceed-to-payment' style="display: none;">
+            <button id ='pay'>Proceed to pay</button><br>
+            <button id='generate'>Generate Order Id</button>
+            <h4 id='orderId'></h4>
+            <hr>
+            <h5 id='key'>Razor Pay Key : </h5>
+            <h4 id='1'> payment Id: </h4>
+            <h4 id='2'>Order Id: </h4>
+            <h4 id='3'>Signature : </h4>
+            <hr>
+        </div>
+        <div class='main-content' style="margin-left: 10%;">
+            <table >
+                <tr>
+                    <td>
+                        <h4>Students</h4>
+                    </td>
+                    <td>
+                        <h4>Fees</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Babalu Pandit</p>
+                    </td>
+                    <td>
+                        <p>500.00</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Guddu Pandit</p>                        
+                    </td>
+                    <td>
+                        <p>600.00</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border_bottom">
+                        <p>Gajgamini Devi</p>
+                    </td>
+                    <td class ="border_bottom">
+                        <p>700.00</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Total Fees:</p>
+                    </td>
+                    <td>
+                        <p > 1800.00</p>
+                    </td>
+                </tr >
+                <tr  >
+                    <td class="border_bottom">
+                        <p>Other Charges</p>
+                    </td>
+                    <td class = "border_bottom">
+                        <p>+ 46.00</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>Total Amount : </h4>
+                    </td>
+                    <td>
+                        <h4> 1846.00</h4>
+            </table>
+        </div>
+        <h6>Note: Other charges are taken by the payment gateway/Bank/Agent.</h6>
+      
+        <div class='proceed-to-payment'>
+            <a href="#proceed_to_payment">
+                <button>Click to Continue </button>
+            </a>
+        </div>
+    </section>
+    <footer>
+        <h3>Footer of the page</h3>
+    </footer>
+    
+</body>
+</html>

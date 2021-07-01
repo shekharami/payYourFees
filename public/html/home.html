@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Document</title>
+</head>
+<body>
+ <div class = 'payment-div'>
+    <form>
+        <table>
+            <caption>Pay Fees</caption>
+            <tr>
+                <td>
+                    <label for="institute">Choose a Institute :</label>
+                </td>
+                <td>
+                    <select name="institute" id="institute">
+                        <!-- $0.selectedOptions[0].value -->
+                        <optgroup label="School">
+                        <option value="mongo-id1">School 1</option>
+                        <option value="mongo-id2">School 2</option>
+                        </optgroup>
+                        <!-- <optgroup label="Colleges">
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                        <optgroup label="Institutes">
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                        </optgroup> -->
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="reg-number">Registration Number : </label>
+                </td>
+                <td>
+                    <input type="text" id = 'reg-number' >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="roll-number">Roll Number : </label>
+                </td>
+                <td>
+                    <input type="text" id = 'roll-number' >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="mob-number">Mobile Number : </label>
+                </td>
+                <td>
+                    <input type="text" id = 'mob-number' >
+                </td>
+            </tr>
+            <tr>
+                
+                <td>
+                    <input type="submit" id = 'submit' value='Continue' >
+                </td>
+            </tr>
+    </table>
+    </form>
+
+ </div>
+
+ <div class = 'login-div'>
+
+    <p>If you are a student login here : </p>
+    <a href="/user-login/"><input type="button" id = 'user-login-but' value='Student Login' ></a>
+    
+    <p>For institutes ( school / College/ Coaching ) Login here : </p>
+    <a href="/institute-login/"><input type="button" id = 'institute-login-but' value='Institute Login' ></a>
+    
+
+ </div>
+
+
+</body>
+</html>
