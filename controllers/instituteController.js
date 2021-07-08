@@ -15,8 +15,8 @@ exports.getInstitutes = async (req, res, next) =>{
         })
 
     }catch(err){
-
-        // res.locals.institutes = ['Error fetching institute names']
+        console.log(err.stack)
+        res.locals.institutes = ['Error fetching institute names']
     }
     
     next();

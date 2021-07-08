@@ -45,7 +45,6 @@ window.onload = () => {
             }else if(c.parentElement.classList.length===1){
                 c.parentElement.classList.add('selected')
                 c.parentElement.style.backgroundColor = 'lightgreen'
-
             } 
         }
     })
@@ -58,7 +57,10 @@ if(checkout.length){
     checkout.forEach(button => {
         button.onclick = () => {
             const selectedStudents = [...document.getElementsByClassName('selected')]
-            if(!selectedStudents.length) alert('Please select at least one student!')
+            if(!selectedStudents.length){
+                alert('Please select at least one student!')
+                return
+            }
             let i = 0;
             selectedStudents.forEach(s => {
                 const dataset = s.children

@@ -40,7 +40,8 @@ li a.active {
 
 .associated-students {
   padding: 10px;
-  background-color: #ddd;
+  /* background-color: #ddd; */
+  background-color: white;
   /* width: max-content; */
   margin: 10px;
 }

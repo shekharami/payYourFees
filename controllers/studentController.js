@@ -135,21 +135,26 @@ exports.getStudent = async (req, res, next) => {
     try{
 
         let query ;
-        
+        console.log(req.body)
+        if(req.body.uid){
+            query.find({ adhr : req.body.uid })
+        }
         if(req.body.regNo){
             query = Student.find({ registrationNo: new RegExp(req.body.regNo) })
-        }else if(req.body.name){
+        }
+        if(req.body.name){
             query = Student.find({ name: new RegExp(req.body.name) })
-        }else if(req.body.father){
+        }
+        if(req.body.father){
             query = Student.find({ father: new RegExp(req.body.father) })
-        }else if(req.body.mother){
+        }
+        if(req.body.mother){
             query = Student.find({ mother: new RegExp(req.body.mother) })
         }
-
-        query = query.select('-__v -father -mother -email -addedAt')
-
+        query = query.find({ institute: mongoose.Types.ObjectId(req.body.institute) })
+        query = query.select('-__v -father -mother -email')
         const students = await query;
-        
+
         res.status(200).json({
             status :'success',
             data : students

@@ -1,43 +1,34 @@
 extends ../home_base 
 block content 
   section.main-content
-      .proceed-to-payment.common-style
-        //- a(href='/checkout')
-          button.checkout Click to Continue
-        button.checkout Click to Continue 
-         
-      .associated-students.common-style
-        h2 Associated students with this account
-        h4 Select students for which fees to be paid
-
-        //- Added students will be shown up here
-        #added-students(style='text-align:none;')
-          each stud in user.students 
-            //- p=stud.name
-            .student-card(id=`${stud._id}`)
-              h3.student-name=`${stud.name}`
-              h5.student-class=`${stud.class} (${stud.section})`
-              br
-              h5.student-school(id=`${stud.institute._id}`)=`${stud.institute.name} ,`
-              br
-              h5.std-schl-add=`${stud.institute.addressDistrict}`
-              input.std-chkbx(type='checkbox' name='card')
-              br
-              h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
-              br
-              button More details
-              .details(style='display:none ;')
-                p=`Father's Name : ${stud.father}` 
-                p=`Mother's Name : ${stud.mother}` 
-                p=`Roll Number : ${stud.rollNo}`
-                p=`Registration No. : ${stud.registrationNo}` 
-        
-        img(src="/img/plus.png" id='addStudent-img' alt="Add students")
-  .common-style
-    //- a(href='/checkout')
-      button.checkout Click to Continue
-    button.checkout Click to Continue
-
-  .content-div.common-style
-    h3 Welcome to payyourfees.com
-    p You can add a maximum of 5 students to this account
+      - if(user.students.length)
+          h2(style='text-align:center;color:green;') Linked students with this account are displayed below
+          .associated-students.common-style(style='background-color:#f9f9f9;')
+            #added-students(style='text-align:none;')
+              h4(style='text-align:center;color:green;') Select student(s) for which you want to pay fees 
+              each stud in user.students 
+                .student-card(id=`${stud._id}`)
+                  h3.student-name=`${stud.name}`
+                  h5.student-class=`${stud.class} (${stud.section})`
+                  br
+                  h5.student-school(id=`${stud.institute._id}`)=`${stud.institute.name} ,`
+                  br
+                  h5.std-schl-add=`${stud.institute.addressDistrict}`
+                  input.std-chkbx(type='checkbox' name='card')
+                  br
+                  h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
+                  br
+                  button More details
+                  .details(style='display:none ;')
+                    p=`Father's Name : ${stud.father}` 
+                    p=`Mother's Name : ${stud.mother}` 
+                    p=`Roll Number : ${stud.rollNo}`
+                    p=`Registration No. : ${stud.registrationNo}` 
+            img(src="/img/plus.png" id='addStudent-img' alt="Add students")
+            .common-style.proceed-to-payment
+              button.checkout Click to Continue
+      - else 
+          h2(style='text-align:center;color:red;') No linked students. Please link by clicking on PLUS icon below
+          .common-style
+            img(src="/img/plus.png" id='addStudent-img' alt="Add students")
+            h4(style='margin-top:0;') Add Student

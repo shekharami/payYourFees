@@ -9211,7 +9211,11 @@ if (checkout.length) {
     button.onclick = function () {
       var selectedStudents = _toConsumableArray(document.getElementsByClassName('selected'));
 
-      if (!selectedStudents.length) alert('Please select at least one student!');
+      if (!selectedStudents.length) {
+        alert('Please select at least one student!');
+        return;
+      }
+
       var i = 0;
       selectedStudents.forEach(function (s) {
         var dataset = s.children;
@@ -9451,12 +9455,16 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+var createCard = function createCard(e) {
+  return "<div class='student-card' id=".concat(e.children[0].children[0].id, ">\n                  <h3 class='student-name'>").concat(e.children[1].textContent, "</h3>\n                  <h5 class='student-class'>").concat(e.children[3].textContent, "  | Roll :  ").concat(e.children[4].textContent, "</h5>\n                  <h3 class='student-class deselct' style='float:right;color:red; width:20px'>X</h3>\n                  </div>");
+};
+
 var searchStudent = document.getElementById('searchStudent');
 
 if (searchStudent) {
-  searchStudent.addEventListener('click', /*#__PURE__*/function () {
+  searchStudent.onclick = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-      var name, father, mother, regNo, res, html;
+      var name, father, mother, regNo, uid, institute, res, html, table, step3;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -9466,7 +9474,28 @@ if (searchStudent) {
               father = document.getElementById('father').value.toLowerCase();
               mother = document.getElementById('mother').value.toLowerCase();
               regNo = document.getElementById('regNo').value.toLowerCase();
-              _context.next = 7;
+              uid = document.getElementById('uid').value;
+              institute = document.getElementById('institute').selectedOptions[0].value;
+
+              if (institute) {
+                _context.next = 10;
+                break;
+              }
+
+              alert('Please select institute first!');
+              return _context.abrupt("return");
+
+            case 10:
+              if (!(!uid && !regNo && !name && (!father || !mother))) {
+                _context.next = 13;
+                break;
+              }
+
+              alert("Please provide any one of ADHAAR, Registration No, \n            Students's Name or Father's name + Mother's name");
+              return _context.abrupt("return");
+
+            case 13:
+              _context.next = 15;
               return (0, _axios.default)({
                 method: 'POST',
                 url: '/api/v1/student/search',
@@ -9474,16 +9503,19 @@ if (searchStudent) {
                   name: name,
                   father: father,
                   mother: mother,
-                  regNo: regNo
+                  regNo: regNo,
+                  uid: uid,
+                  institute: institute
                 },
                 headers: {
                   "Content-type": "application/json; charset=UTF-8"
                 }
               });
 
-            case 7:
+            case 15:
               res = _context.sent;
               html = '';
+              table = "<hr>\n                <h2 style='color:green;text-align:center;text-decoration:underline;'>Step 2</h2>\n                <p style='text-align:center;'>Click on 'Add' button below to select student whom you want to link.</p>\n                    <table>\n                        <tr>\n                            <th>Selection</th>\n                            <th>Name</th>\n                            <th>Registration Number</th>\n                            <th>Class (section)</th>\n                            <th>Roll No.</th>\n                            <th>Fees Paid Upto</th>\n                        </tr>";
 
               if (res.data.status === 'success') {
                 html += "<div>";
@@ -9491,23 +9523,51 @@ if (searchStudent) {
                   var date = new Date(new Date(s.feesPaidTill).getMonth() + '-27-' + new Date(Date.now()).getFullYear());
                   date = date.toLocaleString('en-us', {
                     month: 'short'
-                  }) + '-' + new Date(Date.now()).getFullYear();
-                  html += "<div class='students-card'>        \n                            <input id ='".concat(s.id, "' type='checkbox' name='addStudent'style=\"float:right;width:20px;height:20px\">\n                            <p>Name : ").concat(s.name, "</p>\n                            <p>Registration No. : ").concat(s.registrationNo, "</p>\n                            <p> Class : ").concat(s.class, " ( ").concat(s.section, " )</p>\n                            <p>Roll No. : ").concat(s.rollNo, "</p>\n                            <p style=\"display:none;\">Fees Paid Upto : ").concat(date, "</p>\n                        </div>");
-                });
-                html += '<br></div>';
-                document.getElementById('returned-students').innerHTML = html;
+                  }) + '-' + new Date(Date.now()).getFullYear(); // html += `<div class='students-card'>        
+                  //             <input id ='${s.id}' type='checkbox' name='addStudent'style="float:right;width:20px;height:20px">
+                  //             <br><p>Name : ${s.name}</p>
+                  //             <p style='display:none;'>Registration No. : ${s.registrationNo}</p>
+                  //             <p> Class : ${s.class} ( ${s.section} )</p>
+                  //             <p>Roll No. : ${s.rollNo}</p>
+                  //             <p style="display:none;">Fees Paid Upto : ${date}</p>
+                  //         </div>`
+
+                  table += "<tr>\n                            <td style='text-align:left';>\n                                <!--<input id ='".concat(s.id, "' type='checkbox' name='addStudent'style=\"width:20px;height:20px;margin-right:50%;margin-left:50%;\">-->\n                                <button id= ").concat(s.id, " style='color:green;' name='addStudent'>Add</button>\n                            </td>\n                            <td>\n                                ").concat(s.name, "\n                            </td>\n                            <td>\n                                ").concat(s.registrationNo, "\n                            </td>\n                            <td>\n                                ").concat(s.class, " ( ").concat(s.section, " )\n                            </td>\n                            <td>\n                                ").concat(s.rollNo, "\n                            </td>\n                            <td>\n                                ").concat(date, "\n                            </td>\n                          </tr>");
+                }); // html += '<br></div>'
+
+                table += '</table>'; // document.getElementById('returned-students').innerHTML = html;
+
+                document.getElementById('returned-students').innerHTML = table;
+                step3 = "<hr>\n                        <h2 style='color:green;text-align:center;text-decoration:underline;'>Step 3</h2>\n                        <p style='text-align:center;'>Click LInk</p>\n                        <div>";
                 document.getElementsByName('addStudent').forEach(function (c) {
-                  c.onchange = function () {
-                    if (c.parentElement.classList.length === 2) {
-                      c.parentElement.classList.remove('selected');
-                    } else if (c.parentElement.classList.length === 1) {
-                      c.parentElement.classList.add('selected');
-                    }
+                  // c.onchange = () => {
+                  //     if(c.parentElement.parentElement.classList.length){
+                  //         c.parentElement.parentElement.classList.remove('selected')
+                  //     }else if(!c.parentElement.parentElement.classList.length){
+                  //         c.parentElement.parentElement.classList.add('selected')
+                  //     } 
+                  // }
+                  // 2nd solution 
+                  // c.onchange = () => {
+                  //     let bgclr = c.parentNode.parentElement.style.backgroundColor
+                  //     if(!bgclr || (bgclr === '#f2f2f2')){
+                  //         c.parentNode.parentElement.style.backgroundColor = 'lightgreen'
+                  //     }else if(bgclr === 'lightgreen'){
+                  //         c.parentNode.parentElement.style.backgroundColor = ''
+                  //     } 
+                  // }
+                  // 3rd solution
+                  c.onclick = function () {
+                    step3 += createCard(c.parentElement.parentElement);
+                    step3 += '</div>';
+                    document.getElementById('step3').innerHTML = step3;
                   };
                 });
+              } else {
+                alert('NO students found');
               }
 
-            case 10:
+            case 19:
             case "end":
               return _context.stop();
           }
@@ -9518,7 +9578,7 @@ if (searchStudent) {
     return function (_x) {
       return _ref.apply(this, arguments);
     };
-  }());
+  }();
 }
 
 var selectedStudents = [];
@@ -25753,7 +25813,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56939" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43159" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
