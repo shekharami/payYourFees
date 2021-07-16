@@ -48,6 +48,13 @@ exports.myProfile = (req, res, next) => {
     next()
 };
 
+exports.paymentHistory = (req, res, next) => {
+    let template = './errorPage';
+    if(res.locals.user) template = './user/paymentHistory';
+    res.status(200).render(template)
+    next()
+};
+
 exports.logout = (req, res, next) => {
     res.status(200).render('logout')
     next()

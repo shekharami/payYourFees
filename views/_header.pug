@@ -10,6 +10,7 @@
                 a(href='/') Notification
                 a(href='#footer') Contact
                 if(user)
+                    a(href='payment-history' ) Payment History
                     a(href='my-profile' class='user-detail' id=`${user._id}`)=`Welcome ${user.name}`
                     a(href='/logout') Log Out
 

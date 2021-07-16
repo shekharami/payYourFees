@@ -28,6 +28,8 @@ router.get('/add-student', instituteController.getInstitutes ,viewController.add
 
 router.get('/my-profile', viewController.myProfile)
 
+router.get('/payment-history', viewController.paymentHistory)
+
 router.get('/logout', authController.logout ,viewController.logout)
 
 module.exports = router;

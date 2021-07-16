@@ -15,10 +15,10 @@ function createHeaders(keys) {
     return result;
   }
 
-const downloadBtn = document.getElementById('export');
-if(downloadBtn){
+const exportBtn = document.getElementById('export');
+if(exportBtn){
     // Default export is a4 paper, portrait, using millimeters for units
-    downloadBtn.onclick = () => {
+    exportBtn.onclick = () => {
         let trs = [...document.getElementsByTagName('tr')].filter(tr => tr.style.display === '')
         trs = trs.splice(1, trs.length)
         const students = trs.map(tr => { 
@@ -44,4 +44,29 @@ if(downloadBtn){
 }
 
 
-// add downloading of pdf file after payment by a user in this file only
+// For user : paymnet-history download reciept buttons
+const downloadBtn = document.getElementsByName('past-pay-dnld')
+if(downloadBtn.length){
+    downloadBtn.forEach(btn => {
+        btn.onclick = () => {
+          const details = [{ 'Paid For': 'Amit Shekhar', 'Amount':'500','Status' : 'Success', 'Paid on': '2-July-2021' }]  
+          const headers = createHeaders([ 'Paid For' , 'Amount', 'Status', 'Paid on']);
+          const doc = new jsPDF();
+          doc.table(10, 
+              10, 
+              details,
+              headers
+              ,
+              {
+                  printHeaders : true
+              },
+              { 
+                  autoSize : true
+              }
+          )
+          doc.save(`reciept.pdf`)
+          }
+    })
+}
+
+//Add downloading of fees reciept just after the paymnet has been made

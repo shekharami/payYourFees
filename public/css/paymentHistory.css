@@ -1,0 +1,9 @@
+.payment-history-card {
+    display: inline-block;
+    box-shadow: 1px 5px 6px -2px #777;
+    background-color: #f8f8ff;
+    margin-bottom: 20px;
+    width: 65%;
+    padding: 10px;
+    text-align: left;
+  }

@@ -1,0 +1,37 @@
+extends ../home_base 
+block content 
+    .common-style
+        h1 Payment history
+        h2 Fee payment made by you will appear here.
+
+        div  
+            .payment-history-card
+                p Paid for Amit Shekhar
+                    span(style='float:right;margin-right:10px;')  ₹ 500
+                p payment status : success
+                p 
+                    h5 02-Jan-2021
+                    button(style='float:right' name='past-pay-dnld') Download reciept
+            .payment-history-card
+                p Paid for Amit Shekhar
+                    span(style='float:right;margin-right:10px;')  ₹ 500
+                p payment status : success
+                h5 02-Jan-2021
+                button(style='float:right' name='past-pay-dnld') Download reciept
+            .payment-history-card
+                p Paid for Amit Shekhar
+                    span(style='float:right;margin-right:10px;')  ₹ 500
+                p payment status : success
+                h5 02-Jan-2021
+                button(style='float:right' name='past-pay-dnld') Download reciept
+            .pagination 
+                p Results per page 
+                    select(name="no" style="margin:0;padding:0;width:3em;")
+                        option(value="5") 5
+                        option(value="10") 10 
+                        option(value="15") 15
+                a(href="") << Previous |
+                |  
+                a(href="")  Next >> 
+
+        

@@ -25434,11 +25434,11 @@ function createHeaders(keys) {
   return result;
 }
 
-var downloadBtn = document.getElementById('export');
+var exportBtn = document.getElementById('export');
 
-if (downloadBtn) {
+if (exportBtn) {
   // Default export is a4 paper, portrait, using millimeters for units
-  downloadBtn.onclick = function () {
+  exportBtn.onclick = function () {
     var trs = _toConsumableArray(document.getElementsByTagName('tr')).filter(function (tr) {
       return tr.style.display === '';
     });
@@ -25465,7 +25465,31 @@ if (downloadBtn) {
     });
     doc.save("example.pdf");
   };
-} // add downloading of pdf file after payment by a user in this file only
+} // For user : paymnet-history download reciept buttons
+
+
+var downloadBtn = document.getElementsByName('past-pay-dnld');
+
+if (downloadBtn.length) {
+  downloadBtn.forEach(function (btn) {
+    btn.onclick = function () {
+      var details = [{
+        'Paid For': 'Amit Shekhar',
+        'Amount': '500',
+        'Status': 'Success',
+        'Paid on': '2-July-2021'
+      }];
+      var headers = createHeaders(['Paid For', 'Amount', 'Status', 'Paid on']);
+      var doc = new _jspdf.jsPDF();
+      doc.table(10, 10, details, headers, {
+        printHeaders: true
+      }, {
+        autoSize: true
+      });
+      doc.save("reciept.pdf");
+    };
+  });
+} //Add downloading of fees reciept just after the paymnet has been made
 },{"jspdf":"../../node_modules/jspdf/dist/jspdf.es.min.js"}],"errorHandler.js":[function(require,module,exports) {
 var queryString = document.location.href.split('?');
 
@@ -25813,7 +25837,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43159" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56309" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
