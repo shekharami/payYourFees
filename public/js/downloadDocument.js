@@ -69,4 +69,4 @@ if(downloadBtn.length){
     })
 }
 
-//Add downloading of fees reciept just after the paymnet has been made
+//Add downloading of fees reciept just after the paymnet has been made  
