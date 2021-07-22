@@ -7,7 +7,10 @@ block content
             //- label(for='institute-id') Institute Id : 
             input#institute-id(type='text' placeholder='Institute Id')
             //- label(for='password') password : 
-            input#institute-password(type='password' placeholder='Password')
+            //- input#institute-password(type='password' name='password' placeholder='Password')
+            div(style="width: 100%;padding: 12px 20px;margin: 4px 0;display: block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;padding-top: 6px;padding-bottom: 6px;border-bottom-width: 1px;")
+                input#institute-password( type="password" placeholder='Password' name="password" style="border:none transparent;width: 240px;padding-top: 6px;padding-bottom: 6px;padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 0px;outline:none;")
+                i(class="bi bi-eye-slash" style="float:right;margin-top: 4px;" id="togglePassword")
             input#institute-login(type='submit' value='Login')
             a.forgot-password(href="") Forgot Password 
             |  

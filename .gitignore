@@ -1,3 +1,10 @@
 node_modules/
 *.env
 .cache/
+public/js/purify.7461be3b.js
+public/js/purify.7461be3b.js.map
+public/js/html2canvas.389d8a0d.js
+public/js/html2canvas.389d8a0d.js.map
+public/js/index.es.70f16b3d.js
+public/js/index.es.70f16b3d.js.map
+
