@@ -9199,7 +9199,7 @@ var addStudentImg = document.getElementById('addStudent-img');
 if (addStudentImg) {
   addStudentImg.addEventListener('click', function () {
     alert('Your previously tagged students data will be lost');
-    window.open('/add-student', '_blank');
+    window.open('/link-student');
   });
 }
 
@@ -9473,35 +9473,72 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var createCard = function createCard(e) {
-  return "<div class='student-card' id=".concat(e.children[0].children[0].id, ">\n                  <h3 class='student-name'>").concat(e.children[1].textContent, "</h3>\n                  <h5 class='student-class'>").concat(e.children[3].textContent, "  | Roll :  ").concat(e.children[4].textContent, "</h5>\n                  <h3 class='student-class deselct' style='float:right;color:red; width:20px'>X</h3>\n                  </div>");
-};
+var addOrRemove = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id, action) {
+    var data, res;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            data = {
+              students: id,
+              action: {
+                add: false,
+                remove: false
+              }
+            };
+            action === 'add' ? data.action.add = true : data.action.remove = true;
+            _context.next = 4;
+            return (0, _axios.default)({
+              method: 'PATCH',
+              url: '/api/v1/user/update',
+              data: data,
+              headers: {
+                "Content-type": "application/json; charset=UTF-8"
+              }
+            });
+
+          case 4:
+            res = _context.sent;
+            if (res.data.status === 'success') location.reload(true);
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function addOrRemove(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}(); //remove students
+
+
+var removeStudents = document.getElementsByName('removeStudent');
+
+if (removeStudents.length) {
+  removeStudents.forEach(function (c) {
+    c.onclick = function () {
+      return addOrRemove(c.id, 'remove');
+    };
+  });
+}
 
 var searchStudent = document.getElementById('searchStudent');
 
 if (searchStudent) {
   searchStudent.onclick = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-      var name, father, mother, regNo, uid, institute, res, html, table, step3;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
+      var name, father, mother, regNo, uid, institute, res, html, table;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
               name = document.getElementById('name').value.toLowerCase();
@@ -9512,24 +9549,24 @@ if (searchStudent) {
               institute = document.getElementById('institute').selectedOptions[0].value;
 
               if (institute) {
-                _context.next = 10;
+                _context2.next = 10;
                 break;
               }
 
               alert('Please select institute first!');
-              return _context.abrupt("return");
+              return _context2.abrupt("return");
 
             case 10:
               if (!(!uid && !regNo && !name && (!father || !mother))) {
-                _context.next = 13;
+                _context2.next = 13;
                 break;
               }
 
               alert("Please provide any one of ADHAAR, Registration No, \n            Students's Name or Father's name + Mother's name");
-              return _context.abrupt("return");
+              return _context2.abrupt("return");
 
             case 13:
-              _context.next = 15;
+              _context2.next = 15;
               return (0, _axios.default)({
                 method: 'POST',
                 url: '/api/v1/student/search',
@@ -9547,55 +9584,25 @@ if (searchStudent) {
               });
 
             case 15:
-              res = _context.sent;
+              res = _context2.sent;
               html = '';
-              table = "<hr>\n                <h2 style='color:green;text-align:center;text-decoration:underline;'>Step 2</h2>\n                <p style='text-align:center;'>Click on 'Add' button below to select student whom you want to link.</p>\n                    <table>\n                        <tr>\n                            <th>Selection</th>\n                            <th>Name</th>\n                            <th>Registration Number</th>\n                            <th>Class (section)</th>\n                            <th>Roll No.</th>\n                            <th>Fees Paid Upto</th>\n                        </tr>";
+              table = "<hr>\n                <h2 style='color:green;text-align:center;text-decoration:underline;'>Step 2</h2>\n                <p style='text-align:center;'>Click on 'Add' button below to select student whom you want to link.</p>\n                    <table>\n                        <tr>\n                            <th>Action</th>\n                            <th>Name</th>\n                            <th>Registration Number</th>\n                            <th>Class (section)</th>\n                            <th>Roll No.</th>\n                            <th>Fees Paid Upto</th>\n                        </tr>";
 
               if (res.data.status === 'success') {
-                html += "<div>";
                 res.data.data.forEach(function (s) {
                   var date = new Date(new Date(s.feesPaidTill).getMonth() + '-27-' + new Date(Date.now()).getFullYear());
                   date = date.toLocaleString('en-us', {
                     month: 'short'
-                  }) + '-' + new Date(Date.now()).getFullYear(); // html += `<div class='students-card'>        
-                  //             <input id ='${s.id}' type='checkbox' name='addStudent'style="float:right;width:20px;height:20px">
-                  //             <br><p>Name : ${s.name}</p>
-                  //             <p style='display:none;'>Registration No. : ${s.registrationNo}</p>
-                  //             <p> Class : ${s.class} ( ${s.section} )</p>
-                  //             <p>Roll No. : ${s.rollNo}</p>
-                  //             <p style="display:none;">Fees Paid Upto : ${date}</p>
-                  //         </div>`
-
-                  table += "<tr>\n                            <td style='text-align:left';>\n                                <!--<input id ='".concat(s.id, "' type='checkbox' name='addStudent'style=\"width:20px;height:20px;margin-right:50%;margin-left:50%;\">-->\n                                <button id= ").concat(s.id, " style='color:green;' name='addStudent'>Add</button>\n                            </td>\n                            <td>\n                                ").concat(s.name, "\n                            </td>\n                            <td>\n                                ").concat(s.registrationNo, "\n                            </td>\n                            <td>\n                                ").concat(s.class, " ( ").concat(s.section, " )\n                            </td>\n                            <td>\n                                ").concat(s.rollNo, "\n                            </td>\n                            <td>\n                                ").concat(date, "\n                            </td>\n                          </tr>");
-                }); // html += '<br></div>'
-
-                table += '</table>'; // document.getElementById('returned-students').innerHTML = html;
-
+                  }) + '-' + new Date(Date.now()).getFullYear();
+                  table += "<tr>\n                            <td style='text-align:left';>\n                                <button id= ".concat(s.id, " style='color:green;' name='addStudent'>Add</button>\n                            </td>\n                            <td>\n                                ").concat(s.name, "\n                            </td>\n                            <td>\n                                ").concat(s.registrationNo, "\n                            </td>\n                            <td>\n                                ").concat(s.class, " ( ").concat(s.section, " )\n                            </td>\n                            <td>\n                                ").concat(s.rollNo, "\n                            </td>\n                            <td>\n                                ").concat(date, "\n                            </td>\n                          </tr>");
+                });
+                table += '</table>';
                 document.getElementById('returned-students').innerHTML = table;
-                step3 = "<hr>\n                        <h2 style='color:green;text-align:center;text-decoration:underline;'>Step 3</h2>\n                        <p style='text-align:center;'>Click LInk</p>\n                        <div>";
                 document.getElementsByName('addStudent').forEach(function (c) {
-                  // c.onchange = () => {
-                  //     if(c.parentElement.parentElement.classList.length){
-                  //         c.parentElement.parentElement.classList.remove('selected')
-                  //     }else if(!c.parentElement.parentElement.classList.length){
-                  //         c.parentElement.parentElement.classList.add('selected')
-                  //     } 
-                  // }
-                  // 2nd solution 
-                  // c.onchange = () => {
-                  //     let bgclr = c.parentNode.parentElement.style.backgroundColor
-                  //     if(!bgclr || (bgclr === '#f2f2f2')){
-                  //         c.parentNode.parentElement.style.backgroundColor = 'lightgreen'
-                  //     }else if(bgclr === 'lightgreen'){
-                  //         c.parentNode.parentElement.style.backgroundColor = ''
-                  //     } 
-                  // }
-                  // 3rd solution
                   c.onclick = function () {
-                    step3 += createCard(c.parentElement.parentElement);
-                    step3 += '</div>';
-                    document.getElementById('step3').innerHTML = step3;
-                  };
+                    return addOrRemove(c.id, 'add');
+                  }; // make network request to add students
+
                 });
               } else {
                 alert('NO students found');
@@ -9603,83 +9610,66 @@ if (searchStudent) {
 
             case 19:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
-    return function (_x) {
-      return _ref.apply(this, arguments);
+    return function (_x3) {
+      return _ref2.apply(this, arguments);
     };
   }();
 }
-
-var selectedStudents = [];
-var addStudentBtn = document.getElementById('addStudent-btn');
-
-if (addStudentBtn) {
-  addStudentBtn.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    var i, o, students, res;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            document.getElementsByName('addStudent').forEach(function (o) {
-              if (o.checked) {
+/*
+const selectedStudents = [];
+const addStudentBtn = document.getElementById('addStudent-btn');
+if(addStudentBtn){
+    addStudentBtn.addEventListener('click', async ()=>{
+        document.getElementsByName('addStudent').forEach(o => { 
+            if(o.checked){
                 selectedStudents.push(o);
-              }
-            });
-
-            if (selectedStudents.length) {
-              for (i = 0; i < selectedStudents.length; i++) {
-                o = {
-                  id: selectedStudents[i].id,
-                  name: selectedStudents[i].parentNode.children[1].innerText.split(': ')[1],
-                  regNo: selectedStudents[i].parentNode.children[2].innerText.split(': ')[1],
-                  class: selectedStudents[i].parentNode.children[3].innerText.split(': ')[1],
-                  roll: selectedStudents[i].parentNode.children[4].innerText.split(': ')[1],
-                  feesPaidUpto: selectedStudents[i].parentNode.children[5].innerText.split(': ')[1]
-                };
-                localStorage.setItem("".concat(i), JSON.stringify(o));
-              }
             }
+        })
+        if(selectedStudents.length){
+            for(let i = 0; i < selectedStudents.length; i++){
 
-            students = _toConsumableArray(document.getElementsByClassName('selected')).splice(0, 5).map(function (s) {
-              return s.children[0].id;
-            });
-            _context2.next = 5;
-            return (0, _axios.default)({
-              method: 'PATCH',
-              url: '/api/v1/user/update?students=true',
-              data: {
-                students: students
-              },
-              headers: {
-                "Content-type": "application/json; charset=UTF-8"
-              }
-            });
+                let o = { id: selectedStudents[i].id,
+                    name: selectedStudents[i].parentNode.children[1].innerText.split(': ')[1],
+                    regNo : selectedStudents[i].parentNode.children[2].innerText.split(': ')[1],
+                    class : selectedStudents[i].parentNode.children[3].innerText.split(': ')[1],
+                    roll : selectedStudents[i].parentNode.children[4].innerText.split(': ')[1],
+                    feesPaidUpto : selectedStudents[i].parentNode.children[5].innerText.split(': ')[1] }
 
-          case 5:
-            res = _context2.sent;
-
-            if (res.data.status === 'success') {
-              alert('Data saved succefully');
-            } else {
-              alert("something went wrong while tagging \nselected students to your account");
+                localStorage.setItem(`${i}`, JSON.stringify(o))
             }
-
-            opener.location.reload();
-            window.close();
-
-          case 9:
-          case "end":
-            return _context2.stop();
         }
-      }
-    }, _callee2);
-  })));
+        let students = [...document.getElementsByClassName('selected')]
+        .splice(0,5)
+        .map(s => s.children[0].id )
+
+        const res = await axios({
+            method: 'PATCH',
+            url : '/api/v1/user/update?students=true',
+            data : {students},
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        
+        if(res.data.status === 'success'){
+            alert('Data saved succefully')
+        }else{
+            alert(`something went wrong while tagging \nselected students to your account`)
+        }
+
+        opener.location.reload();
+        window.close();
+        
+    })
 }
+
+*/
 },{"axios":"../../node_modules/axios/index.js"}],"searchStudent.js":[function(require,module,exports) {
 "use strict";
 
@@ -25855,7 +25845,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55476" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52408" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

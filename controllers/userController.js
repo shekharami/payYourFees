@@ -30,48 +30,15 @@ exports.getUser = async (req, res, next) =>{
     next();
 };
 
-
-// exports.saveInsitute = async (req, res, next) =>{
-//     try{
-//         const item = {... req.body};
-//         const data = await Institute.create(item);
-
-//         res.status(201).json({
-//             status: "success",
-//             data: {
-//                 data
-//             }
-
-//         });
-    
-//     }catch(err){
-//         console.log(err);
-//     }
-
-//     next();
-// };
-
 exports.updateUser = async (req, res, next) => {
     try{
         if(!res.locals.user) throw new Error('Please login to continue')
-        
-        let data;
-        if(req.query.students){
-            data = { students : req.body.students.map(id => mongoose.Types.ObjectId(id)) }
-        }
-        // const data = {
-        //     name : req.body.name,
-        //     email : req.body.email
-        // }
 
-        if(!data){
-            throw new Error('Something went wrong')
-        }
-
-        const user = await User.findByIdAndUpdate(res.locals.user._id, data ,{new: true, runValidators: true})
+        console.log(req.body) 
+        // const user = await User.findByIdAndUpdate(res.locals.user._id, data ,{new: true, runValidators: true})
         res.status(200).json({
-            status: 'success',
-            user
+            status: 'success'//,
+            // user
         })
 
         next();
@@ -86,21 +53,6 @@ exports.updateUser = async (req, res, next) => {
     }
     
 };
-
-exports.addStudent = async (req, res, next) => {
-
-    try{
-
-        // findstudentfrom database
-    }catch(err){
-
-        res.status(200).json({
-            status: 'fail',
-            error: err.message
-        })
-    }
-    next()
-}
 
 exports.taggedStudentDetails = async (req, res, next) => {
     try{

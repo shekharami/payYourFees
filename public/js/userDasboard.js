@@ -5,8 +5,7 @@ if(addStudentImg){
     addStudentImg.addEventListener('click', ()=>{
         alert('Your previously tagged students data will be lost')
         window.open(
-            '/add-student',
-            '_blank' 
+            '/link-student'
           );
     })
 }

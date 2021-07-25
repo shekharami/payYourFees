@@ -67,9 +67,9 @@ exports.getCheckout =  (req, res, next) => {
     next()
 };
 
-exports.addStudent = (req, res, next) => {
+exports.linkStudent = (req, res, next) => {
     let template = './errorPage';
-    if(res.locals.user) template = './user/addStudent';
+    if(res.locals.user) template = './user/linkStudent';
     res.status(200).render(template)
     next()
 };

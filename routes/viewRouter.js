@@ -24,7 +24,7 @@ router.get('/dashboard', userController.taggedStudentDetails, viewController.das
 
 router.get('/checkout', viewController.getCheckout)
 
-router.get('/add-student', instituteController.getInstitutes ,viewController.addStudent)
+router.get('/link-student', instituteController.getInstitutes,userController.taggedStudentDetails ,viewController.linkStudent)
 
 router.get('/my-profile', viewController.myProfile)
 

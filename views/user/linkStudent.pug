@@ -1,0 +1,51 @@
+extends ../home_base
+block content
+  //- h2(style='color:green;text-align:center;text-decoration:underline;') Link /Unlink students
+  h2(style='color:green;text-align:center;text-decoration:underline;') Link / Unlink students
+  .common-style(style='width:300px;margin:auto;')
+    form(action='')
+      select#institute(name='institute')
+        option(value="") Choose an Institute 
+        each i in institutes 
+            option(value=`${i.id}`)=i.name
+      br
+      p
+        | AND
+      input#uid(type='text' placeholder='ADHAAR Number')
+      br
+      p
+        | Or
+      input#regNo(type='text' placeholder='Registration Number')
+      r
+      p
+        | Or
+      input#name(type="text" placeholder="Student's Name")
+      br
+      p
+        | Or
+      input#father(type='text' placeholder="Father's Name")
+      input#mother(type='text' placeholder="Mother's Name")
+      br 
+      br
+      input#searchStudent(type='submit' value='Search')
+    
+  #returned-students
+  br
+  hr(style='width:30%;')
+  br
+  - if(user.students.length)
+        h2(style='text-align:center;color:green;') Linked students with this account
+        .associated-students.common-style(style='background-color:#f9f9f9;')
+          #added-students(style='text-align:none;')
+            each stud in user.students 
+              .student-card
+                h3.student-name=`${stud.name.toUpperCase()}`
+                h5.student-class=`${stud.class} (${stud.section})`
+                br
+                h5.student-school=`${stud.institute.name} ,`
+                button(id=`${stud._id}` name='removeStudent' style='margin:0;float:right;color:red') X
+                br
+                h5.std-schl-add=`${stud.institute.addressDistrict}` 
+  - else 
+        h2(style='text-align:center;color:red;') No linked students. 
+  script(src='/js/bundle.js')
