@@ -9198,8 +9198,7 @@ var addStudentImg = document.getElementById('addStudent-img');
 
 if (addStudentImg) {
   addStudentImg.addEventListener('click', function () {
-    alert('Your previously tagged students data will be lost');
-    window.open('/link-student');
+    location.assign('/link-student');
   });
 }
 
@@ -9504,9 +9503,18 @@ var addOrRemove = /*#__PURE__*/function () {
 
           case 4:
             res = _context.sent;
-            if (res.data.status === 'success') location.reload(true);
 
-          case 6:
+            if (!(res.data.status === 'success')) {
+              _context.next = 9;
+              break;
+            }
+
+            return _context.abrupt("return", 1);
+
+          case 9:
+            throw new Error('Something Went wrong, Please try again later.');
+
+          case 10:
           case "end":
             return _context.stop();
         }
@@ -9525,7 +9533,17 @@ var removeStudents = document.getElementsByName('removeStudent');
 if (removeStudents.length) {
   removeStudents.forEach(function (c) {
     c.onclick = function () {
-      return addOrRemove(c.id, 'remove');
+      c.style.display = 'none';
+      c.parentElement.children[1].style.display = '';
+      addOrRemove(c.id, 'remove').then(function (a) {
+        if (a) {
+          location.reload(true);
+        }
+      }).catch(function (err) {
+        alert(err.message);
+        c.parentElement.children[1].style.display = 'none';
+        c.style.display = '';
+      });
     };
   });
 }
@@ -9594,15 +9612,24 @@ if (searchStudent) {
                   date = date.toLocaleString('en-us', {
                     month: 'short'
                   }) + '-' + new Date(Date.now()).getFullYear();
-                  table += "<tr>\n                            <td style='text-align:left';>\n                                <button id= ".concat(s.id, " style='color:green;' name='addStudent'>Add</button>\n                            </td>\n                            <td>\n                                ").concat(s.name, "\n                            </td>\n                            <td>\n                                ").concat(s.registrationNo, "\n                            </td>\n                            <td>\n                                ").concat(s.class, " ( ").concat(s.section, " )\n                            </td>\n                            <td>\n                                ").concat(s.rollNo, "\n                            </td>\n                            <td>\n                                ").concat(date, "\n                            </td>\n                          </tr>");
+                  table += "<tr>\n                            <td style='text-align:left';>\n                                <button id= ".concat(s.id, " style='color:green;' name='addStudent'>Add</button>\n                                <img src=\"/img/spinner.gif\" alt=\"Loading\" width=\"40\" height=\"40\" style='display:none;'>\n                            </td>\n                            <td>\n                                ").concat(s.name, "\n                            </td>\n                            <td>\n                                ").concat(s.registrationNo, "\n                            </td>\n                            <td>\n                                ").concat(s.class, " ( ").concat(s.section, " )\n                            </td>\n                            <td>\n                                ").concat(s.rollNo, "\n                            </td>\n                            <td>\n                                ").concat(date, "\n                            </td>\n                          </tr>");
                 });
                 table += '</table>';
                 document.getElementById('returned-students').innerHTML = table;
                 document.getElementsByName('addStudent').forEach(function (c) {
                   c.onclick = function () {
-                    return addOrRemove(c.id, 'add');
-                  }; // make network request to add students
-
+                    c.style.display = 'none';
+                    c.parentElement.children[1].style.display = '';
+                    addOrRemove(c.id, 'add').then(function (a) {
+                      if (a) {
+                        location.reload(true);
+                      }
+                    }).catch(function (err) {
+                      alert(err.message);
+                      c.parentElement.children[1].style.display = 'none';
+                      c.style.display = '';
+                    });
+                  };
                 });
               } else {
                 alert('NO students found');
@@ -9621,55 +9648,6 @@ if (searchStudent) {
     };
   }();
 }
-/*
-const selectedStudents = [];
-const addStudentBtn = document.getElementById('addStudent-btn');
-if(addStudentBtn){
-    addStudentBtn.addEventListener('click', async ()=>{
-        document.getElementsByName('addStudent').forEach(o => { 
-            if(o.checked){
-                selectedStudents.push(o);
-            }
-        })
-        if(selectedStudents.length){
-            for(let i = 0; i < selectedStudents.length; i++){
-
-                let o = { id: selectedStudents[i].id,
-                    name: selectedStudents[i].parentNode.children[1].innerText.split(': ')[1],
-                    regNo : selectedStudents[i].parentNode.children[2].innerText.split(': ')[1],
-                    class : selectedStudents[i].parentNode.children[3].innerText.split(': ')[1],
-                    roll : selectedStudents[i].parentNode.children[4].innerText.split(': ')[1],
-                    feesPaidUpto : selectedStudents[i].parentNode.children[5].innerText.split(': ')[1] }
-
-                localStorage.setItem(`${i}`, JSON.stringify(o))
-            }
-        }
-        let students = [...document.getElementsByClassName('selected')]
-        .splice(0,5)
-        .map(s => s.children[0].id )
-
-        const res = await axios({
-            method: 'PATCH',
-            url : '/api/v1/user/update?students=true',
-            data : {students},
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-        
-        if(res.data.status === 'success'){
-            alert('Data saved succefully')
-        }else{
-            alert(`something went wrong while tagging \nselected students to your account`)
-        }
-
-        opener.location.reload();
-        window.close();
-        
-    })
-}
-
-*/
 },{"axios":"../../node_modules/axios/index.js"}],"searchStudent.js":[function(require,module,exports) {
 "use strict";
 
@@ -25845,7 +25823,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52408" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60936" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

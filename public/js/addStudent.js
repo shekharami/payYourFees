@@ -11,8 +11,11 @@ const addOrRemove = async (id, action) => {
             "Content-type": "application/json; charset=UTF-8"
         }
     })
-    if(res.data.status === 'success') 
-        location.reload(true)
+    if(res.data.status === 'success'){
+        return 1
+    }else{
+        throw new Error('Something Went wrong, Please try again later.')
+    }
 
 }
 
@@ -20,8 +23,22 @@ const addOrRemove = async (id, action) => {
 const removeStudents = document.getElementsByName('removeStudent');
 if(removeStudents.length){
     removeStudents.forEach(c => {
-        c.onclick = () => addOrRemove(c.id, 'remove')
-    }) 
+        c.onclick = () => {
+            c.style.display = 'none'
+            c.parentElement.children[1].style.display = ''
+            addOrRemove(c.id, 'remove')
+            .then(a => { 
+                if(a){
+                    location.reload(true)
+                }
+            })
+            .catch(err => {
+                alert(err.message)
+                c.parentElement.children[1].style.display = 'none'
+                c.style.display = ''
+            })
+        }
+    })
 }
 
 const searchStudent = document.getElementById('searchStudent');
@@ -74,6 +91,7 @@ if(searchStudent){
                 table += `<tr>
                             <td style='text-align:left';>
                                 <button id= ${s.id} style='color:green;' name='addStudent'>Add</button>
+                                <img src="/img/spinner.gif" alt="Loading" width="40" height="40" style='display:none;'>
                             </td>
                             <td>
                                 ${s.name}
@@ -96,62 +114,24 @@ if(searchStudent){
             document.getElementById('returned-students').innerHTML = table;
             document.getElementsByName('addStudent')
             .forEach(c => {
-                c.onclick = () => addOrRemove(c.id, 'add')
-               // make network request to add students
+                c.onclick = () => {
+                    c.style.display = 'none'
+                    c.parentElement.children[1].style.display = ''
+                    addOrRemove(c.id, 'add')
+                    .then(a => { 
+                        if(a){
+                            location.reload(true)
+                        }
+                    })
+                    .catch(err => {
+                        alert(err.message)
+                        c.parentElement.children[1].style.display = 'none'
+                        c.style.display = ''
+                    })
+                }
             }) 
-
         }else{
             alert('NO students found')
         }
     }
 }
-
-/*
-const selectedStudents = [];
-const addStudentBtn = document.getElementById('addStudent-btn');
-if(addStudentBtn){
-    addStudentBtn.addEventListener('click', async ()=>{
-        document.getElementsByName('addStudent').forEach(o => { 
-            if(o.checked){
-                selectedStudents.push(o);
-            }
-        })
-        if(selectedStudents.length){
-            for(let i = 0; i < selectedStudents.length; i++){
-
-                let o = { id: selectedStudents[i].id,
-                    name: selectedStudents[i].parentNode.children[1].innerText.split(': ')[1],
-                    regNo : selectedStudents[i].parentNode.children[2].innerText.split(': ')[1],
-                    class : selectedStudents[i].parentNode.children[3].innerText.split(': ')[1],
-                    roll : selectedStudents[i].parentNode.children[4].innerText.split(': ')[1],
-                    feesPaidUpto : selectedStudents[i].parentNode.children[5].innerText.split(': ')[1] }
-
-                localStorage.setItem(`${i}`, JSON.stringify(o))
-            }
-        }
-        let students = [...document.getElementsByClassName('selected')]
-        .splice(0,5)
-        .map(s => s.children[0].id )
-
-        const res = await axios({
-            method: 'PATCH',
-            url : '/api/v1/user/update?students=true',
-            data : {students},
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-        
-        if(res.data.status === 'success'){
-            alert('Data saved succefully')
-        }else{
-            alert(`something went wrong while tagging \nselected students to your account`)
-        }
-
-        opener.location.reload();
-        window.close();
-        
-    })
-}
-
-*/

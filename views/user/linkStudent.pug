@@ -43,7 +43,9 @@ block content
                 h5.student-class=`${stud.class} (${stud.section})`
                 br
                 h5.student-school=`${stud.institute.name} ,`
-                button(id=`${stud._id}` name='removeStudent' style='margin:0;float:right;color:red') X
+                div(style='display:inline-block;float:right;')
+                  button(id=`${stud._id}` name='removeStudent' style='margin:0;color:red') X
+                  img(src="/img/spinner.gif" alt="Loading" width="40" height="40" style='display:none;')
                 br
                 h5.std-schl-add=`${stud.institute.addressDistrict}` 
   - else 
