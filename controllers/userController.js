@@ -33,16 +33,20 @@ exports.getUser = async (req, res, next) =>{
 exports.updateUser = async (req, res, next) => {
     try{
         if(!res.locals.user) throw new Error('Please login to continue')
-
-        console.log(req.body) 
-        // const user = await User.findByIdAndUpdate(res.locals.user._id, data ,{new: true, runValidators: true})
+        let user;
+        if(req.body.action.add){
+            user = await User.findByIdAndUpdate(res.locals.user._id, {
+                $push : { students : req.body.students }
+            } ,{new: true, runValidators: true})
+        }else if(req.body.action.remove){
+            user = await User.findByIdAndUpdate(res.locals.user._id, {
+                $pull : { students : req.body.students }
+            } ,{new: true, runValidators: true})
+        }
         res.status(200).json({
-            status: 'success'//,
-            // user
+            status: 'success',
+            user
         })
-
-        next();
-
     }catch(err){
         console.log(err)
         
@@ -51,7 +55,7 @@ exports.updateUser = async (req, res, next) => {
             error: err.message
         })
     }
-    
+    next();
 };
 
 exports.taggedStudentDetails = async (req, res, next) => {

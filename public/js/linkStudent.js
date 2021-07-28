@@ -73,7 +73,7 @@ if(searchStudent){
         let html = '';
     
     let table = `<hr>
-                <h2 style='color:green;text-align:center;text-decoration:underline;'>Step 2</h2>
+                <h2 style='color:green;text-align:center;text-decoration:underline;'>Search Results</h2>
                 <p style='text-align:center;'>Click on 'Add' button below to select student whom you want to link.</p>
                     <table>
                         <tr>

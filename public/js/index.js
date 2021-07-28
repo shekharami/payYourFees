@@ -6,7 +6,7 @@ require('./loginSignupRedirect');
 require('./loginSignupHandler');
 require('./userDasboard');
 require('./payment');
-require('./addStudent');
+require('./linkStudent');
 require('./searchStudent');
 require('./addInstituteDetails');
 require('./downloadDocument');
