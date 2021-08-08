@@ -10,6 +10,7 @@ const cookieParser= require('cookie-parser');
 const morgan = require('morgan');
 
 const instituteRouter = require('./routes/instituteRouter');
+const adminViewRouter = require('./routes/adminViewRouter');
 const viewRouter = require('./routes/viewRouter');
 const userRouter = require('./routes/userRouter');
 const paymentRouter = require('./routes/paymentRouter');
@@ -60,6 +61,7 @@ app.use('/api/v1/student', studentRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/institute', instituteViewRouter);
 
+app.use('/admin', adminViewRouter);
 app.use('/', viewRouter);
 
 /*
