@@ -1,4 +1,67 @@
 extends ../home_base 
 block content 
-  div
-    h1 Institute Management
+  div 
+    h1(style='text-align:center;color:#4caf50;') Institute Management
+    .common-style
+      input(id="list-all-institutes" type="button", value="List All Institutes" style="width:200px;margin:50px;")
+      input(id="search-institutes" type="button", value="Search Insitute" style="width:200px;margin:50px;")
+    #spinner.common-style(style='display:none;')
+      img(src="/img/spinner.gif", alt="loading")
+    #list-all-insti(style="width:80%;margin:auto;display:none;")
+      table 
+        tr 
+          th Actions
+          th Institute 
+          th Email
+          th Phone
+          th Address 
+        tr 
+          td
+            .dropdown
+              .common-style.student-card.action-list-all-insti(style='margin:0;padding:0;width:20px;height:40px;text-align:center;')
+                h6(style='margin:0;') .
+                h6(style='margin:0;') .
+                h6(style='margin:0;') .
+              div(style="display:none;" class="dropdown-content")
+                a(href="#") View
+                a(href="#") Edit
+                a(href="#") Delete
+          td ABC Institute 
+          td abcinstite@gmail.com
+          td 9876543210
+          td Lorem Ipsum, Doler Sit Amet, 8788, JH
+        tr 
+          td
+            .dropdown
+              .common-style.student-card.action-list-all-insti(style='margin:0;padding:0;width:20px;height:40px;text-align:center;')
+                h6(style='margin:0;') .
+                h6(style='margin:0;') .
+                h6(style='margin:0;') .
+              div(style="display:none;" class="dropdown-content")
+                a(href="#") View
+                a(href="#") Edit
+                a(href="#") Delete
+          td ABC Institute 
+          td abcinstite@gmail.com 
+          td 9876543210
+          td Lorem Ipsum, Doler Sit Amet, 8788, JH
+        tr 
+          td
+            .dropdown
+              .common-style.student-card.action-list-all-insti(style='margin:0;padding:0;width:20px;height:40px;text-align:center;')
+                h6(style='margin:0;') .
+                h6(style='margin:0;') .
+                h6(style='margin:0;') .
+              div(style="display:none;" class="dropdown-content")
+                a(href="#") View
+                a(href="#") Edit
+                a(href="#") Delete
+          td ABC Institute 
+          td abcinstite@gmail.com
+          td 9876543210
+          td Lorem Ipsum, Doler Sit Amet, 8788, JH
+        
+
+    .search-insti
+
+    
