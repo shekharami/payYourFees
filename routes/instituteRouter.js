@@ -28,6 +28,9 @@ router
 
 router.use(authController.isLoggedIn)
 
+router
+.route('/search')
+.post(instituteController.searchInstitutes)
 
 router
 .route('/upload')

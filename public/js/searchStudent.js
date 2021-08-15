@@ -111,23 +111,18 @@ if(searchStudent){
                 if(!section.includes(o.section)){
                     section.push(o.section)
                 }
-                feesPaidTill = o.feesPaidTill.split('-')
-                year = feesPaidTill[0]
-                month = feesPaidTill[1]*1
+                feesPaidTill = o.feesPaidTill//.split('-')
+                // year = feesPaidTill[0]
+                // month = feesPaidTill[1]*1
                 html3 += `<tr>
                 <td>${o.rollNo}</td>
                 <td>${o.name}</td>
                 <td>${o.class}</td>
                 <td>${o.section}</td>
-                <td>${months[month]} ${year}</td>
-                <td><button name=${o.id}>View Details</button></td>
-                </tr>
-                <div id=${o.id} style='display:none;background-color:yellow;'>
-                <p>Registration No. : ${o.registrationNo}</p>
-                <p>Father's Name : ${o.father}</p>
-                <p>Mother's Name : ${o.mother}</p>
-                <p>Email : ${o.email}</p>
-                <div>`;
+                <td>${o.feesPaidTill}</td>
+                <!--<td>{months[month] {year}</td> -->
+                <td><button id=${o.id} name='view-details'>View Details</button></td>
+                </tr>`;
             });
 
             section.sort()
@@ -170,20 +165,11 @@ if(searchStudent){
             a.innerHTML = html;
             a.style.display = '';
 
-            [...document.getElementsByTagName('button')].forEach(b => {
-                b.onclick = () =>{
-                    const [previousDispalyedDiv] = document.getElementsByClassName('on');
-                    if(previousDispalyedDiv){
-                        previousDispalyedDiv.style.display = 'none';
-                        previousDispalyedDiv.classList.remove('on');
-
-                    }
-                    const showingDiv = document.getElementById(b.name);
-                    showingDiv.classList.add('on');
-                    showingDiv.style.display = '';
-                    
+            [...document.getElementsByName('view-details')].forEach(button => {
+                button.onclick =() => {
+                    location.assign(`/institute/student-detail/${button.id}`)
                 }
-            });
+            })
             
             const [cls,sec] = document.getElementsByTagName('select');
             const classFilter = document.getElementById('classFilter');

@@ -65,6 +65,11 @@ const studentSchema = new mongoose.Schema({
         type: Date
     },
 
+    active:{
+        type:Boolean,
+        default : true
+    },
+
     addedAt:{
         type: Date,
         default: Date.now(),

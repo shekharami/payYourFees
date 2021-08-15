@@ -180,6 +180,8 @@ exports.addStudent = async (req, res, next) => {
             { $set : { students: req.body.students } },
             { new : true } )
 
+        console.log(students)
+        
         res.status(200).json({
             status :'success'
         })
@@ -249,5 +251,48 @@ exports.getFeesDetails = async (req, res, next) => {
         // })
     }
 
+    next()
+}
+
+exports.studentDetailsById = async (req, res, next) => {
+
+    try{
+        const student = await Student.findById({ _id : mongoose.Types.ObjectId(req.params.studentId) })
+        res.locals.student = student;
+        console.log(student)
+    }catch(err){
+        console.log(err.stack)
+    }
+    next()
+}
+
+exports.updateStudent = async (req, res, next) => {
+
+    try{
+        let query;
+        if(req.body.activeFlag){
+            query = Student.updateOne({ _id: mongoose.Types.ObjectId(req.body.id) }, 
+            { $set : { active : req.body.active } },
+            { new : true } )
+        }else{
+            query = Student.updateOne({ _id: mongoose.Types.ObjectId(req.body.id) }, 
+                { $set : { father : req.body.father,
+                        mother : req.body.mother,
+                        email : req.body.email,
+                        phone : req.body.phone,
+                        class : req.body.clas,
+                        section : req.body.section,
+                        rollNo : req.body.rollNo } },
+                { new : true } )
+        }
+
+        const student = await query;
+        
+        res.status(200).json({
+            status : 'success'
+        })
+    }catch(err){
+        console.log(err.stack)
+    }
     next()
 }

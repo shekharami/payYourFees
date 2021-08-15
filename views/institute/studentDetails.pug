@@ -1,0 +1,136 @@
+extends _instituteBase
+block content 
+    div 
+        div 
+            h1(id =student._id style="display:inline-block;margin:30px;")=student.name.toUpperCase()
+            div(style="display:inline-block;float:right;margin-right:100px;")
+                input#editStudent(type="button" style="display:inline-block;width: 140px;margin-right: 30px;margin-top: 30px;" value="Edit")
+                if(student.active)
+                    input#deregisterStudent(type="button" style="display:inline-block;width: 160px;" value="Deregister")
+                else 
+                    input#registerStudent(type="button" style="display:inline-block;width: 160px;" value="Register")
+
+        div
+            div(style="display:inline-block;border-right:1px solid;")
+                h3(style="margin-left:35px;") Basic Details
+                table(style="margin:30px;width:300px;")
+                    tr 
+                        td
+                            h5(style="margin:0;") Father's Name
+                        td#father
+                            h4(style="margin:0;")=student.father
+                    tr(style="background-color:white;") 
+                        td
+                            h5(style="margin:0;")  Mother's Name
+                        td#mother
+                            h4(style="margin:0;")=student.mother
+                    tr 
+                        td
+                            h5(style="margin:0;") Email
+                            td#email
+                                if(student.email)
+                                    h4(style="margin:0;")=student.email
+                    tr(style="background-color:white;") 
+                        td
+                            h5(style="margin:0;") Phone
+                            td#phone
+                                if(student.phone)
+                                    h4(style="margin:0;")=student.phone
+            div(style="display:inline-block;border-right:1px solid black;")
+                h3(style="margin-left:35px;") Registration Details
+                table(style="margin:30px;width:350px;")
+                    tr 
+                        td
+                            h5(style="margin:0;") Registration Number
+                        td 
+                            h4(style="margin:0;")=student.registrationNo
+                    tr(style="background-color:white;") 
+                        td
+                            h5(style="margin:0;") Class
+                        td#class
+                            h4(style="margin:0;")=student.class
+                    tr 
+                        td
+                            h5(style="margin:0;") Section
+                            td#section
+                                if(student.section)
+                                    h4(style="margin:0;")=student.section
+                    tr(style="background-color:white;") 
+                        td
+                            h5(style="margin:0;") Roll No.
+                        td#rollNo
+                            h4(style="margin:0;")=student.rollNo
+            div(style="display:inline-block;")
+                h3(style="margin-left:35px;") Other Details
+                table(style="margin:30px;width:250px;")
+                    tr 
+                        td
+                            h5(style="margin:0;") Fees Paid Upto 
+                        td 
+                            h4(style="margin:0;")=student.feesPaidTill
+                    tr(style="background-color:white;") 
+                        td
+                            h5(style="margin:0;") Active
+                        
+                        td#active 
+                            if(student.active)
+                                h4(style="margin:0;background-color:green;color:white;text-align:center;") True
+                            else 
+                                h4(style="margin:0;background-color:red;color:white;text-align:center;") False
+            div#actionButtons.common-style(style="margin:30px;display:none;")
+                input#saveStudentDetail(type="button" value="Save" style="width:80px;margin-right:30px;")
+                input#cancelStudentDetail(type="button" value="Cancel" style="width:80px")
+            
+        //- div(style="margin:30px;") 
+            h3 Fees Payment History
+            table(style="width:50%;margin:0;") 
+                tr 
+                    th 
+                        p Id 
+                    th 
+                        p Payment Date  
+                    th 
+                        p Payment for 
+                    th 
+                        p Amount 
+                tr 
+                    td 
+                        p 87688098
+                    td 
+                        p 2-Jul-2021 
+                    td 
+                        p Jun-2021 
+                    td 
+                        p 500
+                tr 
+                    td 
+                        p 87688098
+                    td 
+                        p 2-Jul-2021 
+                    td 
+                        p Jun-2021 
+                    td 
+                        p 500
+                tr 
+                    td 
+                        p 87688098
+                    td 
+                        p 2-Jul-2021 
+                    td 
+                        p Jun-2021 
+                    td 
+                        p 500
+                tr 
+                    td 
+                        p 87688098
+                    td 
+                        p 2-Jul-2021 
+                    td 
+                        p Jun-2021 
+                    td 
+                        p 500
+
+                
+                   
+
+        

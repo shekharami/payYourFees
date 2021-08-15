@@ -8,15 +8,30 @@ exports.getInstitutes = async (req, res, next) =>{
 
     try{
         
-        const institutes = await Institute.find().select('name')//.sort({name: -1 })
-        
-        res.locals.institutes = institutes.map(i => {
-            return { name: i.name, id : i._id }
-        })
+        const institutes = await Institute.find().select('name email phone address addrressDistrict addressState addressPincode')//.sort({name: -1 })
+        if(['/','/link-student'].includes(req.url)){
+            res.locals.institutes = institutes.map(i => {
+                return { name: i.name, id : i._id }
+            })
+        }else{
+            res.status(200).json({
+                status: 'success',
+                data : {
+                    length : institutes.length,
+                    institutes
+                }
+            })
+        }
 
     }catch(err){
         console.log(err.stack)
         res.locals.institutes = ['Error fetching institute names']
+        if(req.url !== '/'){
+            res.status(200).json({
+                status:'fail',
+                error: err.message
+            })
+        }
     }
     
     next();
@@ -78,6 +93,23 @@ exports.updateInstituteData = async(req, res, next) => {
     }
 
     next();
+}
+
+exports.searchInstitutes = async (req, res, next) => {
+
+    try{
+        console.log(req.body)
+        res.status(200).json({
+            status:'success'
+        })
+    }catch(err){
+        console.log(ree.stack)
+        res.status(200).json({
+            status : 'fail',
+            error : err.message
+        })
+    }
+    next()
 }
 
 exports.deleteInstitute = async(req, res, next) =>{

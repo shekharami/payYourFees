@@ -14,6 +14,10 @@ router.route('/search')
 .get(studentController.searchStudent)
 .post(studentController.getStudent)
 
+router.route('/update')
+.post(studentController.updateStudent)
+
+
 router.route('/fees').post(studentController.getFeesDetails)
 
 module.exports = router;
