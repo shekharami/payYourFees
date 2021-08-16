@@ -1,0 +1,41 @@
+extends ./_instituteBase
+block content
+    div 
+        div.common-style(style="width:25%;margin:auto;")
+            h1 Add Fees
+            form 
+                input#name(type="text", placeholder="Name e.g. JUL-2021")
+                input#desc(type="text" placeholder="Description e.g. July 2021") 
+                input#amount(type="text", placeholder="Amount e.g. 500") 
+                br
+                br
+                div(style="text-align:left;") 
+                    label(for="applicableTo") Applicable To : 
+                    br
+                    if(institute.instituteType === 'school')
+                        for clas in institute.class
+                            div(style="margin:10px;display:inline-block;")
+                                input(type="checkbox" style="float:none;" id=`${clas}` name="applicableTo" value=`${clas}`)
+                                label(for=`${clas}`)=clas
+                    if(institute.instituteType === 'coaching')
+                        for course in institute.course 
+                            div(style="margin:10px;display:inline-block;")
+                                input(type="checkbox" style="float:none;" id=`${course}` name="applicableTo" value=`${course}`)
+                                label(for=`${course}`)=course
+                    if(institute.instituteType === 'college')
+                        for programme  in institute.programme
+                            div(style="margin:10px;display:inline-block;")
+                                input(type="checkbox" style="float:none;" id=`${programme}` name="applicableTo" value=`${programme}`)
+                                label(for=`${programme}`)=programme
+                    br
+                    br
+                    label(for="payBy") Pay By  : 
+                    input#payBy(type="date", placeholder="Pay By")
+                br
+                br
+                div.common-style
+                    input#addFees(type="submit" style="width:100px;margin:25px;" value="Save")
+                    | 
+                    a(href="/institute/fees-management")
+                        input(type="button" style="width:100px;" value="Cancel")
+            

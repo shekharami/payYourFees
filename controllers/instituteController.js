@@ -2,7 +2,8 @@ const { unlink } = require('fs');
 const XLSX = require('xlsx');
 const Institute = require("../models/instituteModel");
 const Student = require("../models/studentModel");
-
+const Fees = require("../models/feesModel");
+const mongoose = require('mongoose');
 
 exports.getInstitutes = async (req, res, next) =>{
 
@@ -176,3 +177,42 @@ exports.fileUpload = async (req, res, next) =>{
     
     next();
 };
+
+
+exports.feesDetails = async (req, res, next) => {
+    try{
+        const fees = await Fees.find({ institute : mongoose.Types.ObjectId(res.locals.institute._id) }).sort('-addedAt')
+        res.locals.fees = fees
+    }catch(err){
+        console.log(err.stack)
+    }
+    next()
+}
+
+exports.feesManagement = async (req, res, next) => {
+    try{
+
+        console.log(req.body)
+        const fee = await Fees.create({ institute : mongoose.Types.ObjectId(res.locals.institute._id),
+                                        name : req.body.name,
+                                        numeralWeight : 0,
+                                        desc : req.body.desc,
+                                        amount : req.body.amount,
+                                        classes : req.body.applicableTo,
+                                        payBy : req.body.payBy
+        })
+    
+        res.status(200).json({
+            status : 'success',
+            data : fee
+        })
+
+    }catch(err){
+        console.log(err.stack)
+        res.status(200).json({
+            status : 'fail',
+            error : err.message
+        })
+    }
+    next()
+}

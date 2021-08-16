@@ -29,3 +29,20 @@ exports.studentDetails = (req, res, next) => {
     res.status(200).render(template)
     next()
 }
+
+exports.feesManagement = (req, res, next) => {
+    let template = './errorPage';
+
+    if(res.locals.institute) template = './institute/feesManagement';
+
+    res.status(200).render(template)
+    next()
+}
+
+exports.addFees = (req, res, next) => {
+    let template = './errorPage';
+
+    if(res.locals.institute) template = './institute/addFees';
+    res.status(200).render(template)
+    next()
+}

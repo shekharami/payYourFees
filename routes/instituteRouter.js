@@ -40,4 +40,8 @@ router
 .route('/update')
 .patch(instituteController.updateInstituteData);
 
+router
+.route('/fees-management')
+.post(instituteController.feesManagement);
+
 module.exports = router;

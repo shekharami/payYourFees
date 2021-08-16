@@ -59,6 +59,7 @@ exports.test = async (req, res, next) => {
             const o =  {
                 institute : mongoose.Types.ObjectId('60acd2645b1c3916c4fdeea2'),
                 name : `${month[i]}-2021`,
+                numeralWeight : (i+1),
                 desc : 'Description text',
                 amount : 500,
                 classes ,
@@ -69,7 +70,6 @@ exports.test = async (req, res, next) => {
         }
         */
 
-        console.log(req.body)
 
         res.status(200).json({
             status: 'success'//,

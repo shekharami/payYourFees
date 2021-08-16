@@ -1,0 +1,31 @@
+extends ./_instituteBase
+block content
+    div.common-style 
+        h1 Fees Management
+        a(href="/institute/fees-management/add-fees") 
+            input(type="button" style="width:150px;" value="Add New Fees")
+        div(style="width:80%;margin:auto;") 
+            h2 Fees table 
+            table
+                tr 
+                    th Name 
+                    th Description 
+                    th Amount 
+                    th Applicable to 
+                    th Pay By 
+                    th Updated On 
+                    th Added On 
+                    th Active
+                for fee in fees 
+                    tr 
+                        td=fee.name 
+                        td=fee.desc 
+                        td=fee.amount 
+                        td=fee.classes.join(', ')
+                        td=fee.payBy 
+                        td=fee.updatedAt 
+                        td=fee.addedAt 
+                        if(fee.active === true)
+                            td(style="color:green;")=fee.active
+                        else 
+                            td(style="color:red;")=fee.active

@@ -10,7 +10,8 @@ require('./linkStudent');
 require('./searchStudent');
 require('./studentDetails')
 require('./addInstituteDetails');
-require('./instituteManagement')
+require('./instituteManagement');
+require('./feesManagement');
 require('./downloadDocument');
 // keep this at the end
 require('./errorHandler');

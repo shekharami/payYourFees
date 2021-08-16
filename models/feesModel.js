@@ -13,6 +13,11 @@ const feeSchema = new mongoose.Schema({
         required: [true, 'Must have a name']
     },
 
+    numeralWeight : {
+        // 1 - 12 for months, other numbers for different fees
+        type : Number  
+    },
+
     desc: {
         type: String
     },
@@ -43,6 +48,10 @@ const feeSchema = new mongoose.Schema({
         type: Date
     },
 
+    updatedAt : {
+        type: Date
+    },
+    
     addedAt:{
         type: Date,
         default: Date.now()
