@@ -3,7 +3,7 @@ exports.dashboard = (req, res, next) => {
 
     if(res.locals.institute){
         if(res.locals.institute.class.length){
-        template = './institute/instituteDashboard'
+        template = './institute/dashboard'
         }else{
         template = './institute/addInstituteDetails';
         }
@@ -17,6 +17,14 @@ exports.addStudents = (req, res, next) => {
 
     if(res.locals.institute) template = './institute/addStudentsFileUpload';
 
+    res.status(200).render(template)
+    next()
+}
+
+exports.searchStudent = (req, res, next) => {
+    let template = './errorPage';
+
+    if(res.locals.institute) template = './institute/searchStudent';
     res.status(200).render(template)
     next()
 }

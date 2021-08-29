@@ -7,7 +7,10 @@ exports.homepage = (req, res, next) => {
 };
 
 exports.userLogin = (req, res, next) => {
-    res.status(200).render('./user/userLogin', {
+    res.status(200).set(
+        'Content-Security-Policy',
+        "script-src 'self' *"
+        ).render('./user/userLogin', {
         title: 'Pay your Fees | User Login'
     });
     next();

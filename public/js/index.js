@@ -10,6 +10,7 @@ require('./linkStudent');
 require('./searchStudent');
 require('./studentDetails')
 require('./addInstituteDetails');
+require('./instituteDashboard');
 require('./instituteManagement');
 require('./feesManagement');
 require('./downloadDocument');

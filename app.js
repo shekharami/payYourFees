@@ -63,7 +63,6 @@ app.use('/institute', instituteViewRouter);
 
 app.use('/admin', adminViewRouter);
 app.use('/', viewRouter);
-
 /*
 app.all('*', (req, res, next) => {
     try{
