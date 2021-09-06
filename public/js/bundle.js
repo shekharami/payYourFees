@@ -27481,39 +27481,74 @@ _chart.Chart.register(..._chart.registerables);
 
 var _default = _chart.Chart;
 exports.default = _default;
-},{"../dist/chart.esm":"../../node_modules/chart.js/dist/chart.esm.js"}],"instituteDashboard.js":[function(require,module,exports) {
+},{"../dist/chart.esm":"../../node_modules/chart.js/dist/chart.esm.js"}],"default.json":[function(require,module,exports) {
+module.exports = {
+  "months": {
+    "JAN": 0,
+    "FEB": 1,
+    "MAR": 2,
+    "APR": 3,
+    "MAY": 4,
+    "JUN": 5,
+    "JUL": 6,
+    "AUG": 7,
+    "SEP": 8,
+    "OCT": 9,
+    "NOV": 10,
+    "DEC": 11
+  }
+};
+},{}],"instituteDashboard.js":[function(require,module,exports) {
 "use strict";
 
 var _auto = _interopRequireDefault(require("chart.js/auto"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const { Chart, BarController }  = require('chart.js');
-// Chart.register(BarController)
-var chartId = document.getElementById('insti-month-wise-chart').getContext('2d');
-var data = {
-  labels: ['LKG', 'UKG', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'],
-  datasets: [{
-    label: 'Total Students',
-    data: [50, 60, 70, 40, 50, 60, 70, 40, 50, 60, 70, 40],
-    borderColor: 'skyblue',
-    backgroundColor: 'skyblue'
-  }, {
-    label: 'Paid',
-    data: [10, 20, 30, 20, 20, 20, 20, 20, 20, 20, 20, 20],
-    borderColor: 'seagreen',
-    backgroundColor: 'seagreen'
-  }, {
-    label: 'Due',
-    data: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
-    borderColor: 'red',
-    backgroundColor: 'red'
-  }]
-};
-var myChart = new _auto.default(chartId, {
-  type: 'bar',
-  data: data,
-  options: {
+var defaultData = require('./default.json');
+
+if (document.location.pathname === '/institute/dashboard') {
+  var pieChartCanvas = document.getElementById('summary');
+
+  if (pieChartCanvas) {
+    var pieChartContext = pieChartCanvas.getContext('2d');
+    var pieChart = new _auto.default(pieChartContext, {
+      type: 'pie',
+      data: {
+        labels: ['Paid', 'Due'],
+        datasets: [{
+          label: 'Total',
+          data: [500, 300],
+          backgroundColor: ['rgb(144,238,144)', 'rgb(255,0,0)'],
+          hoverOffset: 4
+        }]
+      }
+    });
+  }
+
+  var data = {
+    labels: ['LKG', 'UKG', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'],
+    datasets: [{
+      label: 'Total Students',
+      data: [50, 60, 70, 40, 50, 60, 70, 40, 50, 60, 70, 40],
+      borderColor: 'skyblue',
+      backgroundColor: 'skyblue'
+    }, {
+      label: 'Paid',
+      data: [10, 20, 30, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+      borderColor: 'seagreen',
+      backgroundColor: 'seagreen'
+    }, {
+      label: 'Due',
+      data: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+      borderColor: 'red',
+      backgroundColor: 'red'
+    }]
+  };
+  var today = new Date();
+  var month = Object.keys(defaultData.months)[today.getMonth()];
+  var year = today.getUTCFullYear();
+  var options = {
     responsive: true,
     plugins: {
       legend: {
@@ -27521,12 +27556,18 @@ var myChart = new _auto.default(chartId, {
       },
       title: {
         display: true,
-        text: 'Payment count for AUG 2021'
+        text: "Stats for ".concat(month + '-' + year)
       }
     }
-  }
-});
-},{"chart.js/auto":"../../node_modules/chart.js/auto/auto.esm.js"}],"instituteManagement.js":[function(require,module,exports) {
+  };
+  var ctx = document.getElementById('insti-month-wise-chart').getContext('2d');
+  var chart = new _auto.default(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+  });
+}
+},{"chart.js/auto":"../../node_modules/chart.js/auto/auto.esm.js","./default.json":"default.json"}],"instituteManagement.js":[function(require,module,exports) {
 "use strict";
 
 var _axios = _interopRequireDefault(require("axios"));
@@ -43539,7 +43580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53636" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61781" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

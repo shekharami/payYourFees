@@ -51,4 +51,6 @@
 
 // console.log(new Date('2021-06-09T18:30:00.000Z').toDateString())
 const a = {}
-console.log( a && a.id)
+// console.log( a && a.id)
+
+console.log('abcd efg jkl'.includes('efg'))
