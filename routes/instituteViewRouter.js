@@ -12,6 +12,8 @@ router.use(authController.isLoggedIn)
 
 router.get('/dashboard',  instituteViewController.dashboard)
 
+router.get('/profile',  instituteViewController.profile)
+
 router.get('/search-students',  instituteViewController.searchStudent)
 
 router.get('/add-students', instituteViewController.addStudents)

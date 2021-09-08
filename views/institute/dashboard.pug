@@ -1,7 +1,14 @@
 extends _instituteBase
 block content
     div(style="margin:30px;")
-        #count-stats.common-style(style="margin:80px auto;width:400px;height:450px;")
+        div 
+            p(style="font-weight:bold;display:inline-block;margin-right:20px;margin-bottom:0;") Quick Links :
+            a(href="/institute/search-students" style="margin-right:30px;margin-bottom:0;") Search Students
+            a(href="#" style="margin-right:30px;margin-bottom:0;") View Payment Details
+                //- input(type="button", value="Search Students" style="width:150px") 
+            //- a(href="/institute/search" style="margin-right:100px;")
+                input(type="button", value="Search Studets" style="width:150px") 
+        #count-stats.common-style(style="margin:50px auto;width:400px;height:450px;")
             p=`A summary of ${institute.name}` 
             h5(style="color:purple;margin-bottom:20px;") Total Students 800 
             canvas(id='summary' ) 

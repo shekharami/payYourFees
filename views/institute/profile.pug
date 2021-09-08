@@ -1,0 +1,48 @@
+extends _instituteBase
+block content
+    div(style="margin:30px;")
+        h1 Profile
+        div(style="display:inline-block;border-right:1px solid black;width:600px;margin-left:150px;")  
+            table 
+                tr 
+                    td
+                        h3 Name
+                    td 
+                        p=institute.name
+                tr(style="background-color:white;") 
+                    td
+                        h3 Address
+                    td 
+                        p=`${institute.address}, ${institute.addressDistrict}, ${institute.addressState}${institute.pin ? institute.pin : ''}`
+                tr 
+                    td
+                        h3 GST
+                    td 
+                        p=institute.gst
+                tr(style="background-color:white;") 
+                    td
+                        h3 PAN
+                    td 
+                        p=institute.pan
+                tr 
+                    td
+                        h3 Phone Number
+                    td 
+                        p=institute.phone.join(', ')
+                tr(style="background-color:white;") 
+                    td
+                        h3 E-mail
+                    td 
+                        p=institute.email
+                tr 
+                    td
+                        - if(institute.instituteType == 'school')
+                            h3 Classes Available
+                        - if(institute.instituteType == 'coaching')
+                            h3 Courses Available
+                    td 
+                        - if(institute.instituteType == 'school')
+                            p=institute.class.join(', ')
+                        - if(institute.instituteType == 'school')
+                            p=institute.course.join(', ')
+                
