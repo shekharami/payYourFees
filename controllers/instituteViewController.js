@@ -56,8 +56,21 @@ exports.addFees = (req, res, next) => {
 
 exports.profile = (req, res, next) => {
     let template = './errorPage';
-    console.log(res.locals.institute)
     if(res.locals.institute) template = './institute/profile'
+    res.status(200).render(template)
+    next()
+}
+
+exports.paymentDetails = (req, res, next) => {
+    let template = './errorPage';
+    if(res.locals.institute) template = './institute/paymentDetails'
+    res.status(200).render(template)
+    next()
+}
+
+exports.reports = (req, res, next) => {
+    let template = './errorPage';
+    if(res.locals.institute) template = './institute/reports'
     res.status(200).render(template)
     next()
 }

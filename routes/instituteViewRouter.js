@@ -24,4 +24,8 @@ router.get('/fees-management', instituteController.feesDetails , instituteViewCo
 
 router.get('/fees-management/add-fees', instituteController.feesDetails , instituteViewController.addFees)
 
+router.get('/payment-details',  instituteViewController.paymentDetails)
+
+router.get('/reports',  instituteViewController.reports)
+
 module.exports = router;
