@@ -1,4 +1,5 @@
 import Chart from 'chart.js/auto';
+import XLSX from 'xlsx';
 const defaultData = require('./default.json');
 if(document.location.pathname === '/institute/dashboard'){
     const pieChartCanvas = document.getElementById('summary');
@@ -68,4 +69,20 @@ if(document.location.pathname === '/institute/dashboard'){
         data: data,
         options
     });
+    const exportXlsx = document.getElementById('exportXlsx');
+    if(exportXlsx){
+        exportXlsx.onclick = () => {
+            const wb = XLSX.utils.book_new();
+            var ws_name = "SheetJS";
+
+        const ws_data = [
+        [ "S", "h", "e", "e", "t", "J", "S" ],
+        [  1 ,  2 ,  3 ,  4 ,  5 ]
+        ];
+        const ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+        XLSX.utils.book_append_sheet(wb, ws, ws_name);
+            XLSX.writeFile(wb, 'out.xlsx')
+        }
+    }
 }

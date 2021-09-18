@@ -1,7 +1,7 @@
 exports.homepage = (req, res, next) => {
     // console.log(res.locals.institutes)
     // res.status(200).render('home', {
-    res.status(200).render('newHome', {
+    res.status(200).render('home', {
         title: 'Pay your Fees | Home'
     });
     next();

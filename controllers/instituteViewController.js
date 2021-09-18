@@ -31,7 +31,6 @@ exports.searchStudent = (req, res, next) => {
 
 exports.studentDetails = (req, res, next) => {
     let template = './errorPage';
-
     if(res.locals.institute) template = './institute/studentDetails';
 
     res.status(200).render(template)

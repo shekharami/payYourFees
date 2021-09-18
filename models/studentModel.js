@@ -74,6 +74,15 @@ const studentSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
         select: false
+    },
+
+    updatedAt : {
+        type: Date
+    },
+
+    deletedAt:  {
+        type : Date,
+        default : null
     }
 
 }, {

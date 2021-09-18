@@ -89,3 +89,9 @@ body {
   text-decoration: none;
   display: block;
 }
+
+.mandatory{
+  color: red;
+  margin-left :5px;
+  margin-right :5px;
+}

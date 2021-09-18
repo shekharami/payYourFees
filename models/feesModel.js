@@ -55,6 +55,11 @@ const feeSchema = new mongoose.Schema({
     addedAt:{
         type: Date,
         default: Date.now()
+    },
+    
+    deletedAt:  {
+        type : Date,
+        default : null
     }
 
 }, {

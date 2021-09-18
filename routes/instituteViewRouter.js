@@ -18,7 +18,7 @@ router.get('/search-students',  instituteViewController.searchStudent)
 
 router.get('/add-students', instituteViewController.addStudents)
 
-router.get('/student-detail/:studentId', studentController.studentDetailsById, instituteViewController.studentDetails)
+router.get('/student-detail/:studentId', studentController.studentDetailsById, instituteController.feesDetails, instituteViewController.studentDetails)
 
 router.get('/fees-management', instituteController.feesDetails , instituteViewController.feesManagement)
 

@@ -115,3 +115,59 @@ if(registerStudent){
         }
     }
 }
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("recordPayment");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+const save = document.getElementById('save');
+if(save){
+    save.onclick = async () => {
+        let fee = document.getElementById('fees').options;
+        fee = fee[fee.selectedIndex].id;
+        let date =  document.getElementById('date').value;
+        if(!fee || !date){
+            alert('Asterisk marked fields are mandatory!')
+            return 
+        }
+        date = new Date(date);
+        const amount =  document.getElementById('amount').value || null;
+        const note =  document.getElementById('note').value || null;
+        const studentId = document.getElementsByTagName('h1')[0].id;
+        const res = await axios({
+            method: 'POST',
+            url : '/api/v1/payments/record-cash-payment',
+            data : { fee , date, amount, note, mode : 'offline' , studentId },
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+
+            console.log(res)
+
+    }
+}
+

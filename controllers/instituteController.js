@@ -181,7 +181,7 @@ exports.fileUpload = async (req, res, next) =>{
 
 exports.feesDetails = async (req, res, next) => {
     try{
-        const fees = await Fees.find({ institute : mongoose.Types.ObjectId(res.locals.institute._id) }).sort('-addedAt')
+        const fees = await Fees.find({ institute : mongoose.Types.ObjectId(res.locals.institute._id), active:true }).sort('-addedAt')
         res.locals.fees = fees
     }catch(err){
         console.log(err.stack)

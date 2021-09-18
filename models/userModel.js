@@ -64,6 +64,15 @@ const userSchema = new mongoose.Schema({
     ceatedAt: {
         type: Date,
         default: Date.now()
+    },
+
+    updatedAt : {
+        type: Date
+    },
+
+    deletedAt:  {
+        type : Date,
+        default : null
     }
 
 

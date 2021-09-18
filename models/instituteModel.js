@@ -80,6 +80,15 @@ const instituteSchema = new mongoose.Schema({
     addedAt:{
         type: Date,
         default: Date.now()
+    },
+
+    updatedAt : {
+        type: Date
+    },
+
+    deletedAt:  {
+        type : Date,
+        default : null
     }
 
 }, {
