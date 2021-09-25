@@ -74,3 +74,11 @@ exports.reports = (req, res, next) => {
     res.status(200).render(template)
     next()
 }
+
+exports.viewStudents = (req, res, next) => {
+    let template = './errorPage';
+    console.log(res.locals.institute)
+    if(res.locals.institute) template = './institute/viewStudents'
+    res.status(200).render(template)
+    next()
+}

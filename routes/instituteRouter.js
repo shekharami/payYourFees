@@ -44,4 +44,8 @@ router
 .route('/fees-management')
 .post(instituteController.feesManagement);
 
+router
+.route('/getDetails')
+.get(instituteController.getDetails);
+
 module.exports = router;

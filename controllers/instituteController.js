@@ -216,3 +216,30 @@ exports.feesManagement = async (req, res, next) => {
     }
     next()
 }
+
+exports.getDetails = async (req, res, next) => {
+    try{
+        const students = await Student.find(
+            { 
+                institute : mongoose.Types.ObjectId(res.locals.institute._id),
+                class : req.query.class,
+                section : req.query.section,
+                deletedAt: null
+            }
+        ).select('name rollNo father mother').sort('rollNo')
+        res.status(200).json({
+            status : 'success',
+            data : {
+                length : students.length,
+                students
+            }
+        })
+    }catch(err){
+        console.log(err.stack)
+        res.status(200).json({
+            status : 'fail',
+            error : err.message
+        })
+    }
+    next()
+}

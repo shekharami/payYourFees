@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { type } = require('os');
+const { format } = require('path');
 const { promisify } = require('util');
 const Institute = require('../models/instituteModel');
 const User = require('../models/userModel');
@@ -222,7 +223,14 @@ exports.isLoggedIn = async (req, res, next) => {
                 res.locals.user = freshUser;
             }else if(decoded.type === 'institute'){
                 freshUser = await Institute.findById(decoded.id)
+                const arr = [];
                 res.locals.institute = freshUser;
+                if(freshUser.instituteType === 'school'){
+                    freshUser.class.forEach(cls => {
+                        arr.push(JSON.parse(cls))
+                    });
+                    res.locals.institute.parsedClass = arr
+                }
             }
 
             if(!freshUser){

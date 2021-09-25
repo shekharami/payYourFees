@@ -8,7 +8,8 @@ require('./userDasboard');
 require('./payment');
 require('./linkStudent');
 require('./searchStudent');
-require('./studentDetails')
+require('./studentDetails');
+require('./viewStudents');
 require('./addInstituteDetails');
 require('./instituteDashboard');
 require('./instituteManagement');
