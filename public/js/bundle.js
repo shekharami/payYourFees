@@ -6656,7 +6656,7 @@ var open = document.getElementById('burger');
 
 if (open) {
   open.onclick = function () {
-    document.getElementById("mySidepanel").style.width = "200px";
+    document.getElementById('mySidepanel').style.width = '200px';
   };
 }
 
@@ -6666,7 +6666,7 @@ if (close) {
   close.href = 'javascript:void(0)';
 
   close.onclick = function () {
-    document.getElementById("mySidepanel").style.width = "0";
+    document.getElementById('mySidepanel').style.width = '0';
   };
 }
 
@@ -8565,7 +8565,7 @@ var signUp = /*#__PURE__*/function () {
               url: '/api/v1/auth/signup',
               data: data,
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -8607,7 +8607,7 @@ var login = /*#__PURE__*/function () {
               url: '/api/v1/auth/login',
               data: data,
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -8661,9 +8661,9 @@ if (userSignup) {
               password = document.getElementById('user-password').value;
               confirmPassword = document.getElementById('confirm-password').value; // const institute = document.getElementById('institute').value
 
-              address = document.getElementById('address').value; // const address2 = document.getElementById('address2').value  
-              // const address3 = document.getElementById('address3').value 
-              // const city = document.getElementById('address-city').value 
+              address = document.getElementById('address').value; // const address2 = document.getElementById('address2').value
+              // const address3 = document.getElementById('address3').value
+              // const city = document.getElementById('address-city').value
 
               district = document.getElementById('address-district').value;
               pincode = document.getElementById('pincode').value;
@@ -9313,7 +9313,7 @@ if (orderGenerate) {
               url: '/api/v1/payment/order',
               data: params,
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -9344,13 +9344,13 @@ var proceedForPayment = function proceedForPayment(key, name, orderId) {
           switch (_context3.prev = _context3.next) {
             case 0:
               options = {
-                "key": key,
-                "currency": "INR",
-                "name": name,
+                key: key,
+                currency: 'INR',
+                name: name,
                 //change it to payment for which month
-                "description": "Fees Payment",
-                "order_id": orderId,
-                "handler": function () {
+                description: 'Fees Payment',
+                order_id: orderId,
+                handler: function () {
                   var _handler = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(response) {
                     var params, ax_res;
                     return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -9368,7 +9368,7 @@ var proceedForPayment = function proceedForPayment(key, name, orderId) {
                               url: '/api/v1/payment/verify',
                               data: params,
                               headers: {
-                                "Content-type": "application/json; charset=UTF-8"
+                                'Content-type': 'application/json; charset=UTF-8'
                               }
                             });
 
@@ -9393,8 +9393,8 @@ var proceedForPayment = function proceedForPayment(key, name, orderId) {
 
                   return handler;
                 }(),
-                "theme": {
-                  "color": "#0EB9F2"
+                theme: {
+                  color: '#0EB9F2'
                 }
               };
               rzp1 = new Razorpay(options);
@@ -9433,7 +9433,7 @@ if (checkoutTable) {
     url: 'api/v1/payment/createOrder',
     data: students,
     headers: {
-      "Content-type": "application/json; charset=UTF-8"
+      'Content-type': 'application/json; charset=UTF-8'
     }
   }).then(function (res) {
     if (!(res.data.status === 'success')) throw new Error('Something went wrong!');
@@ -9497,7 +9497,7 @@ var addOrRemove = /*#__PURE__*/function () {
               url: '/api/v1/user/update',
               data: data,
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -9597,7 +9597,7 @@ if (searchStudent) {
                   institute: institute
                 },
                 headers: {
-                  "Content-type": "application/json; charset=UTF-8"
+                  'Content-type': 'application/json; charset=UTF-8'
                 }
               });
 
@@ -9740,7 +9740,7 @@ var filterBySection = function filterBySection(sec) {
     }
   });
 }; // const sortStudents = (students) => {
-//     const 
+//     const
 //     return students
 // }
 
@@ -9790,7 +9790,7 @@ if (searchStudent) {
                 method: 'GET',
                 url: "/api/v1/student/search?".concat(regno, "&name=").concat(name, "&class=").concat(clas, "&section=").concat(section),
                 headers: {
-                  "Content-type": "application/json; charset=UTF-8"
+                  'Content-type': 'application/json; charset=UTF-8'
                 }
               });
 
@@ -9845,18 +9845,18 @@ if (searchStudent) {
                   12: 'XII'
                 };
                 wts = {
-                  'I': 1,
-                  'II': 2,
-                  'III': 3,
-                  'IV': 4,
-                  'V': 5,
-                  'VI': 6,
-                  'VII': 7,
-                  'VIII': 8,
-                  'IX': 9,
-                  'X': 10,
-                  'XI': 11,
-                  'XII': 12
+                  I: 1,
+                  II: 2,
+                  III: 3,
+                  IV: 4,
+                  V: 5,
+                  VI: 6,
+                  VII: 7,
+                  VIII: 8,
+                  IX: 9,
+                  X: 10,
+                  XI: 11,
+                  XII: 12
                 };
                 html1 += '<option>All</option>';
                 classes.map(function (c) {
@@ -10008,7 +10008,7 @@ if (saveStudenetDetail) {
                 rollNo: rollNo
               },
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -10054,7 +10054,7 @@ var modifyRegistration = /*#__PURE__*/function () {
                 active: activeFlag
               },
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -10138,29 +10138,29 @@ if (registerStudent) {
 } // Get the modal
 
 
-var modal = document.getElementById("myModal"); // Get the button that opens the modal
+var modal = document.getElementById('myModal'); // Get the button that opens the modal
 
-var btn = document.getElementById("recordPayment"); // Get the <span> element that closes the modal
+var btn = document.getElementById('recordPayment'); // Get the <span> element that closes the modal
 
-var span = document.getElementsByClassName("close")[0]; // When the user clicks the button, open the modal 
+var span = document.getElementsByClassName('close')[0]; // When the user clicks the button, open the modal
 
 if (btn) {
   btn.onclick = function () {
-    modal.style.display = "block";
+    modal.style.display = 'block';
   };
 } // When the user clicks on <span> (x), close the modal
 
 
 if (span) {
   span.onclick = function () {
-    modal.style.display = "none";
+    modal.style.display = 'none';
   };
 } // When the user clicks anywhere outside of the modal, close it
 
 
 window.onclick = function (event) {
   if (event.target == modal) {
-    modal.style.display = "none";
+    modal.style.display = 'none';
   }
 };
 
@@ -10203,7 +10203,7 @@ if (save) {
                 studentId: studentId
               },
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -10274,7 +10274,7 @@ if (cls) {
     var sectionsArray = JSON.parse(cls.value)[selectedCls];
     sectionsArray.unshift('Select');
     sectionsArray.forEach(function (sec) {
-      var opt = document.createElement("option");
+      var opt = document.createElement('option');
       opt.text = sec;
       section.add(opt);
     });
@@ -10383,7 +10383,7 @@ if (cls) {
               method: 'GET',
               url: "/api/v1/institute/getDetails?class=".concat(selectedCls, "&section=").concat(selectedSec),
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -10405,11 +10405,11 @@ if (cls) {
 
           case 17:
             headersDataMapping = {
-              "Roll No.": 'rollNo',
-              'Name': 'name',
+              'Roll No.': 'rollNo',
+              Name: 'name',
               "Father's Name": 'father',
               "Mother's Name": 'mother',
-              'Action': 'id'
+              Action: 'id'
             };
             table = makeTable({
               data: res.data.data.students,
@@ -10474,7 +10474,7 @@ var updateInstituteData = /*#__PURE__*/function () {
               url: '/api/v1/institute/update',
               data: data,
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -80183,8 +80183,8 @@ if (document.location.pathname === '/institute/dashboard') {
     exportXlsx.onclick = function () {
       var wb = _xlsx.default.utils.book_new();
 
-      var ws_name = "SheetJS";
-      var ws_data = [["S", "h", "e", "e", "t", "J", "S"], [1, 2, 3, 4, 5]];
+      var ws_name = 'SheetJS';
+      var ws_data = [['S', 'h', 'e', 'e', 't', 'J', 'S'], [1, 2, 3, 4, 5]];
 
       var ws = _xlsx.default.utils.aoa_to_sheet(ws_data);
 
@@ -80266,7 +80266,7 @@ if (listAllInstitutes) {
               method: 'GET',
               url: '/api/v1/institute/list',
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               }
             });
 
@@ -80318,7 +80318,7 @@ if (adminInstiSearch) {
                   district: district
                 },
                 headers: {
-                  "Content-type": "application/json; charset=UTF-8"
+                  'Content-type': 'application/json; charset=UTF-8'
                 }
               });
 
@@ -80385,11 +80385,8 @@ if (addFees) {
               e.preventDefault();
               name = document.getElementById('name').value;
               desc = document.getElementById('desc').value;
-              ;
               amount = document.getElementById('amount').value;
-              ;
               payBy = document.getElementById('payBy').value;
-              ;
               applicableTo = [];
 
               _toConsumableArray(document.getElementsByName('applicableTo')).forEach(function (o) {
@@ -80398,7 +80395,7 @@ if (addFees) {
                 }
               });
 
-              _context.next = 12;
+              _context.next = 9;
               return (0, _axios.default)({
                 method: 'POST',
                 url: '/api/v1/institute/fees-management?add=true',
@@ -80410,11 +80407,11 @@ if (addFees) {
                   applicableTo: applicableTo
                 },
                 headers: {
-                  "Content-type": "application/json; charset=UTF-8"
+                  'Content-type': 'application/json; charset=UTF-8'
                 }
               });
 
-            case 12:
+            case 9:
               res = _context.sent;
 
               if (res.data.status === 'success') {
@@ -80424,7 +80421,7 @@ if (addFees) {
                 alert('Something went wrong !\n Try again after some time.');
               }
 
-            case 14:
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -95804,7 +95801,7 @@ function createHeaders(keys) {
       name: keys[i],
       prompt: keys[i],
       width: 50,
-      align: "center",
+      align: 'center',
       padding: 0
     });
   }
@@ -95829,8 +95826,8 @@ if (exportBtn) {
 
       return {
         'Roll No.': dataset[0],
-        'Section': dataset[3],
-        'Name': dataset[1],
+        Section: dataset[3],
+        Name: dataset[1],
         'Fees Paid Upto': dataset[4]
       };
     });
@@ -95853,8 +95850,8 @@ if (downloadBtn.length) {
     btn.onclick = function () {
       var details = [{
         'Paid For': 'Amit Shekhar',
-        'Amount': '500',
-        'Status': 'Success',
+        Amount: '500',
+        Status: 'Success',
         'Paid on': '2-July-2021'
       }];
       var headers = createHeaders(['Paid For', 'Amount', 'Status', 'Paid on']);
@@ -96209,7 +96206,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56258" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60220" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

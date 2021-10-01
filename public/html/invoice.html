@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        /* <!-- <style>
+        @font-face {
+            font-family: 'IBM Plex Sans';
+            src: url(IBMPlexSans-Regular.woff)
+        }
+
+        body {
+            font-size: 0.75rem;
+            line-height: 1.6em;
+            font-family: 'IBM Plex Sans', sans-serif;
+            color: #142132;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-weight: 100;
+            color: #142132;
+        }
+
+        a {
+            color: #142132;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #4537DE;
+            text-decoration: none;
+        }
+
+        .header {
+            height: 16rem;
+            vertical-align: top;
+        }
+
+        .header img {
+            padding: 40px 0px;
+            height: 3rem;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .info {
+            width: calc(33% - 2rem);
+            border-top: 1px solid #717885;
+            margin-right: 2rem;
+            padding-top: .25rem;
+        }
+
+        .invoice-box {
+            width: 67%;
+        }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: right;
+            padding-bottom: 40px;
+        }
+
+        .invoice-box table tr td:nth-child(1) {
+            text-align: left;
+        }
+
+        .invoice-box table tr.heading td {
+            border-bottom: 1px solid #717885;
+            border-top: 1px solid #717885;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: .65rem;
+            height: 1.8rem;
+        }
+
+        .invoice-box table tr.item td {
+            border-bottom: 1px dotted #717885;
+            padding: 0.25rem 0 1rem 0;
+        }
+
+        .invoice-box table tr:nth-last-child(-n+2) td {
+            border-bottom: 0px;
+            padding: 0.25rem 0 1rem 0;
+        }
+
+        .invoice-box table tr.total td {
+            border-top: 1px solid #717885;
+            padding: 0.75rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .notes {
+            width: 50%;
+        }
+
+        .company-info {
+            margin-top: 10rem;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .company-info-item {
+            width: calc(33% - 1rem);
+            padding-right: 1rem;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding-top: 1rem;
+        }
+
+        .label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: .65rem;
+        }
+
+        .form-border {
+            padding: 10px 0px;
+            border-top: 1px solid #717885;
+            border-bottom: 1px solid #717885;
+            border-left: none;
+            border-right: none;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.75rem;
+            line-height: 1.6em;
+        }
+
+        .form-border:hover {
+            border-bottom: 1px solid #4537DE;
+            border-top: 1px solid #4537DE;
+        }
+
+        .form-border:focus-visible {
+            padding: 10px;
+        }
+
+        .signature {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        } */
+        table, td, th {
+            border: 1px solid black;
+          }
+          
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+          } 
+          @media print {
+              button{
+                  display: none;
+              }
+              @page {
+                size: auto;   /* auto is the initial value */
+                margin: 0;  /* this affects the margin in the printer settings */
+                }
+          }
+        
+    </style>
+</head>
+
+<body style="margin:30px;">
+
+    <div class="title">
+        <div style="text-align:center">
+        <button  onclick='func()'>Print</button>
+        </div>
+        <h4 style="text-align:right;margin:0;padding: 0;">Payment Reciept</h4>
+        <h1 style="margin-bottom: 0;">
+        <img style="width: 30px;height: 30px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAAB3CAMAAAAO5y+4AAAAVFBMVEX///9mZmZjY2NfX19bW1tXV1f8/Pzo6Ohvb29qamrb29vw8PD09PSkpKR6enqHh4fi4uLS0tLGxsaVlZW8vLzMzMy1tbWurq6NjY2bm5uBgYF0dHRc/6yQAAADvklEQVRoge2a2XLkIAxFDQK877v9//852J3MGNKdIKMiNTO5D/3SLk6xSEhCUfSjv00qHqe+V4Gp+VSnICAJy81nLjhjjO8huWpgwE7xKiA2XwRj4blNCuw3tw6Gbc+NfRPMobAZv2CZGANhGwPLeBwGm6cmdguDjWq4YhlMYbCTYKbyINjYwsIaBBstYE03zKlqpUkVgYy3Ns5ysDuh4dZ0myDYaDZ3Vw5hsMpcZlGGwWpXZZjQEggbZVfjhTpYnDFeuBAwnBv+BBmh3LLB5aIOZEDvXK4lZJ2FpGovmez7tnZFWKqWUtZhUsUhqhOmmnFe+6Xuy655OabOUcp+S1Ktql6nzHcVVFvuHACOrdS/+zo+udnzsazY+c15zo7vk7X1QBdDxeHqDfWQ6dIZ6GLsEwDrijg+rIa7K94lwh7vtBuNfpuMyspUPvnm8V3V3qHm9asR9ZCwDHGRTZW0Iw7jM7niF7vlnw15oFPxbDkMwY6NfAb5xZBu4hznVWYa7HHAMOAPcbEHGJG6dHRYTLiXsa/OC0quoYjaabFp58YtPzUgNLZ3zJkyys1l4BzdVpSrDI5rrMM1Kss9JNw9dEI4Xele7bBzPB9hUoiebrq8cr+Ac8JVFgjPPBA65t4dGy1085WIq9fM8byEKmVldC7S3WNEtNuLKWXRWRGuEL2RcVEltILu5hWY7Y3prAgwMbtdb/QQx+TilFc+JmAn5KIK7//AfL9tnb/pXKHsiJArMNVZQvsFzK1P6K94guAWhEEs5mApwlwB9UJJGF4xhuBSpoKYp1HKRJ/v7lzCuA5lwoRx7CHn0M56m/EU4o2Ftsbg/mBImnUjgnfKfPAEOxoT7QYz97rKRLrBWsItgI9pN5gddTOn/JuyrvIQF6uDIc/UC60F7GuDIow5LmCHyg5pve5N0mGLSYvPDzlVlBT9fN1uJloffUg6PefE1FzXStaH9hdPScfQ0m4I8ZR7JasnnbB0TpVIJ4xpMaQ80pgHM6ttzguLamQZyCacol5EFVXlDtsLRnQtYWr9D9E8iaJeYR+iWOk7HXeFP/ded1TrvdI3u2V9vQfilc6U38Ukbndl5T6xFqqSZCm+7y/BqyW5eQ0+24VeY9EOwwLzZ2NzIWBby3JJQT6Fw+bbCZUn9uHiUvTdu4WobKrlh0Ye6bG371LrZVgOMllbu89sXFNxWRfgNC2rWXU0dWmmgGp+3kpWtGui/z7bw8RC1V+osnlL0mrt4k8OS9EM5bJt9Uza1aiK3OWk2K1+P/o/9QuuazK9pg4CqQAAAABJRU5ErkJggg==" alt="">
+        Star International Public School</h1>
+        <i>
+            <h5 style="margin:0;padding: 0;">Address : Khao Gali, Bhgalpur, Andheri West , Navi Mumbai Gujarat - 814133 | Mob : 9876543210</h5>
+        </i>
+        <hr>
+    </div>
+
+    <div class="content">
+        <div class="info">
+            <p>
+                <span>Recipt No. KJYH568758BTF</span>
+                <span style="margin-left:30px;">Payment Mode : Online</span>
+            </p>
+            <p>Date : 12-05-2021</p>
+            <p>
+                <span>Name : First Last</span><br><br>
+                <span style="margin-right: 15px;">Class: V</span>
+                <span style="margin-right: 15px;">Section: Z</span>
+                <span >Roll No. : 9807098</span>
+
+            </p>
+            
+        </div>
+
+        <div class="invoice-box" style="width:500px;">
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr class="heading">
+                        <th>Particulars</th>
+                        <th>Discription</th>
+                        <th>Amount</th>
+                    </tr>
+
+                    <tr class="item">
+                        <td>
+                            Admission Fees
+                        </td>
+                        <td> - </td>
+                        <td> - </td>
+                    </tr>
+
+                    <tr class="item">
+                        <td>
+                            Registration Fees
+                        </td>
+                        <td> - </td>
+                        <td> - </td>
+                    </tr>
+                    <tr class="item">
+                        <td>
+                            Tution Fees
+                        </td>
+                        <td>MAY-2021</td>
+                        <td>500</td>
+                    </tr>
+                    <tr class="item">
+                        <td>
+                            Hostel Fees
+                        </td>
+                        <td> - </td>
+                        <td> - </td>
+                    </tr>
+                    <tr class="item">
+                        <td>
+                            Examination Fees
+                        </td>
+                        <td> - </td>
+                        <td>100</td>
+                    </tr>
+                    <tr class="item">
+                        <td>
+                            Previous Dues
+                        </td>
+                        <td> - </td>
+                        <td> - </td>
+                    </tr><tr class="item">
+                        <td>
+                            Computer Fees
+                        </td>
+                        <td> - </td>
+                        <td>200</td>
+                    </tr><tr class="item">
+                        <td>
+                            Annual Fees
+                        </td>
+                        <td> - </td>
+                        <td> - </td>
+                    </tr><tr class="item">
+                        <td>
+                            Vehicle Fees
+                        </td>
+                        <td> MAY-2021</td>
+                        <td>200</td>
+                    </tr><tr class="item">
+                        <td>
+                            Miscellaneous Fees
+                        </td>
+                        <td> - </td>
+                        <td> - </td>
+                    </tr>
+                    <tr class="total">
+                        <td>Total</td>
+                        <td></td>
+                        <td>1000</td>
+                    </tr>
+                    <tr class="total">
+                        <td>Tax</td>
+                        <td></td>
+                        <td>30</td>
+                    </tr>
+                    <tr class="total">
+                        <th>Amount Paid</th>
+                        <td></td>
+                        <th>1030</th>
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+            <div class="company-info" style="margin-top:100px;">
+                <div class="company-info-item">
+                    <p style="font-size: 12px;">
+                        *This is a system generated Reciept. Hence no signature is required.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div style="text-align: left;">
+            <hr>
+            <img style="width: 30px;;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAAB3CAMAAAAO5y+4AAAAVFBMVEX///9mZmZjY2NfX19bW1tXV1f8/Pzo6Ohvb29qamrb29vw8PD09PSkpKR6enqHh4fi4uLS0tLGxsaVlZW8vLzMzMy1tbWurq6NjY2bm5uBgYF0dHRc/6yQAAADvklEQVRoge2a2XLkIAxFDQK877v9//852J3MGNKdIKMiNTO5D/3SLk6xSEhCUfSjv00qHqe+V4Gp+VSnICAJy81nLjhjjO8huWpgwE7xKiA2XwRj4blNCuw3tw6Gbc+NfRPMobAZv2CZGANhGwPLeBwGm6cmdguDjWq4YhlMYbCTYKbyINjYwsIaBBstYE03zKlqpUkVgYy3Ns5ysDuh4dZ0myDYaDZ3Vw5hsMpcZlGGwWpXZZjQEggbZVfjhTpYnDFeuBAwnBv+BBmh3LLB5aIOZEDvXK4lZJ2FpGovmez7tnZFWKqWUtZhUsUhqhOmmnFe+6Xuy655OabOUcp+S1Ktql6nzHcVVFvuHACOrdS/+zo+udnzsazY+c15zo7vk7X1QBdDxeHqDfWQ6dIZ6GLsEwDrijg+rIa7K94lwh7vtBuNfpuMyspUPvnm8V3V3qHm9asR9ZCwDHGRTZW0Iw7jM7niF7vlnw15oFPxbDkMwY6NfAb5xZBu4hznVWYa7HHAMOAPcbEHGJG6dHRYTLiXsa/OC0quoYjaabFp58YtPzUgNLZ3zJkyys1l4BzdVpSrDI5rrMM1Kss9JNw9dEI4Xele7bBzPB9hUoiebrq8cr+Ac8JVFgjPPBA65t4dGy1085WIq9fM8byEKmVldC7S3WNEtNuLKWXRWRGuEL2RcVEltILu5hWY7Y3prAgwMbtdb/QQx+TilFc+JmAn5KIK7//AfL9tnb/pXKHsiJArMNVZQvsFzK1P6K94guAWhEEs5mApwlwB9UJJGF4xhuBSpoKYp1HKRJ/v7lzCuA5lwoRx7CHn0M56m/EU4o2Ftsbg/mBImnUjgnfKfPAEOxoT7QYz97rKRLrBWsItgI9pN5gddTOn/JuyrvIQF6uDIc/UC60F7GuDIow5LmCHyg5pve5N0mGLSYvPDzlVlBT9fN1uJloffUg6PefE1FzXStaH9hdPScfQ0m4I8ZR7JasnnbB0TpVIJ4xpMaQ80pgHM6ttzguLamQZyCacol5EFVXlDtsLRnQtYWr9D9E8iaJeYR+iWOk7HXeFP/ded1TrvdI3u2V9vQfilc6U38Ukbndl5T6xFqqSZCm+7y/BqyW5eQ0+24VeY9EOwwLzZ2NzIWBby3JJQT6Fw+bbCZUn9uHiUvTdu4WobKrlh0Ye6bG371LrZVgOMllbu89sXFNxWRfgNC2rWXU0dWmmgGp+3kpWtGui/z7bw8RC1V+osnlL0mrt4k8OS9EM5bJt9Uza1aiK3OWk2K1+P/o/9QuuazK9pg4CqQAAAABJRU5ErkJggg==" alt="">
+            <h4 style="margin: 0;">Powered by: PYF</h4>
+            <a href="">
+                <h5 style="margin: 0;display: block;">Mail to : info@pyf.com</h5>
+            </a>
+        </div>
+        
+    </div>
+    <script> 
+        function func(){
+            
+            window.print()
+        }
+    </script>
+</body>
+</html>
