@@ -1,4 +1,4 @@
-import { months } from './staticData';
+import { months } from '../utils/staticData';
 
 const addStudentImg = document.getElementById('addStudent-img');
 if (addStudentImg) {

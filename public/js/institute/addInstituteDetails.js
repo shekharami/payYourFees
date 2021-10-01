@@ -1,4 +1,4 @@
-import { updateInstituteData } from './apiCalls';
+import { updateInstituteData } from '../utils/apiCalls';
 const addInstituteDetails = document.getElementById('addInstituteDetails');
 if (addInstituteDetails) {
   /* Select all checkbox toggle functionality */

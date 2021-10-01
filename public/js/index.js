@@ -1,19 +1,19 @@
 import '@babel/polyfill';
 
-require('./commonUtilities');
-require('./redirectToMain');
-require('./loginSignupRedirect');
-require('./loginSignupHandler');
-require('./userDasboard');
-require('./payment');
-require('./linkStudent');
-require('./searchStudent');
-require('./studentDetails');
-require('./viewStudents');
-require('./addInstituteDetails');
-require('./instituteDashboard');
-require('./instituteManagement');
-require('./feesManagement');
-require('./downloadDocument');
+require('./common/utilities');
+require('./common/redirectToMain');
+require('./common/loginSignupRedirect');
+require('./common/loginSignupHandler');
+require('./user/dashboard');
+require('./user/payment');
+require('./user/linkStudent');
+require('./institute/searchStudent');
+require('./institute/studentDetails');
+require('./institute/viewStudents');
+require('./institute/addInstituteDetails');
+require('./institute/dashboard');
+require('./admin/instituteManagement');
+require('./institute/feesManagement');
+require('./common/downloadDocument');
 // keep this at the end
-require('./errorHandler');
+require('./common/errorHandler');

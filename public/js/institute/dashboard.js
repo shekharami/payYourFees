@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
 import XLSX from 'xlsx';
-const defaultData = require('./default.json');
+const defaultData = require('../utils/default.json');
 if (document.location.pathname === '/institute/dashboard') {
   const pieChartCanvas = document.getElementById('summary');
   if (pieChartCanvas) {
