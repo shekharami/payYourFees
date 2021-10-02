@@ -12,9 +12,17 @@
     },
     "razorpay":{
         "key":"rzp_test_dSZ17ZH7zRgRBQ",
-        "secret":"Q5cUQafMstpXpdUb8bDCxYbc"
+        "secret":"Q5cUQafMstpXpdUb8bDCxYbc",
+        "charges":"2"
     },
     "googleApi":{
         "key":"AIzaSyDkAMQDP0C-iKIUi944zOshewD_7qzGCuw"
+    },
+    "constants":{
+        "month":["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]
+    },
+    "deadlines":{
+        "first":7,
+        "second":14
     }
 }

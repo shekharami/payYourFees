@@ -9,7 +9,7 @@ const router = express.Router();
 
 // Protected Routes
 
-router.use(authController.isLoggedIn);
+// router.use(authController.isLoggedIn);
 
 router.get('/dashboard', adminViewController.dashboard);
 

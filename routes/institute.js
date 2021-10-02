@@ -19,7 +19,7 @@ router.route('/list').get(instituteController.getInstitutes);
 
 router.route('/delete/:instituteId').delete(instituteController.deleteInstitute);
 
-router.use(authController.isLoggedIn);
+// router.use(authController.isLoggedIn);
 
 router.route('/search').post(instituteController.searchInstitutes);
 

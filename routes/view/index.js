@@ -1,8 +1,8 @@
 const express = require('express');
 const viewController = require('../../controllers/view/index');
-const authController = require('../../controllers/auth/index.js');
+const authController = require('../../controllers/auth/index');
 const userController = require('../../controllers/user/index');
-const instituteController = require('../../controllers/institute/index.js');
+const instituteController = require('../../controllers/institute/index');
 
 const router = express.Router();
 

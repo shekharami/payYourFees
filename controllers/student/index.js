@@ -258,7 +258,7 @@ exports.getFeesDetails = async (req, res, next) => {
       };
     }
 
-    fesDetails = Object.keys(feesDetails).map((name) => {
+    feesDetails = Object.keys(feesDetails).map((name) => {
       feesDetails[name].details = feesDetails[name].details.map((o) => {
         delete o.id;
         delete o._id;
@@ -267,7 +267,7 @@ exports.getFeesDetails = async (req, res, next) => {
     });
 
     res.locals.feesDetails = feesDetails;
-    // console.log(feesDetails)
+    console.log(feesDetails);
     // console.log(feesDetails['amit'].details)
 
     // res.status(200).json({

@@ -9,6 +9,7 @@ const config = require('config');
 
 exports.createOrder = async (req, res, next) => {
   try {
+    console.log('aaaaaaaaaaaaaaaaaaa');
     const instance = new Razorpay({
       key_id: config.get('razorpay.key'),
       key_secret: config.get('razorpay.secret')
