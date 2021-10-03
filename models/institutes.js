@@ -20,7 +20,9 @@ const instituteSchema = new mongoose.Schema(
     },
 
     phone: {
-      type: [String]
+      type: String,
+      unique: true,
+      required: true
     },
 
     address: {
@@ -56,18 +58,6 @@ const instituteSchema = new mongoose.Schema(
       required: [true, 'Please enter a password'],
       minlength: 5,
       select: false
-    },
-
-    confirmPassword: {
-      type: String,
-      required: [true, 'Please confirm your password'],
-      validate: {
-        //This only works on CREATE OR SAVE!
-        validator: function (val) {
-          return val === this.password;
-        }
-      },
-      message: 'You typed something different than above.'
     },
 
     gst: {

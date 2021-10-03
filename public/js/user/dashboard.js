@@ -6,31 +6,17 @@ if (addStudentImg) {
     location.assign('/link-student');
   });
 }
-
-window.onload = () => {
-  if (document.location.pathname === '/dashboard') {
-    let o_str, o;
-    let html = '';
+if (document.location.pathname === '/dashboard') {
+  window.onload = () => {
+    document.getElementsByName('card').forEach((checkbox) => {
+      checkbox.removeAttribute('checked');
+    });
+    let flag = 0;
     for (let i = 0; i < 5; i++) {
-      o_str = localStorage.getItem(`${i}`);
-      if (o_str) {
-        o = JSON.parse(o_str);
-
-        html += `<div class='students-card' id=${o.id}>
-                    <input type='checkbox' name='card' >
-                    <h3> Name : ${o.name}</h3> 
-                    <p>Class : ${o.class}</p> 
-                    <p>Registration No. : ${o.regNo}</p>
-                    <p>Roll No. : ${o.roll}</p>
-                    <p>Fees Paid Upto : ${o.feesPaidTill}</p>
-                 </div>`;
+      if (!localStorage.getItem(`${i}`)) {
+        flag = 1;
+        localStorage.removeItem(`${i}`);
       }
-
-      localStorage.removeItem(`${i}`);
-    }
-
-    if (o_str) {
-      document.getElementById('added-students').innerHTML = html;
     }
     document.getElementsByName('card').forEach((c) => {
       c.onchange = () => {
@@ -43,8 +29,8 @@ window.onload = () => {
         }
       };
     });
-  }
-};
+  };
+}
 
 const checkout = [...document.getElementsByClassName('checkout')];
 if (checkout.length) {

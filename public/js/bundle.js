@@ -9202,24 +9202,18 @@ if (addStudentImg) {
   });
 }
 
-window.onload = function () {
-  if (document.location.pathname === '/dashboard') {
-    var o_str, o;
-    var html = '';
+if (document.location.pathname === '/dashboard') {
+  window.onload = function () {
+    document.getElementsByName('card').forEach(function (checkbox) {
+      checkbox.removeAttribute('checked');
+    });
+    var flag = 0;
 
     for (var i = 0; i < 5; i++) {
-      o_str = localStorage.getItem("".concat(i));
-
-      if (o_str) {
-        o = JSON.parse(o_str);
-        html += "<div class='students-card' id=".concat(o.id, ">\n                    <input type='checkbox' name='card' >\n                    <h3> Name : ").concat(o.name, "</h3> \n                    <p>Class : ").concat(o.class, "</p> \n                    <p>Registration No. : ").concat(o.regNo, "</p>\n                    <p>Roll No. : ").concat(o.roll, "</p>\n                    <p>Fees Paid Upto : ").concat(o.feesPaidTill, "</p>\n                 </div>");
+      if (!localStorage.getItem("".concat(i))) {
+        flag = 1;
+        localStorage.removeItem("".concat(i));
       }
-
-      localStorage.removeItem("".concat(i));
-    }
-
-    if (o_str) {
-      document.getElementById('added-students').innerHTML = html;
     }
 
     document.getElementsByName('card').forEach(function (c) {
@@ -9233,8 +9227,8 @@ window.onload = function () {
         }
       };
     });
-  }
-};
+  };
+}
 
 var checkout = _toConsumableArray(document.getElementsByClassName('checkout'));
 
@@ -96206,7 +96200,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50193" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57947" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

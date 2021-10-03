@@ -18,7 +18,7 @@ block content
                   br
                   h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
                   br
-                  button More details
+                  //- button More details
                   .details(style='display:none ;')
                     p=`Father's Name : ${stud.father}` 
                     p=`Mother's Name : ${stud.mother}` 
@@ -26,7 +26,7 @@ block content
                     p=`Registration No. : ${stud.registrationNo}` 
             img(src="/img/plus.png" id='addStudent-img' alt="Add students")
             .common-style.proceed-to-payment
-              button.checkout Click to Continue
+              input(type="button" class='checkout' value="Click to Continue" style="width:150px;") 
       - else 
           h2(style='text-align:center;color:red;') No linked students. Please link by clicking on PLUS icon below
           .common-style

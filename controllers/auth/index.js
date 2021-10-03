@@ -5,7 +5,8 @@ const { promisify } = require('util');
 const Institute = require('../../models/institutes');
 const User = require('../../models/users');
 const utils = require('../../utils/utils');
-// const { use } = require('../routes/userRouter');
+const userRepositories = require('../../noSqlRepositories/users');
+const insituteRepositories = require('../../noSqlRepositories/institutes');
 
 const createTokenSendCookie = function (id, type, req, res) {
   const token = jwt.sign({ id, type }, 'This is pay your fees secret key for JWT');
@@ -17,6 +18,7 @@ const createTokenSendCookie = function (id, type, req, res) {
   });
   return token;
 };
+
 module.exports = {
   signUp: async (req, res) => {
     const { type, name, email, phone, address, password, confirmPassword } = req.body;
@@ -35,10 +37,16 @@ module.exports = {
       password,
       confirmPassword
     });
+    if (password !== confirmPassword) {
+      throw utils.createErrorObject({
+        message: 'Passwords do not match!',
+        status: 400
+      });
+    }
     let token;
     switch (type) {
       case 'user': {
-        data = await User.create({
+        data = await userRepositories.createUser({
           type,
           name,
           email,
@@ -47,15 +55,14 @@ module.exports = {
           addressDistrict,
           addressPincode,
           addressState,
-          password,
-          confirmPassword
+          password
         });
 
         break;
       }
 
       case 'institute': {
-        data = await Institute.create({
+        data = await insituteRepositories.createInstitute({
           type,
           name,
           email,
@@ -64,8 +71,7 @@ module.exports = {
           addressDistrict,
           addressPincode,
           addressState,
-          password,
-          confirmPassword
+          password
         });
 
         break;

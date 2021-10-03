@@ -49,17 +49,17 @@ const userSchema = new mongoose.Schema(
       minlength: 5,
       select: false
     },
-    confirmPassword: {
-      type: String,
-      required: [true, 'Please confirm your password'],
-      validate: {
-        //This only works on CREATE OR SAVE!
-        validator: function (val) {
-          return val === this.password;
-        }
-      },
-      message: 'You typed something different than above.'
-    },
+    // confirmPassword: {
+    //   type: String,
+    //   required: [true, 'Please confirm your password'],
+    //   validate: {
+    //     //This only works on CREATE OR SAVE!
+    //     validator: function (val) {
+    //       return val === this.password;
+    //     }
+    //   },
+    //   message: 'You typed something different than above.'
+    // },
 
     ceatedAt: {
       type: Date,
