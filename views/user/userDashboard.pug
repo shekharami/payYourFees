@@ -7,7 +7,22 @@ block content
             #added-students(style='text-align:none;')
               h4(style='text-align:center;color:green;') Select student(s) for which you want to pay fees 
               each stud in user.students 
-                .student-card(id=`${stud._id}`)
+                .card
+                  - if (stud.gender === 'M')
+                    img(src='/img/male_avatar.png' alt='Avatar' style='width:100%')
+                  - else 
+                    img(src='/img/female_avatar.png' alt='Avatar' style='width:100%')
+                  .container
+                    h3.student-name(style='text-align:left;')=`${stud.name}`
+                    h5.student-class(style='text-align:left;')=`${stud.class} (${stud.section})`
+                    br
+                    h5.student-school(id=`${stud.institute._id}` style='text-align:left;')=`${stud.institute.name} ,`
+                    h5.std-schl-add(style='text-align:left;')=`${stud.institute.addressDistrict}`
+                    //- input.std-chkbx(type='checkbox' name='card')
+                    //- br
+                    h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
+                    input(type="button", value="Add for Payment")
+                //- .student-card(id=`${stud._id}`)
                   h3.student-name=`${stud.name}`
                   h5.student-class=`${stud.class} (${stud.section})`
                   br
@@ -19,7 +34,7 @@ block content
                   h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
                   br
                   //- button More details
-                  .details(style='display:none ;')
+                  //- .details(style='display:none ;')
                     p=`Father's Name : ${stud.father}` 
                     p=`Mother's Name : ${stud.mother}` 
                     p=`Roll Number : ${stud.rollNo}`

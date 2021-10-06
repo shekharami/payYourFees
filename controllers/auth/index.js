@@ -197,12 +197,13 @@ module.exports = {
     next();
   },
 
-  logout: async (req, res) => {
+  logout: async (req, res, next) => {
     res.cookie('jwt', 'loggedout', {
       expires: new Date(Date.now() + 5 * 1000),
       httpOnly: true
     });
-    return null;
+    // return null;
+    next();
   },
 
   test: (loo) => {

@@ -1,3 +1,5 @@
+/* FOR OLDER HEADER (BURGER)NAV BAR */
+
 const open = document.getElementById('burger');
 if (open) {
   open.onclick = () => {

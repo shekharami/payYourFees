@@ -76,7 +76,7 @@ li a.active {
   background-color: #ddd;
   height: 200px;
 }
-input[type="checkbox"] {
+input[type='checkbox'] {
   height: 20px;
   width: 20px;
   float: right;
@@ -106,24 +106,24 @@ h5 {
   text-align: left;
 }
 .student-name {
-  display: inline-block;
+  /* display: inline-block; */
   margin-top: 0;
   margin-bottom: 0;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 .student-class {
-  display: inline-block;
+  /* display: inline-block; */
   margin-top: 0;
   margin-bottom: 0;
 }
 .student-school {
-  display: inline-block;
+  /* display: inline-block; */
   margin-top: 5px;
   margin-bottom: 0;
 }
 .std-schl-add {
-  display: inline-block;
-  margin-right: 100px;
+  /* display: inline-block; */
+  /* margin-right: 100px; */
   margin-top: 0;
   margin-bottom: 10px;
 }
@@ -137,4 +137,20 @@ h5 {
   margin-top: 0;
   margin-bottom: 5px;
   color: green;
+}
+/*---------------------*/
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 220px;
+  display: inline-block;
+  margin: 30px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 2px 16px;
 }

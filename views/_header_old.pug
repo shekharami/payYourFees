@@ -1,0 +1,20 @@
+.header
+  
+    header
+      ul
+        li 
+            .sidepanel#mySidepanel
+                a.closebtn#close-btn ×
+                a(href='#') About
+                a(href='/dashboard') Pay Fees
+                a(href='/') Notification
+                a(href='#footer') Contact
+                if(user)
+                    a(href='payment-history' ) Payment History
+                    a(href='my-profile' class='user-detail' id=`${user._id}`)=`Welcome ${user.name}`
+                    a(href='/logout') Log Out
+
+            button#burger(class="openbtn" ) ☰
+
+        li( style='float:right;margin-right:10px;margin-top:8px;') 
+            img(src="/img/logo.PNG", alt="Logo" style='width:100px;height:45px;margin-top:3px;')

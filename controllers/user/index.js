@@ -2,6 +2,8 @@ const Institute = require('../../models/institutes');
 const User = require('../../models/users');
 const Student = require('../../models/students');
 const mongoose = require('mongoose');
+const utils = require('../../utils/utils');
+const userRepositories = require('../../noSqlRepositories/users');
 
 exports.getUser = async (req, res, next) => {
   try {
@@ -101,4 +103,18 @@ exports.taggedStudentDetails = async (req, res, next) => {
     console.log(err.stack);
   }
   next();
+};
+
+exports.addToCart = async (req, res, next) => {
+  const { userId, students } = req.body;
+  utils.areRequiredFieldsPresent({ userId, student });
+  return userRepositories.addToCart(
+    {
+      user: mongoose.Types.ObjectId(userId)
+    },
+    {
+      user: mongoose.Types.ObjectId(userId),
+      students: students.map((stud) => mongoose.Types.ObjectId(student))
+    }
+  );
 };

@@ -8,6 +8,11 @@ const studentSchema = new mongoose.Schema(
       required: [true, 'You should provide your name']
     },
 
+    gender: {
+      type: String,
+      enum: ['M', 'F', 'O']
+    },
+
     father: {
       type: String
     },
