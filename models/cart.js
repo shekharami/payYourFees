@@ -11,9 +11,8 @@ const cartSchema = new mongoose.Schema(
     },
 
     students: {
-      type: [mongoose.Types.ObjectId],
-      required: true,
-      ref: Student
+      type: [{ type: mongoose.Types.ObjectId, ref: Student }],
+      required: true
     },
 
     addedAt: {

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { months } from '../utils/staticData';
 
 const addStudentImg = document.getElementById('addStudent-img');
@@ -59,6 +60,30 @@ if (checkout.length) {
         i++;
       });
       location.assign('/checkout');
+    };
+  });
+}
+
+const addToCart = [...document.getElementsByName('add-to-cart')];
+if (addToCart.length) {
+  addToCart.forEach((button) => {
+    button.onclick = async function () {
+      try {
+        const res = await axios({
+          method: 'POST',
+          url: '/api/v1/student/add-to-cart',
+          data: { student: this.id },
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+        });
+        if (res.data.status === 'success') {
+          alert('Added to cart successflly !');
+          location.reload(true);
+        }
+      } catch (err) {
+        console.log(err.response);
+      }
     };
   });
 }

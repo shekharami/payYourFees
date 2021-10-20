@@ -77,3 +77,10 @@ exports.linkStudent = (req, res, next) => {
   res.status(200).render(template);
   next();
 };
+
+exports.getCart = (req, res, next) => {
+  let template = './errorPage';
+  if (res.locals.user) template = './user/cart';
+  res.status(200).render(template);
+  next();
+};

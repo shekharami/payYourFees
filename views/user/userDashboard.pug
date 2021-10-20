@@ -1,4 +1,4 @@
-extends ../home_base 
+extends _userBase 
 block content 
   section.main-content
       - if(user.students.length)
@@ -21,7 +21,7 @@ block content
                     //- input.std-chkbx(type='checkbox' name='card')
                     //- br
                     h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
-                    input(type="button", value="Add for Payment")
+                    input(type="button" id=`${stud._id}` name='add-to-cart' value="Add for Payment")
                 //- .student-card(id=`${stud._id}`)
                   h3.student-name=`${stud.name}`
                   h5.student-class=`${stud.class} (${stud.section})`

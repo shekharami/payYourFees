@@ -20,9 +20,16 @@ router.get('/institute-signup', viewController.instituteSignup);
 
 router.use(authController.isLoggedIn);
 
-router.get('/dashboard', userController.taggedStudentDetails, viewController.dashboard);
+router.get(
+  '/dashboard',
+  userController.taggedStudentDetails,
+  userController.getCartDetails,
+  viewController.dashboard
+);
 
 router.get('/checkout', viewController.getCheckout);
+
+router.get('/cart', userController.getCartDetails, viewController.getCart);
 
 router.get(
   '/link-student',

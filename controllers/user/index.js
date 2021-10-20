@@ -106,15 +106,33 @@ exports.taggedStudentDetails = async (req, res, next) => {
 };
 
 exports.addToCart = async (req, res, next) => {
-  const { userId, students } = req.body;
+  let { student } = req.body,
+    userId = res.locals.user._id;
   utils.areRequiredFieldsPresent({ userId, student });
+  const cart = await userRepositories.getCart({ user: mongoose.Types.ObjectId(userId) });
+  const students = [
+    ...new Set([...(cart ? cart.students.map((stud) => stud.toString()) : []), student])
+  ].map((stud) => mongoose.Types.ObjectId(stud));
   return userRepositories.addToCart(
     {
       user: mongoose.Types.ObjectId(userId)
     },
     {
       user: mongoose.Types.ObjectId(userId),
-      students: students.map((stud) => mongoose.Types.ObjectId(student))
+      students
     }
   );
+};
+
+exports.getCartDetails = async (req, res, next) => {
+  try {
+    res.locals.cart =
+      (await userRepositories.getCart({
+        user: mongoose.Types.ObjectId(res.locals.user._id),
+        populate: true
+      })) || null;
+  } catch (e) {
+    console.log(e);
+  }
+  next();
 };

@@ -8,7 +8,15 @@ module.exports = {
     return User.create(model);
   },
 
-  addToCart: async ({ where, model, transaction = null }) => {
+  getCart: async ({ user, populate = false }) => {
+    let query = Cart.findOne({ user }).populate('students');
+    if (populate) {
+      query = query.populate('students');
+    }
+    return query;
+  },
+
+  addToCart: async (where, model, transaction = null) => {
     return Cart.updateOne(where, model, {
       upsert: true,
       new: true

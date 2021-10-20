@@ -1,0 +1,57 @@
+extends _userBase 
+block content 
+    div(style='margin:30px').common-style
+           
+        //- for c of cart.students
+            p=c 
+  
+        table
+            tr
+                th Student
+                th Institute
+                th Particulars
+                th Description
+                th Amount
+            tr
+                th(rowspan='3' style='background-color:white;color:black;border-bottom:1px solid #ddd;') First Last 1
+            tr
+                td A B C School
+                td MAY-2021
+                td Fees for may 2021
+                td $100
+            tr
+                td(style='border-bottom:1px solid #ddd;background-color:white;') X Y Z Coaching
+                td(style='border-bottom:1px solid #ddd;background-color:white;') JUN-2021
+                td(style='border-bottom:1px solid #ddd;background-color:white;') Fees for june 2021
+                td(style='border-bottom:1px solid #ddd;background-color:white;') $100
+            tr
+                th(rowspan='3' style='background-color:white;color:black;border-bottom:1px solid #ddd;') First Last 2
+            tr
+                td(style='background-color:white;') X Y Z Coaching
+                td(style='background-color:white;') JUN-2021
+                td(style='background-color:white;') Fees for june 2021
+                td(style='background-color:white;') $100
+            tr
+                td(style='border-bottom:1px solid #ddd;') A B C School
+                td(style='border-bottom:1px solid #ddd;') MAY-2021
+                td(style='border-bottom:1px solid #ddd;') Fees for may 2021
+                td(style='border-bottom:1px solid #ddd;') $100
+            tr
+                td(style='background-color:white;')
+                td(style='background-color:white;')
+                td(style='background-color:white;')
+                td Total
+                td(style='border-bottom:1px solid #ddd;') $400
+            tr
+                td(style='background-color:white;')
+                td(style='background-color:white;')
+                td(style='background-color:white;')
+                td Taxes and charges
+                td(style='border-bottom:1px solid #ddd;') $8
+            tr
+                td(style='background-color:white;')
+                td(style='background-color:white;')
+                td(style='background-color:white;')
+                td Total Payble
+                td(style='border-bottom:1px solid #ddd;') $408
+        input(type="button", style='width:200px;margin-top:100px;' value="Continue to pay 408")
