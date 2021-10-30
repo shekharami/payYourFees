@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./users');
 const Student = require('./students');
+const Institute = require('./institutes');
 
 const cartSchema = new mongoose.Schema(
   {
@@ -10,8 +11,14 @@ const cartSchema = new mongoose.Schema(
       ref: User
     },
 
-    students: {
-      type: [{ type: mongoose.Types.ObjectId, ref: Student }],
+    student: {
+      type: mongoose.Types.ObjectId,
+      ref: Student,
+      required: true
+    },
+
+    institutes: {
+      type: [{ type: mongoose.Types.ObjectId, ref: Institute }],
       required: true
     },
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const Institute = require('./institutes');
 const Student = require('./students');
+const Payments = require('./payments');
 
 const userSchema = new mongoose.Schema(
   {
@@ -60,6 +60,10 @@ const userSchema = new mongoose.Schema(
     //   },
     //   message: 'You typed something different than above.'
     // },
+
+    payments: {
+      type: [{ type: mongoose.Types.ObjectId, ref: Payments }]
+    },
 
     ceatedAt: {
       type: Date,

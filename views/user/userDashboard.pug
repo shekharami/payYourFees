@@ -13,14 +13,29 @@ block content
                   - else 
                     img(src='/img/female_avatar.png' alt='Avatar' style='width:100%')
                   .container
-                    h3.student-name(style='text-align:left;')=`${stud.name}`
-                    h5.student-class(style='text-align:left;')=`${stud.class} (${stud.section})`
+                    h3.student-name(style='text-align:left;font-size:20px;color:green;')=`${stud.name.toUpperCase()}`
+                    //- h5.student-class(style='text-align:left;')=`${stud.class} (${stud.section})`
                     br
-                    h5.student-school(id=`${stud.institute._id}` style='text-align:left;')=`${stud.institute.name} ,`
-                    h5.std-schl-add(style='text-align:left;')=`${stud.institute.addressDistrict}`
-                    //- input.std-chkbx(type='checkbox' name='card')
-                    //- br
-                    h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
+                    //- h5.student-school(id=`${stud.institute._id}` style='text-align:left;')=`${stud.institute.name} ,`
+                    //- h5.std-schl-add(style='text-align:left;')=`${stud.institute.addressDistrict}`
+                    //- div
+                    //-   input(type="checkbox", id=`${stud.institute._id}` style="margin: 0 3px;" )
+                    //-   label(for=`${stud.institute._id}` style='float:left;')=`${stud.institute.name} ,${stud.institute.addressDistrict}`
+                    //- //- input.std-chkbx(type='checkbox' name='card')
+                    table
+                      tr 
+                        td(style='font-weight:bold;color:purple;') Institute
+                        td(style='font-weight:bold;color:purple;') Paid Upto
+                        td(style='font-weight:bold;color:purple;') Select 
+                      each institute in stud.institute
+                        tr 
+                          td=institute.name
+                          td SEP-2021
+                          td 
+                            input(type="checkbox" id=`${institute._id}` name=`${stud._id}-inst`)
+                    p(id=`${stud._id}-err`  style='color:red;')             
+                    br
+                    //- h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
                     input(type="button" id=`${stud._id}` name='add-to-cart' value="Add for Payment")
                 //- .student-card(id=`${stud._id}`)
                   h3.student-name=`${stud.name}`

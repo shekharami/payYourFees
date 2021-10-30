@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Fees = require('./fees');
 const Student = require('./students');
+// const User = require('./users');
 
 const paymentSchema = new Schema(
   {
@@ -30,6 +31,11 @@ const paymentSchema = new Schema(
       type: Date,
       default: Date.now()
     },
+
+    // paidBy: {
+    //   type: mongoose.Types.ObjectId,
+    //   ref: User
+    // },
 
     amount: {
       type: Number

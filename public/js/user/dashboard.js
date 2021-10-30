@@ -64,15 +64,36 @@ if (checkout.length) {
   });
 }
 
+//add for payment
 const addToCart = [...document.getElementsByName('add-to-cart')];
 if (addToCart.length) {
   addToCart.forEach((button) => {
     button.onclick = async function () {
       try {
+        // data variable is of below structure
+        //  {
+        //   student : studentId,
+        //   institute : [array of institute ids]
+        // }
+        const data = {
+          student: this.id,
+          institutes: [...document.getElementsByName(`${this.id}-inst`)]
+            .map((instCheck) => {
+              if (instCheck.checked) {
+                return instCheck.id;
+              }
+            })
+            .filter((val) => val)
+        };
+        if (!data.institutes.length) {
+          document.getElementById(`${this.id}-err`).innerText =
+            'Please select at least 1 institute.';
+          return;
+        }
         const res = await axios({
           method: 'POST',
           url: '/api/v1/student/add-to-cart',
-          data: { student: this.id },
+          data,
           headers: {
             'Content-type': 'application/json; charset=UTF-8'
           }

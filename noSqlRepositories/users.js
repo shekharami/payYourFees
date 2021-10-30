@@ -9,17 +9,18 @@ module.exports = {
   },
 
   getCart: async ({ user, populate = false }) => {
-    let query = Cart.findOne({ user }).populate('students');
+    let query = Cart.find({ user });
     if (populate) {
-      query = query.populate('students');
+      query = query.populate('student institutes');
     }
     return query;
   },
 
-  addToCart: async (where, model, transaction = null) => {
-    return Cart.updateOne(where, model, {
-      upsert: true,
-      new: true
-    });
+  addToCart: async (model) => {
+    // return Cart.updateOne(where, model, {
+    //   upsert: true,
+    //   new: true
+    // });
+    return Cart.create(model);
   }
 };

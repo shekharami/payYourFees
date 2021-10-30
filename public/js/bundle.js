@@ -9271,32 +9271,56 @@ if (checkout.length) {
       location.assign('/checkout');
     };
   });
-}
+} //add for payment
+
 
 var addToCart = _toConsumableArray(document.getElementsByName('add-to-cart'));
 
 if (addToCart.length) {
   addToCart.forEach(function (button) {
     button.onclick = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var res;
+      var data, res;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
-              _context.next = 3;
+              // data variable is of below structure
+              //  {
+              //   student : studentId,
+              //   institute : [array of institute ids]
+              // }
+              data = {
+                student: this.id,
+                institutes: _toConsumableArray(document.getElementsByName("".concat(this.id, "-inst"))).map(function (instCheck) {
+                  if (instCheck.checked) {
+                    return instCheck.id;
+                  }
+                }).filter(function (val) {
+                  return val;
+                })
+              };
+
+              if (data.institutes.length) {
+                _context.next = 5;
+                break;
+              }
+
+              document.getElementById("".concat(this.id, "-err")).innerText = 'Please select at least 1 institute.';
+              return _context.abrupt("return");
+
+            case 5:
+              _context.next = 7;
               return (0, _axios.default)({
                 method: 'POST',
                 url: '/api/v1/student/add-to-cart',
-                data: {
-                  student: this.id
-                },
+                data: data,
                 headers: {
                   'Content-type': 'application/json; charset=UTF-8'
                 }
               });
 
-            case 3:
+            case 7:
               res = _context.sent;
 
               if (res.data.status === 'success') {
@@ -9304,20 +9328,20 @@ if (addToCart.length) {
                 location.reload(true);
               }
 
-              _context.next = 10;
+              _context.next = 14;
               break;
 
-            case 7:
-              _context.prev = 7;
+            case 11:
+              _context.prev = 11;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0.response);
 
-            case 10:
+            case 14:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 7]]);
+      }, _callee, this, [[0, 11]]);
     }));
   });
 }
@@ -96258,7 +96282,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53516" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65156" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

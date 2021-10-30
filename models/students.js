@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Institute = require('./institutes');
+const Fees = require('./fees');
+// const Payments = require('./payments');
 
 const studentSchema = new mongoose.Schema(
   {
@@ -11,6 +13,13 @@ const studentSchema = new mongoose.Schema(
     gender: {
       type: String,
       enum: ['M', 'F', 'O']
+    },
+
+    aadhar: {
+      type: String,
+      maxlength: 12,
+      minlength: 12,
+      required: true
     },
 
     father: {
@@ -34,8 +43,8 @@ const studentSchema = new mongoose.Schema(
     },
 
     institute: {
-      type: mongoose.Types.ObjectId,
-      ref: Institute
+      type: [{ type: mongoose.Types.ObjectId, ref: Institute }],
+      required: true
     },
 
     rollNo: {
@@ -62,17 +71,22 @@ const studentSchema = new mongoose.Schema(
       type: String
     },
 
-    feesPaidTill: {
-      type: Date
-    },
+    // feesPaidTill: {
+    //   type: Date
+    // },
 
-    lastPaymentMadeOn: {
-      type: Date
-    },
+    // lastPaymentMadeOn: {
+    //   type: Date
+    // },
 
     active: {
       type: Boolean,
       default: true
+    },
+
+    paid: {
+      // array of paid fees
+      type: [{ type: mongoose.Types.ObjectId, ref: Fees }]
     },
 
     addedAt: {

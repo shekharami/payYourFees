@@ -1,4 +1,3 @@
-
 // const { unlinkSync } = require('fs');
 // // const cron = require('node-cron');
 
@@ -32,7 +31,7 @@
 // console.log(JSON.stringify(obj)
 
 // const arr = [{ a : '3' , b : 'B'}, { a :  '1', b : 'A'}, { a :  '2', b : 'A'}, { a :  '5', b : 'B'}, { a :  '6', b : 'A'}, { a : '4', b : 'B'}]
-  
+
 //   console.log(arr.map(o => Object.entries(o))
 //   .sort(
 //       (a, b) => a[0][1] - b[0][1]
@@ -44,13 +43,9 @@
 
 // // console.log([1,5,4,3,7].sort((a,b) => a-b))
 
-
 // const d1 = new Date('01-MAY-2021')
 // const d2 = new Date('02-MAY-2021')
 // console.log(d1<d2)
 
 // console.log(new Date('2021-06-09T18:30:00.000Z').toDateString())
-const a = {}
 // console.log( a && a.id)
-
-console.log('abcd efg jkl'.includes('efg'))

@@ -36,6 +36,7 @@ exports.instituteSignup = (req, res, next) => {
 };
 
 exports.dashboard = (req, res, next) => {
+  res.locals.user.students.forEach((a) => console.log(a));
   let template = './errorPage';
   if (res.locals.user) template = './user/userDashboard';
   res.status(200).render(template);
