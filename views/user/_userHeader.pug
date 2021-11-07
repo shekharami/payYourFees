@@ -4,13 +4,13 @@
       - if(user || institite)
         ul(style="background-color:#333;")
             li
-                a.active(style="color:white;" href='/dashboard') Home
+                a(style="color:white;" href='/dashboard' class=`${header==='home'?'active':''}`) Home
             li
-                a(href='#news' style="color:white;") Notifications
+                a(href='/notifications' style="color:white;" class=`${header==='notifications'?'active':''}`) Notifications
             li
-                a(href='#contact' style="color:white;") History
+                a(href='/history' style="color:white;" class=`${header==='history'?'active':''}`) History
             li
             li(style='float:right')
                 a(href='/logout' style="color:white;") Logout
             li(style='float:right')
-                a(href='/cart' style="color:white;")=`Cart (${cart && cart.length || 0})`
+                a(href='/cart' style="color:white;" class=`${header==='cart'?'active':''}`)=`Cart ${(cart && Array.isArray(cart)) ? (`( ${cart.length} )` ):''}`

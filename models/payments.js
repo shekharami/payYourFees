@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Fees = require('./fees');
 const Student = require('./students');
+const Institute = require('./institutes');
 // const User = require('./users');
 
 const paymentSchema = new Schema(
@@ -14,6 +15,11 @@ const paymentSchema = new Schema(
     student: {
       type: mongoose.Types.ObjectId,
       ref: Student
+    },
+
+    institute: {
+      type: mongoose.Types.ObjectId,
+      ref: Institute
     },
 
     paymentMode: {

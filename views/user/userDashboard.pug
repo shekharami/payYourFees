@@ -6,7 +6,7 @@ block content
           .associated-students.common-style(style='background-color:#f9f9f9;')
             #added-students(style='text-align:none;')
               h4(style='text-align:center;color:green;') Select student(s) for which you want to pay fees 
-              each stud in user.students 
+              each stud in students 
                 .card
                   - if (stud.gender === 'M')
                     img(src='/img/male_avatar.png' alt='Avatar' style='width:100%')
@@ -29,14 +29,14 @@ block content
                         td(style='font-weight:bold;color:purple;') Select 
                       each institute in stud.institute
                         tr 
-                          td=institute.name
-                          td SEP-2021
+                          td(id=`${institute.id}`)=institute.name
+                          td(id=`${institute.fee.id?institute.fee.id:''}`)=institute.fee.name
                           td 
-                            input(type="checkbox" id=`${institute._id}` name=`${stud._id}-inst`)
-                    p(id=`${stud._id}-err`  style='color:red;')             
+                            input(type="checkbox" id=`${institute.id}` name=`${stud.id}-inst`)
+                    p(id=`${stud.id}-err`  style='color:red;')             
                     br
                     //- h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`
-                    input(type="button" id=`${stud._id}` name='add-to-cart' value="Add for Payment")
+                    input(type="button" id=`${stud.id}` name='add-to-cart' value="Add for Payment")
                 //- .student-card(id=`${stud._id}`)
                   h3.student-name=`${stud.name}`
                   h5.student-class=`${stud.class} (${stud.section})`

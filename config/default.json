@@ -1,28 +1,29 @@
 {
-    "port":3000,
-    "database":{
-        "url":"mongodb+srv://amitshekhar:<DATABASE_PASSWORD>@cluster0.fxx85.mongodb.net/Payyourfees?retryWrites=true",
-        "localUrl":"mongodb://localhost:27017/payyourfees",
-        "fullUrl":"mongodb+srv://amitshekhar:<DATABASE_PASSWORD>@cluster0.fxx85.mongodb.net/Payyourfees?retryWrites=true&w=majority",
-        "password":"H7xYsB5PRoPvz2Ji"
-    },
-    "jwt":{
-        "secret":"MY-SECOND-WEB-APP-NOTES-HOSTED-AT-CREATEWEBNOTE@HEROKU",
-        "expiresIn":"90d"
-    },
-    "razorpay":{
-        "key":"rzp_test_dSZ17ZH7zRgRBQ",
-        "secret":"Q5cUQafMstpXpdUb8bDCxYbc",
-        "charges":"2"
-    },
-    "googleApi":{
-        "key":"AIzaSyDkAMQDP0C-iKIUi944zOshewD_7qzGCuw"
-    },
-    "constants":{
-        "month":["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]
-    },
-    "deadlines":{
-        "first":7,
-        "second":14
-    }
+  "port": 3000,
+  "parallel_queries_limit": 1,
+  "database": {
+    "url": "mongodb+srv://amitshekhar:<DATABASE_PASSWORD>@cluster0.fxx85.mongodb.net/Payyourfees?retryWrites=true",
+    "localUrl": "mongodb://localhost:27017/payyourfees",
+    "fullUrl": "mongodb+srv://amitshekhar:<DATABASE_PASSWORD>@cluster0.fxx85.mongodb.net/Payyourfees?retryWrites=true&w=majority",
+    "password": "H7xYsB5PRoPvz2Ji"
+  },
+  "jwt": {
+    "secret": "MY-SECOND-WEB-APP-NOTES-HOSTED-AT-CREATEWEBNOTE@HEROKU",
+    "expiresIn": "90d"
+  },
+  "razorpay": {
+    "key": "rzp_test_dSZ17ZH7zRgRBQ",
+    "secret": "Q5cUQafMstpXpdUb8bDCxYbc",
+    "charges": "2"
+  },
+  "googleApi": {
+    "key": "AIzaSyDkAMQDP0C-iKIUi944zOshewD_7qzGCuw"
+  },
+  "constants": {
+    "month": ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+  },
+  "deadlines": {
+    "first": 7,
+    "second": 14
+  }
 }

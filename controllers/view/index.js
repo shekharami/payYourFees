@@ -36,7 +36,7 @@ exports.instituteSignup = (req, res, next) => {
 };
 
 exports.dashboard = (req, res, next) => {
-  res.locals.user.students.forEach((a) => console.log(a));
+  header = 'home';
   let template = './errorPage';
   if (res.locals.user) template = './user/userDashboard';
   res.status(200).render(template);
@@ -80,8 +80,25 @@ exports.linkStudent = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
+  header = 'cart';
   let template = './errorPage';
   if (res.locals.user) template = './user/cart';
+  res.status(200).render(template);
+  next();
+};
+
+exports.getNotifications = (req, res, next) => {
+  header = 'notifications';
+  let template = './errorPage';
+  if (res.locals.user) template = './user/notifications';
+  res.status(200).render(template);
+  next();
+};
+
+exports.getHistory = (req, res, next) => {
+  header = 'history';
+  let template = './errorPage';
+  if (res.locals.user) template = './user/history';
   res.status(200).render(template);
   next();
 };
