@@ -3,6 +3,7 @@ const Institute = require('../../models/institutes');
 const Student = require('../../models/students');
 const User = require('../../models/users');
 const Fees = require('../../models/fees');
+const config = require('config');
 
 exports.test = async (req, res, next) => {
   try {
@@ -97,25 +98,23 @@ exports.test = async (req, res, next) => {
 
         }
         */
-
     /*
-        // Add som efees data to database
-        const fees = []
-        for(let i = 0 ; i< 12; i++){
-            const o =  {
-                institute : mongoose.Types.ObjectId('60acd2645b1c3916c4fdeea2'),
-                name : `${month[i]}-2021`,
-                numeralWeight : (i+1),
-                desc : 'Description text',
-                amount : 500,
-                classes ,
-                payBy :  ((i+1) === 12)? (new Date(`10-${month[0]}-2022`)) :new Date(`10-${month[i+1]}-2021`)
-            }
-            const fee = await Fees.create(o)
-            fees.push(fee)
-        }
-        */
-
+    // Add some fees data to database
+    const fees = [];
+    for (let i = 0; i < 12; i++) {
+      const o = {
+        institute: mongoose.Types.ObjectId('60acd2645b1c3916c4fdeea2'),
+        name: `${month[i]}-2021`,
+        priority: config.get(`priority.${month[i]}`),
+        desc: 'Description text',
+        amount: 500,
+        classes,
+        payBy: i + 1 === 12 ? new Date(`10-${month[0]}-2022`) : new Date(`10-${month[i + 1]}-2021`)
+      };
+      const fee = await Fees.create(o);
+      fees.push(fee);
+    }
+*/
     res.status(200).json({
       status: 'success' //,
       // data : {

@@ -1,5 +1,7 @@
+const config = require('config');
+
 module.exports = {
-  formatStdentAndPaymentDetails: ({ studentDetails, paymentDetails }) => {
+  formatStudentAndPaymentDetails: ({ studentDetails, paymentDetails }) => {
     const students = [];
     for (let i = 0; i < studentDetails.length; i++) {
       const institute = studentDetails[i].institute.map((inst) => {
@@ -8,12 +10,19 @@ module.exports = {
             payment.student.toString() === studentDetails[0].id &&
             payment.institute.toString() === inst.id
         );
+        const selectedFee =
+          payment &&
+          Array.isArray(payment.fee) &&
+          payment.fee.length &&
+          payment.fee.filter((fee) => fee.tag === config.get('fees.tags.TUTION_FEE'))[0];
         return {
           id: inst.id,
           name: inst.name,
           fee: {
-            id: (payment && payment.fee && payment.fee.id) || null,
-            name: (payment && payment.fee && payment.fee.name) || 'NA'
+            id: selectedFee.id || null,
+            name: selectedFee.name || 'N/A',
+            desc: selectedFee.desc || 'N/A',
+            amount: selectedFee.amount || 0
           }
         };
       });
@@ -26,5 +35,7 @@ module.exports = {
       });
     }
     return students;
-  }
+  },
+
+  formatCart: ({ studentDetails, paymentDetails }) => {}
 };

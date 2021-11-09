@@ -49,3 +49,8 @@
 
 // console.log(new Date('2021-06-09T18:30:00.000Z').toDateString())
 // console.log( a && a.id)
+const o = {
+  a: 1,
+  b: 2
+};
+console.log(Object.values(o));

@@ -8,12 +8,8 @@ module.exports = {
     return User.create(model);
   },
 
-  getCart: async ({ user, populate = false }) => {
-    let query = Cart.find({ user });
-    if (populate) {
-      query = query.populate('student institutes');
-    }
-    return query;
+  getCart: async ({ user }) => {
+    return Cart.countDocuments({ user });
   },
 
   addToCart: async (model) => {

@@ -75,7 +75,7 @@ exports.taggedStudentDetails = async (req, res, next) => {
 
     if (!taggedStudents.length) return next();
 
-    res.locals.students = serializer.formatStdentAndPaymentDetails(
+    res.locals.students = serializer.formatStudentAndPaymentDetails(
       await services.getStudentAndPaymentDeails({
         taggedStudents: res.locals.user.students
       })
@@ -114,15 +114,16 @@ exports.addToCart = async (req, res, next) => {
   // );
 };
 
-exports.getCartDetails = async (req, res, next) => {
+exports.getCartCount = async (req, res, next) => {
   try {
-    res.locals.cart =
+    res.locals.cartCount =
       (await userRepositories.getCart({
-        user: mongoose.Types.ObjectId(res.locals.user._id),
-        populate: true
+        user: mongoose.Types.ObjectId(res.locals.user._id)
       })) || null;
   } catch (e) {
     console.log(e);
   }
   next();
 };
+
+exports.getCartDetails = async (req, res, next) => {};

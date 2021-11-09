@@ -13,4 +13,4 @@
             li(style='float:right')
                 a(href='/logout' style="color:white;") Logout
             li(style='float:right')
-                a(href='/cart' style="color:white;" class=`${header==='cart'?'active':''}`)=`Cart ${(cart && Array.isArray(cart)) ? (`( ${cart.length} )` ):''}`
+                a(href='/cart' style="color:white;" class=`${header==='cart'?'active':''}`)=`Cart ${cartCount>=0 ? ('( '+cartCount+' )') : ''}`

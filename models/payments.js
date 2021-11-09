@@ -8,8 +8,8 @@ const Institute = require('./institutes');
 const paymentSchema = new Schema(
   {
     fee: {
-      type: mongoose.Types.ObjectId,
-      ref: Fees
+      type: [{ type: mongoose.Types.ObjectId, ref: Fees }],
+      required: true
     },
 
     student: {

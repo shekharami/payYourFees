@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Institute = require('./institutes');
+const config = require('config');
 
 const feeSchema = new mongoose.Schema(
   {
@@ -13,10 +14,21 @@ const feeSchema = new mongoose.Schema(
       required: [true, 'Must have a name']
     },
 
-    // numeralWeight: {
-    //   // 1 - 12 for months, other numbers for different fees
-    //   type: Number
-    // },
+    priority: {
+      // fees to be collected in a particular month hsould have same priority
+      type: Number,
+      enum: Object.values(config.get('priority')),
+      required: true
+    },
+
+    tag: {
+      type: String,
+      enum: Object.values(config.get('fees.tags')),
+      // TUTION_FEES FOR month's tution fee,
+      // OTHER for any other fees,
+      // FINE for any late fee/ different fine
+      required: true
+    },
 
     desc: {
       //description of fees
