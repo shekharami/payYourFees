@@ -10,7 +10,7 @@ module.exports = {
     return User.create(model);
   },
 
-  getCart: ({ user, student = null, institute = null, findOne = false }) => {
+  getCart: ({ user, student = null, institute = null, findOne = false, findAll = false }) => {
     const whereQuery = {};
     if (user) {
       whereQuery.user = convertToMongoObj(user);
@@ -23,6 +23,12 @@ module.exports = {
     }
     if (findOne) {
       return Cart.findOne(whereQuery);
+    }
+    if (findAll) {
+      return Cart.find(whereQuery)
+        .populate('lastFee', 'priority')
+        .populate('institute', 'name')
+        .populate('student', 'name class');
     }
     return Cart.countDocuments(whereQuery);
   },
