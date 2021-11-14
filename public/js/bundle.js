@@ -9279,38 +9279,50 @@ var addToCart = _toConsumableArray(document.getElementsByName('add-to-cart'));
 if (addToCart.length) {
   addToCart.forEach(function (button) {
     button.onclick = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var data, res;
+      var _this = this;
+
+      var selectedRows, data, res;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
-              // data variable is of below structure
-              //  {
+              // data variable is array of ovjects
+              //  [{
               //   student : studentId,
-              //   institute : [array of institute ids]
-              // }
-              data = {
-                student: this.id,
-                institutes: _toConsumableArray(document.getElementsByName("".concat(this.id, "-inst"))).map(function (instCheck) {
-                  if (instCheck.checked) {
-                    return instCheck.id;
-                  }
-                }).filter(function (val) {
-                  return val;
-                })
-              };
+              //   institute : array of institute ids,
+              //   lastFeePriority : priority of last paid fee,
+              //   fee : feeId
+              // }]
+              selectedRows = [];
 
-              if (data.institutes.length) {
-                _context.next = 5;
+              _toConsumableArray(document.getElementsByName("".concat(this.id, "-select"))).forEach(function (instCheck) {
+                if (instCheck.checked) {
+                  selectedRows.push(instCheck.parentElement.parentElement);
+                }
+              });
+
+              if (selectedRows.length) {
+                _context.next = 6;
                 break;
               }
 
               document.getElementById("".concat(this.id, "-err")).innerText = 'Please select at least 1 institute.';
               return _context.abrupt("return");
 
-            case 5:
-              _context.next = 7;
+            case 6:
+              data = selectedRows.map(function (row) {
+                var institute = row.children[0].id;
+                var lastFee = row.children[1].id || null; // lastFee = lastFee.split('-');
+
+                return {
+                  student: _this.id,
+                  institute: institute,
+                  // lastFeePriority: lastFee[1] * 1,
+                  lastFee: lastFee
+                };
+              });
+              _context.next = 9;
               return (0, _axios.default)({
                 method: 'POST',
                 url: '/api/v1/student/add-to-cart',
@@ -9320,28 +9332,28 @@ if (addToCart.length) {
                 }
               });
 
-            case 7:
+            case 9:
               res = _context.sent;
 
               if (res.data.status === 'success') {
-                alert('Added to cart successflly !');
+                alert(res.data.data);
                 location.reload(true);
               }
 
-              _context.next = 14;
+              _context.next = 16;
               break;
 
-            case 11:
-              _context.prev = 11;
+            case 13:
+              _context.prev = 13;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0.response);
 
-            case 14:
+            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 11]]);
+      }, _callee, this, [[0, 13]]);
     }));
   });
 }
@@ -96282,7 +96294,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55296" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53969" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

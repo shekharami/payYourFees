@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./users');
 const Student = require('./students');
+const Fee = require('./fees');
 const Institute = require('./institutes');
 
 const cartSchema = new mongoose.Schema(
@@ -17,12 +18,18 @@ const cartSchema = new mongoose.Schema(
       required: true
     },
 
-    institutes: {
-      type: [{ type: mongoose.Types.ObjectId, ref: Institute }],
+    institute: {
+      type: mongoose.Types.ObjectId,
+      ref: Institute,
       required: true
     },
 
-    addedAt: {
+    lastFee: {
+      type: mongoose.Types.ObjectId,
+      ref: Fee
+    },
+
+    createdAt: {
       type: Date,
       default: new Date(),
       select: false
@@ -30,6 +37,7 @@ const cartSchema = new mongoose.Schema(
 
     updatedAt: {
       type: Date,
+      default: new Date(),
       select: false
     },
 

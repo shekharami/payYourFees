@@ -1,164 +1,59 @@
 extends _userBase 
 block content 
     div(style='margin:30px;').common-style
-        //- table
-            //- tr
-                th Student
-                th Institute
-                th Particulars
-                th Description
-                th Amount
-            - let i = 0
-            //- each student in cartDetails
-                - ++i
-                tr
-                    th(rowspan=`${student.institute.length + 1}` style='background-color:white;color:black;border:1px solid #ddd;')=student.name.toUpperCase()
-                each inst in student.institute
-                    - ++i 
-                    tr
-                        td(style='border:1px solid #ddd;background-color:white;')=inst.name
-                        td(style='border:1px solid #ddd;background-color:white;')=inst.fee.name
-                        td(style='border:1px solid #ddd;background-color:white;')=inst.fee.desc
-                        td(style='border:1px solid #ddd;background-color:white;')=`${inst.fee.amount} ₹`
-                    //- tr
-                        td(style='border-bottom:1px solid #ddd;background-color:white;') X Y Z Coaching
-                        td(style='border-bottom:1px solid #ddd;background-color:white;') JUN-2021
-                        td(style='border-bottom:1px solid #ddd;background-color:white;') Fees for june 2021
-                        td(style='border-bottom:1px solid #ddd;background-color:white;') $100
-            //- tr
-            //-     th(rowspan='3' style='background-color:white;color:black;border-bottom:1px solid #ddd;') First Last 2
-            //- tr
-            //-     td(style='background-color:white;') X Y Z Coaching
-            //-     td(style='background-color:white;') JUN-2021
-            //-     td(style='background-color:white;') Fees for june 2021
-            //-     td(style='background-color:white;') $100
-            //- tr
-            //-     td(style='border-bottom:1px solid #ddd;') A B C School
-            //-     td(style='border-bottom:1px solid #ddd;') MAY-2021
-            //-     td(style='border-bottom:1px solid #ddd;') Fees for may 2021
-            //-     td(style='border-bottom:1px solid #ddd;') $100
-            //- tr
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td Total
-            //-     td(style='border-bottom:1px solid #ddd;') $400
-            //- tr
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td Taxes and charges
-            //-     td(style='border-bottom:1px solid #ddd;') $8
-            //- tr
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td Total Payble
-            //-     td(style='border-bottom:1px solid #ddd;') $408
-
-        //- table
-            tr
-                th Student
-                th Institute
-                th Particulars
-                th Description
-                th Amount
-            tr
-                th(rowspan='5' style='background-color:white;color:black;border-bottom:1px solid #ddd;') First Last 1
-            tr
-                td(rowspan='2') A B C School
-                td MAY-2021
-                td Fees for may 2021
-                td $100
-            tr 
-                td JUN-2021
-                td Fees for june  2021
-                td $100
-            tr
-                td(style='border-bottom:1px solid #ddd;background-color:white;' rowspan='2') X Y Z Coaching
-                td(style='border-bottom:1px solid #ddd;background-color:white;') JUL-2021
-                td(style='border-bottom:1px solid #ddd;background-color:white;') Fees for june 2021
-                td(style='border-bottom:1px solid #ddd;background-color:white;') $100
-            tr 
-                td(style='border-bottom:1px solid #ddd;background-color:white;') AUG-2021
-                td(style='border-bottom:1px solid #ddd;background-color:white;') Fees for june 2021
-                td(style='border-bottom:1px solid #ddd;background-color:white;') $100
-            //- tr
-            //-     th(rowspan='3' style='background-color:white;color:black;border-bottom:1px solid #ddd;') First Last 2
-            //- tr
-            //-     td(style='background-color:white;' rowspan='3') X Y Z Coaching
-            //- tr  
-            //-     td(style='background-color:white;') JUN-2021
-            //-     td(style='background-color:white;') Fees for june 2021
-            //-     td(style='background-color:white;') $100
-            //- tr  
-            //-     td(style='background-color:white;') JUN-2021
-            //-     td(style='background-color:white;') Fees for june 2021
-            //-     td(style='background-color:white;') $100
-            //- tr
-            //-     td(style='border-bottom:1px solid #ddd;') A B C School
-            //-     td(style='border-bottom:1px solid #ddd;') MAY-2021
-            //-     td(style='border-bottom:1px solid #ddd;') Fees for may 2021
-            //-     td(style='border-bottom:1px solid #ddd;') $100
-            //- tr
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td Total
-            //-     td(style='border-bottom:1px solid #ddd;') $400
-            //- tr
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td Taxes and charges
-            //-     td(style='border-bottom:1px solid #ddd;') $8
-            //- tr
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td(style='background-color:white;')
-            //-     td Total Payble
-            //-     td(style='border-bottom:1px solid #ddd;') $408
         div(style='width:60%;margin:auto;margin-bottom:2%;') 
+            h5(style='float:left;text-decoration:underline;font-weight:bold;') MAYANK SHEKHAR
+                i(class='fa fa-trash w3-xlarge' name='remove' style='cursor:pointer;margin-left:30px;')
             table
-                caption(style='float:left;text-decoration:underline;font-weight:bold;') MAYANK SHEKHAR 
                 tr 
                     th(style='background-color:white;color:black;') Institute
                     th(style='background-color:white;color:black;') Particulars
                     th(style='background-color:white;color:black;') Description
                     th(style='background-color:white;color:black;') Amount
+                    th(style='background-color:white;color:black;') Action
                 tr
                     td A B C School
                     td MAY-2021
                     td Fees for may 2021
                     td $100
+                    td 
+                        i(class='fa fa-trash w3-large' name='removeFromCart' style='cursor:pointer;')
                 tr
                     td A B C School
                     td MAY-2021
                     td Fees for may 2021
                     td $100
+                    td 
+                        i(class='fa fa-trash w3-large' name='removeFromCart' style='cursor:pointer;')
                 tr 
                     td 
                     td 
                     td Total
                     td $200
         div(style='width:60%;margin:auto;margin-bottom:2%;') 
+            h5(style='float:left;text-decoration:underline;font-weight:bold;') MAYANK SHEKHAR
+                i(class='fa fa-trash w3-xlarge' name='removeFromCart' style='cursor:pointer;margin-left:30px;')
             table
-                caption(style='float:left;text-decoration:underline;font-weight:bold;') MAYANK SHEKHAR 
                 tr 
                     th(style='background-color:white;color:black;') Institute
                     th(style='background-color:white;color:black;') Particulars
                     th(style='background-color:white;color:black;') Description
                     th(style='background-color:white;color:black;') Amount
+                    th(style='background-color:white;color:black;') Action
                 tr
                     td A B C School
                     td MAY-2021
                     td Fees for may 2021
                     td $100
+                    td 
+                        i(class='fa fa-trash w3-large' name='removeFromCart' style='cursor:pointer;')
                 tr
                     td A B C School
                     td MAY-2021
                     td Fees for may 2021
                     td $100
+                    td 
+                        i(class='fa fa-trash w3-large' name='removeFromCart' style='cursor:pointer;')
                 tr 
                     td 
                     td 

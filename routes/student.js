@@ -1,7 +1,7 @@
 const express = require('express');
 const studentController = require('../controllers/student/index');
 const authController = require('../controllers/auth/index');
-const userController = require('../controllers/user/index');
+const cartController = require('../controllers/user/cart/index');
 const handleRequest = require('../utils/handler').handleRequest;
 
 const router = express.Router();
@@ -23,7 +23,17 @@ router.post(
   handleRequest(async (req, res, next) =>
     res.status(200).json({
       status: 'success',
-      data: await userController.addToCart(req, res, next)
+      data: await cartController.addToCart(req, res, next)
+    })
+  )
+);
+
+router.delete(
+  '/remove-from-cart',
+  handleRequest(async (req, res, next) =>
+    res.status(204).json({
+      status: 'success',
+      data: await cartController.removeFromCart(req, res, next)
     })
   )
 );

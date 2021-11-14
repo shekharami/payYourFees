@@ -49,8 +49,29 @@
 
 // console.log(new Date('2021-06-09T18:30:00.000Z').toDateString())
 // console.log( a && a.id)
-const o = {
-  a: 1,
-  b: 2
-};
-console.log(Object.values(o));
+
+const { deepEqual, areArraysWithObjElemEqual } = require('./../payYourFees/utils/utils');
+
+console.log(
+  areArraysWithObjElemEqual(
+    [
+      {
+        student: '60af70766c9a4721b00aee8b',
+        institute: '60acd2645b1c3916c4fdeea2',
+        lastFee: '61880ef81b10d04ad853867b'
+      }
+    ],
+    [
+      {
+        student: '60af70766c9a4721b00aee8b',
+        institute: '60af70766c9a4721b00aee8b',
+        lastFee: '61880ef81b10d04ad853867b'
+      }
+    ]
+  )
+);
+
+const o = { a: 1 };
+
+const { a, b, c } = o;
+console.log(a, b, c);

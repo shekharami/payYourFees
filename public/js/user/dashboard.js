@@ -70,26 +70,35 @@ if (addToCart.length) {
   addToCart.forEach((button) => {
     button.onclick = async function () {
       try {
-        // data variable is of below structure
-        //  {
+        // data variable is array of ovjects
+        //  [{
         //   student : studentId,
-        //   institute : [array of institute ids]
-        // }
-        const data = {
-          student: this.id,
-          institutes: [...document.getElementsByName(`${this.id}-inst`)]
-            .map((instCheck) => {
-              if (instCheck.checked) {
-                return instCheck.id;
-              }
-            })
-            .filter((val) => val)
-        };
-        if (!data.institutes.length) {
+        //   institute : array of institute ids,
+        //   lastFeePriority : priority of last paid fee,
+        //   fee : feeId
+        // }]
+        const selectedRows = [];
+        [...document.getElementsByName(`${this.id}-select`)].forEach((instCheck) => {
+          if (instCheck.checked) {
+            selectedRows.push(instCheck.parentElement.parentElement);
+          }
+        });
+        if (!selectedRows.length) {
           document.getElementById(`${this.id}-err`).innerText =
             'Please select at least 1 institute.';
           return;
         }
+        const data = selectedRows.map((row) => {
+          const institute = row.children[0].id;
+          const lastFee = row.children[1].id || null;
+          // lastFee = lastFee.split('-');
+          return {
+            student: this.id,
+            institute,
+            // lastFeePriority: lastFee[1] * 1,
+            lastFee
+          };
+        });
         const res = await axios({
           method: 'POST',
           url: '/api/v1/student/add-to-cart',
@@ -99,7 +108,7 @@ if (addToCart.length) {
           }
         });
         if (res.data.status === 'success') {
-          alert('Added to cart successflly !');
+          alert(res.data.data);
           location.reload(true);
         }
       } catch (err) {

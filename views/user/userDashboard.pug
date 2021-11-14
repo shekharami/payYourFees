@@ -30,9 +30,10 @@ block content
                       each institute in stud.institute
                         tr 
                           td(id=`${institute.id}`)=institute.name
+                          //- td(id=`${institute.fee.id?institute.fee.id:''}-${institute.fee.priority}`)=institute.fee.name
                           td(id=`${institute.fee.id?institute.fee.id:''}`)=institute.fee.name
                           td 
-                            input(type="checkbox" id=`${institute.id}` name=`${stud.id}-inst`)
+                            input(type="checkbox" id=`${institute.id}` name=`${stud.id}-select`)
                     p(id=`${stud.id}-err`  style='color:red;')             
                     br
                     //- h5.std-paid=`Fees Paid Upto : ${stud.feesPaidTill}`

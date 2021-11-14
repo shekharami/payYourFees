@@ -20,9 +20,10 @@ module.exports = {
           name: inst.name,
           fee: {
             id: selectedFee.id || null,
-            name: selectedFee.name || 'N/A',
-            desc: selectedFee.desc || 'N/A',
-            amount: selectedFee.amount || 0
+            name: selectedFee.name || 'N/A'
+            // desc: selectedFee.desc || 'N/A',
+            // amount: selectedFee.amount || 0,
+            // priority: selectedFee.priority || 13
           }
         };
       });
