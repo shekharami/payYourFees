@@ -5,6 +5,7 @@ require('./common/redirectToMain');
 require('./common/loginSignupRedirect');
 require('./common/loginSignupHandler');
 require('./user/dashboard');
+require('./user/cart');
 require('./user/payment');
 require('./user/linkStudent');
 require('./institute/searchStudent');

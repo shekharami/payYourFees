@@ -1,41 +1,64 @@
-extends ../home_base 
-block content  
-  section.content
-    script(src="https://checkout.razorpay.com/v1/checkout.js")
-    .common-style 
-      h4#orderId 
-    h5#key(style='display:none;') Razor Pay key : #{key}
-    .checkout-table
-      div 
-        h4(style='color:green;') Students
-          span.price(style='color:Green')
-            b Fees
+//- extends _userBase 
+//- block content
+doctype html
+html(lang="en" dir="ltr")
+  include _headerTags
+  script(src="https://checkout.razorpay.com/v1/checkout.js")
+  body.main 
+    div(style='margin : 30px;') 
+      h1 Checkout
+      table.checkout-table(style='margin-bottom:50px;')
+        tr 
+          th Order Id 
+          th#orderId 
+        tr 
+          th Amount 
+          th#amount
+      .common-style 
+        input(type="button", value="Cancel" style='width : 150px;')   
+        input#pay(type="button", value="Proceed To Pay" style='width : 150px;margin-left : 200px;')  
+
+  include ../_footer
+        
+  script(src='/js/bundle.js')
+
+
+    //- section.content
+      script(src="https://checkout.razorpay.com/v1/checkout.js")
+      .common-style 
+        h4#orderId 
+      h5#key(style='display:none;') Razor Pay key : #{key}
+      .checkout-table
+        div 
+          h4(style='color:green;') Students
+            span.price(style='color:Green')
+              b Fees
+          hr
+          .common-style#spinner(style='display:;')
+            img(src="/img/spinner.gif", alt="Loading")
+          .checkout-content(style='display:none;')
+            h3(style='color:blue;') Student 1
+            p
+              span.detail Jan, Feb, Mar
+              span.price ₹ 15
+            p
+              span.detail Exam fees
+              span.price ₹ 5
+            hr
+            p Total 
+              span.price
+                b#sum ₹ 30
+            p Other Charges 
+              span.price
+                b#oc + ₹ 3
+            hr
+            p Amount Payable
+              span.price(style='color:black')
+                b#total ₹ 33
+            h6 Note: Any Charges extra is taken by the payment gateway/Bank.
         hr
-        .common-style#spinner(style='display:;')
-          img(src="/img/spinner.gif", alt="Loading")
-        .checkout-content(style='display:none;')
-          h3(style='color:blue;') Student 1
-          p
-            span.detail Jan, Feb, Mar
-            span.price ₹ 15
-          p
-            span.detail Exam fees
-            span.price ₹ 5
-          hr
-          p Total 
-            span.price
-              b#sum ₹ 30
-          p Other Charges 
-            span.price
-              b#oc + ₹ 3
-          hr
-          p Amount Payable
-            span.price(style='color:black')
-              b#total ₹ 33
-          h6 Note: Any Charges extra is taken by the payment gateway/Bank.
-      hr
-      div.common-style 
-        input#pay(type='button' value='Proceed to pay' style='width:200px;' )
+        div.common-style 
+          input#pay(type='button' value='Proceed to pay' style='width:200px;' )
   
 
           

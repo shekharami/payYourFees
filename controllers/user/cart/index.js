@@ -95,6 +95,7 @@ module.exports = {
       feeWithHigherPriority = await async.parallel(feeWithHigherPriority);
       const lateFeeFuncs = {};
       let lateFees = null;
+      console.log('------', savedCart[0], '-----');
       const cartDetails = savedCart.map((item) => {
         // If time lapsed, check for late fees to be included
         if (
@@ -137,7 +138,6 @@ module.exports = {
             .institute.fees.push(...lateFees[inst]);
         });
       }
-      console.log(cartDetails);
       res.locals.cartDetails = cartDetails;
       next();
     } catch (e) {

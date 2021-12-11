@@ -1,48 +1,18 @@
 const path = require('path');
-// const express = require("express");
-// const dotenv = require("dotenv");
-// const cors = require("cors");
-// const bodyParser = require("body-parser");
 const crypto = require('crypto');
 const Razorpay = require('razorpay');
 const config = require('config');
 
 exports.createOrder = async (req, res, next) => {
   try {
-    console.log('aaaaaaaaaaaaaaaaaaa');
     const instance = new Razorpay({
       key_id: config.get('razorpay.key'),
       key_secret: config.get('razorpay.secret')
     });
-
-    const feesDetails = res.locals.feesDetails;
-
-    delete res.locals.feesDetails;
-    let amount = [];
-    let receipt = '';
-    Object.keys(feesDetails).map((name) => {
-      amount.push(feesDetails[name].details[0].amount);
-      receipt += `${name}-${feesDetails[name].details[0].name} `;
-    });
-
-    receipt = receipt.split(' ');
-    receipt.pop();
-
-    receipt = receipt.join('|');
-
-    console.log(receipt);
-
-    //calculate total amount
-    amount = amount.reduce((a, b) => a + b);
-    const total = amount;
-    //add razorpay's cut
-    amount += amount * 0.02;
-    amount.toFixed(2); //rounding to  decimal places
-
     const params = {
-      amount: amount * 100, // total feesamount
+      amount: parseInt(req.body.amount) * 100, // total feesamount
       currency: 'INR',
-      receipt, //name of fees
+      receipt: req.body.receipt, //name of fees
       payment_capture: '1'
     };
 
@@ -53,8 +23,6 @@ exports.createOrder = async (req, res, next) => {
     res.status(200).json({
       status: 'success',
       data: {
-        total,
-        feesDetails,
         razr,
         key: config.get('razorpay.key')
       }

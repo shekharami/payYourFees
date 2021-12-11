@@ -9,7 +9,9 @@ const router = express.Router();
 router.use(authController.isLoggedIn);
 router.route('/verify').post(razorpayController.verifyPayment);
 
-router.route('/createOrder').post(studentController.getFeesDetails, razorpayController.createOrder);
+router
+  .route('/createOrder')
+  .post(/*studentController.getFeesDetails,*/ razorpayController.createOrder);
 
 router.route('/record-cash-payment').post(paymentController.recordCashPayment);
 

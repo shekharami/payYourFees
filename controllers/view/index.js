@@ -66,9 +66,12 @@ exports.getCheckout = (req, res, next) => {
   let template = './errorPage';
   if (res.locals.user) template = './user/checkout';
   res
-    .header({ 'Content-Security-Policy': 'https://checkout.razorpay.com' })
+    .header({
+      'Content-Security-Policy':
+        "script-src 'self' https://checkout.razorpay.com https://apis.google.com/js/platform.js"
+    })
     .status(200)
-    .render(template);
+    .render(template, { title: 'Checkout' });
   next();
 };
 

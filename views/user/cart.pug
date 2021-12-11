@@ -83,32 +83,33 @@ block content
     div(style='margin:30px;').common-style
         - totalAmount = 0
         each cart in cartDetails
-            div(style='width:60%;margin:auto;margin-bottom:2%;') 
-                h5(style='float:left;text-decoration:underline;font-weight:bold;' id=`${cart.student.id}`)=cart.student.name
-                    i(class='fa fa-trash w3-xlarge' name='remove' style='cursor:pointer;margin-left:30px;')
-                table
-                    tr 
-                        th(style='background-color:white;color:black;') Institute
-                        th(style='background-color:white;color:black;') Particulars
-                        th(style='background-color:white;color:black;') Description
-                        th(style='background-color:white;color:black;') Amount
-                        th(style='background-color:white;color:black;') Action
-                    - let amount = 0
-                    each fee in cart.institute.fees
-                        - amount += fee.amount
-                        tr
-                            td=cart.institute.name
-                            td=fee.name
-                            td=fee.desc
-                            td=fee.amount
+                //- - if(cart.institute.fees.length)
+                div(style='width:60%;margin:auto;margin-bottom:2%;') 
+                    h5(style='float:left;text-decoration:underline;font-weight:bold;' id=`${cart.student.id}`)=cart.student.name
+                        i(class='fa fa-trash w3-xlarge' name='remove' style='cursor:pointer;margin-left:30px;')
+                    table
+                        tr 
+                            th(style='background-color:white;color:black;') Institute
+                            th(style='background-color:white;color:black;') Particulars
+                            th(style='background-color:white;color:black;') Description
+                            th(style='background-color:white;color:black;') Amount
+                            th(style='background-color:white;color:black;') Action
+                        - let amount = 0
+                        each fee in cart.institute.fees
+                            - amount += fee.amount
+                            tr
+                                td=cart.institute.name
+                                td=fee.name
+                                td=fee.desc
+                                td=fee.amount
+                                td 
+                                    i(class='fa fa-trash w3-large' name='removeFromCart' style='cursor:pointer;')
+                        tr 
                             td 
-                                i(class='fa fa-trash w3-large' name='removeFromCart' style='cursor:pointer;')
-                    tr 
-                        td 
-                        td 
-                        td Total
-                        td=`${amount}`
-                    - totalAmount += amount
+                            td 
+                            td Total
+                            td=`${amount}`
+                        - totalAmount += amount
             
         div(style='width:60%;margin:auto;margin-bottom:2%;') 
             hr
@@ -132,4 +133,4 @@ block content
                     th(style='background-color:white;color:black;')=`${netPayble}`
             
                     
-        input(type="button", style='width:200px;margin-top:2%;' value=`Continue to pay ${netPayble}`)
+        input#checkout(type="button" name='abcdgn' style='width:200px;margin-top:2%;' value=`Continue to pay ${netPayble}`)
