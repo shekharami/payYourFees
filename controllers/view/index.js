@@ -83,6 +83,7 @@ exports.linkStudent = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
+  console.log(res.locals.cartDetails);
   header = 'cart';
   let template = './errorPage';
   if (res.locals.user) template = './user/cart';

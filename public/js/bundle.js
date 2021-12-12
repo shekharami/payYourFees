@@ -9364,6 +9364,22 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var checkout = document.getElementById('checkout');
 
 if (checkout) {
@@ -9384,6 +9400,58 @@ if (checkout) {
 
     location.assign('/checkout');
   };
+}
+
+var removeFromCart = _toConsumableArray(document.getElementsByName('remove-from-cart'));
+
+if (removeFromCart.length) {
+  removeFromCart.forEach(function (removeIcon) {
+    removeIcon.onclick = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var data, res;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              data = {
+                institute: removeIcon.id || null,
+                student: removeIcon.parentElement.id || null
+              };
+
+              if (!(!data.institute || !data.student)) {
+                _context.next = 4;
+                break;
+              }
+
+              alert('something went wrong!');
+              return _context.abrupt("return");
+
+            case 4:
+              _context.next = 6;
+              return (0, _axios.default)({
+                method: 'DELETE',
+                url: '/api/v1/student/remove-from-cart',
+                data: data,
+                headers: {
+                  'Content-type': 'application/json; charset=UTF-8'
+                }
+              });
+
+            case 6:
+              res = _context.sent;
+
+              if (res.status === 204) {
+                alert('Removed successfully');
+                location.reload(true);
+              }
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+  });
 }
 },{"axios":"../../node_modules/axios/index.js"}],"user/payment.js":[function(require,module,exports) {
 "use strict";
@@ -96309,7 +96377,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52086" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51743" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

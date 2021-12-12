@@ -74,71 +74,74 @@ module.exports = {
         user: mongoose.Types.ObjectId(res.locals.user._id),
         findAll: true
       });
-      let feeWithHigherPriority = {};
-      savedCart.forEach((item) => {
-        feeWithHigherPriority[item.institute.name] = [];
-      });
-      if (savedCart.length) {
+      if (!savedCart.length) {
+        res.locals.cartDetails = [];
+      } else {
+        let feeWithHigherPriority = {};
         savedCart.forEach((item) => {
-          feeWithHigherPriority[item.institute.name] = async () =>
-            instituteRepositories.getFee({
-              whereQuery: {
-                institute: item.institute._id,
-                priority: item.lastFee ? item.lastFee.priority + 1 : { $gt: 0 },
-                classes: { $elemMatch: { $eq: item.student.class } },
-                deletedAt: null,
-                active: true
-              }
-            });
+          feeWithHigherPriority[item.institute.name] = [];
         });
-      }
-      feeWithHigherPriority = await async.parallel(feeWithHigherPriority);
-      const lateFeeFuncs = {};
-      let lateFees = null;
-      console.log('------', savedCart[0], '-----');
-      const cartDetails = savedCart.map((item) => {
-        // If time lapsed, check for late fees to be included
-        if (
-          feeWithHigherPriority[item.institute.name].length &&
-          feeWithHigherPriority[item.institute.name].length < 12
-        ) {
-          feeWithHigherPriority[item.institute.name].forEach((fee) => {
-            if (fee.payBy < Date.now() && !lateFeeFuncs[item.institute.name]) {
-              lateFeeFuncs[item.institute.name] = async () =>
-                getFee({
-                  whereQuery: {
-                    institute: item.institute._id,
-                    tag: config.get('fees.tags.FINE') //later change it to LATE_FEE
-                  }
-                });
-            }
+        if (savedCart.length) {
+          savedCart.forEach((item) => {
+            feeWithHigherPriority[item.institute.name] = async () =>
+              instituteRepositories.getFee({
+                whereQuery: {
+                  institute: item.institute._id,
+                  priority: item.lastFee ? item.lastFee.priority + 1 : { $gt: 0 },
+                  classes: { $elemMatch: { $eq: item.student.class } },
+                  deletedAt: null,
+                  active: true
+                }
+              });
           });
         }
-        //
-        return {
-          student: { name: item.student.name.toUpperCase(), id: item.student.id },
-          institute: {
-            name: item.institute.name,
-            id: item.institute.id,
-            fees: feeWithHigherPriority[item.institute.name]
+        feeWithHigherPriority = await async.parallel(feeWithHigherPriority);
+        const lateFeeFuncs = {};
+        let lateFees = null;
+        const cartDetails = savedCart.map((item) => {
+          // If time lapsed, check for late fees to be included
+          if (
+            feeWithHigherPriority[item.institute.name].length &&
+            feeWithHigherPriority[item.institute.name].length < 12
+          ) {
+            feeWithHigherPriority[item.institute.name].forEach((fee) => {
+              if (fee.payBy < Date.now() && !lateFeeFuncs[item.institute.name]) {
+                lateFeeFuncs[item.institute.name] = async () =>
+                  getFee({
+                    whereQuery: {
+                      institute: item.institute._id,
+                      tag: config.get('fees.tags.FINE') //later change it to LATE_FEE
+                    }
+                  });
+              }
+            });
           }
-        };
-      });
-
-      //find late fees for institute
-      if (Object.keys(lateFeeFuncs).length) {
-        lateFees = await async.parallel(lateFeeFuncs);
-      }
-
-      // push late fees array to insttute fees array
-      if (Object.keys(lateFees).length) {
-        Object.keys(lateFees).forEach((inst) => {
-          cartDetails
-            .filter((obj) => obj.institute.name === inst)[0]
-            .institute.fees.push(...lateFees[inst]);
+          //
+          return {
+            student: { name: item.student.name.toUpperCase(), id: item.student.id },
+            institute: {
+              name: item.institute.name,
+              id: item.institute.id,
+              fees: feeWithHigherPriority[item.institute.name]
+            }
+          };
         });
+
+        //find late fees for institute
+        if (Object.keys(lateFeeFuncs).length) {
+          lateFees = await async.parallel(lateFeeFuncs);
+        }
+
+        // push late fees array to insttute fees array
+        if (lateFees && Object.keys(lateFees).length) {
+          Object.keys(lateFees).forEach((inst) => {
+            cartDetails
+              .filter((obj) => obj.institute.name === inst)[0]
+              .institute.fees.push(...lateFees[inst]);
+          });
+        }
+        res.locals.cartDetails = cartDetails;
       }
-      res.locals.cartDetails = cartDetails;
       next();
     } catch (e) {
       console.log(e.stack);
@@ -146,16 +149,16 @@ module.exports = {
   },
   removeFromCart: async (req, res, next) => {
     try {
-      const { student, institute, fee } = req.query;
+      const { student, institute } = req.body;
+      if (!student || !institute) {
+        throw new Error('student or institute not provided');
+      }
       const whereQuery = { user: mongoose.Types.ObjectId(res.locals.user._id) };
       if (student) {
         whereQuery.student = mongoose.Types.ObjectId(student);
       }
       if (institute) {
         whereQuery.institute = mongoose.Types.ObjectId(institute);
-      }
-      if (fee) {
-        whereQuery.fee = mongoose.Types.ObjectId(fee);
       }
       return cartRepositories.removeFromCart({ whereQuery });
     } catch (e) {

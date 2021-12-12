@@ -14,3 +14,31 @@ if (checkout) {
     location.assign('/checkout');
   };
 }
+
+const removeFromCart = [...document.getElementsByName('remove-from-cart')];
+if (removeFromCart.length) {
+  removeFromCart.forEach((removeIcon) => {
+    removeIcon.onclick = async () => {
+      const data = {
+        institute: removeIcon.id || null,
+        student: removeIcon.parentElement.id || null
+      };
+      if (!data.institute || !data.student) {
+        alert('something went wrong!');
+        return;
+      }
+      const res = await axios({
+        method: 'DELETE',
+        url: '/api/v1/student/remove-from-cart',
+        data,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8'
+        }
+      });
+      if (res.status === 204) {
+        alert('Removed successfully');
+        location.reload(true);
+      }
+    };
+  });
+}
