@@ -69,6 +69,10 @@ if (checkoutTable) {
   const data = {};
   data.amount = sessionStorage.getItem('amount');
   data.receipt = sessionStorage.getItem('receipt');
+  if (!data.amount || !data.receipt) {
+    alert('Something went wrong!');
+    location.assign('/cart');
+  }
   axios({
     method: 'POST',
     url: 'api/v1/payments/createOrder',
@@ -82,7 +86,7 @@ if (checkoutTable) {
       document.getElementById('orderId').textContent = `Order Id: ${res.data.data.razr.id}`;
       console.log(res.data);
       document.getElementById('orderId').innerText = res.data.data.razr.id;
-      document.getElementById('amount').innerText = res.data.data.razr.amount / 100;
+      document.getElementById('amount').innerText = `₹ ${res.data.data.razr.amount / 100}`;
 
       // checkoutContent.innerHTML = html;
       // document.getElementById('spinner').style.display = 'none';

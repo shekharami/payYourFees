@@ -15,7 +15,8 @@ html(lang="en" dir="ltr")
           th Amount 
           th#amount
       .common-style 
-        input(type="button", value="Cancel" style='width : 150px;')   
+        a(href="/cart") 
+          input(type="button", value="Cancel" style='width : 150px;')   
         input#pay(type="button", value="Proceed To Pay" style='width : 150px;margin-left : 200px;')  
 
   include ../_footer

@@ -101,14 +101,14 @@ block content
                                 td=cart.institute.name
                                 td=fee.name
                                 td=fee.desc
-                                td=fee.amount
+                                td=`₹ ${fee.amount}`
                                 td 
                                     i(class='fa fa-trash w3-large' name='removeFromCart' style='cursor:pointer;')
                         tr 
                             td 
                             td 
                             td Total
-                            td=`${amount}`
+                            td=`₹ ${amount}`
                         - totalAmount += amount
             
         div(style='width:60%;margin:auto;margin-bottom:2%;') 
@@ -118,19 +118,19 @@ block content
                     td
                     td
                     td Total 
-                    td=`${totalAmount}`
+                    td=`₹ ${totalAmount}`
                 - tax = 0.02*totalAmount
                 tr
                     td 
                     td
                     td Tax
-                    td=`${tax}`
+                    td=`₹ ${tax}`
                 - netPayble = totalAmount + tax
                 tr 
                     th(style='background-color:white;color:black;') 
                     th(style='background-color:white;color:black;') 
                     th(style='background-color:white;color:black;') Net Payble
-                    th(style='background-color:white;color:black;')=`${netPayble}`
+                    th(style='background-color:white;color:black;')=`₹ ${netPayble}`
             
                     
-        input#checkout(type="button" name='abcdgn' style='width:200px;margin-top:2%;' value=`Continue to pay ${netPayble}`)
+        input#checkout(type="button" name='abcdgn' style='width:200px;margin-top:2%;' value=`Continue to pay ₹ ${netPayble}`)

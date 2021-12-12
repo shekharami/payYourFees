@@ -9336,7 +9336,7 @@ if (addToCart.length) {
               res = _context.sent;
 
               if (res.data.status === 'success') {
-                alert(res.data.data);
+                alert('added successfully!');
                 location.reload(true);
               }
 
@@ -9533,6 +9533,12 @@ if (checkoutTable) {
   var data = {};
   data.amount = sessionStorage.getItem('amount');
   data.receipt = sessionStorage.getItem('receipt');
+
+  if (!data.amount || !data.receipt) {
+    alert('Something went wrong!');
+    location.assign('/cart');
+  }
+
   (0, _axios.default)({
     method: 'POST',
     url: 'api/v1/payments/createOrder',
@@ -9545,7 +9551,7 @@ if (checkoutTable) {
     document.getElementById('orderId').textContent = "Order Id: ".concat(res.data.data.razr.id);
     console.log(res.data);
     document.getElementById('orderId').innerText = res.data.data.razr.id;
-    document.getElementById('amount').innerText = res.data.data.razr.amount / 100; // checkoutContent.innerHTML = html;
+    document.getElementById('amount').innerText = "\u20B9 ".concat(res.data.data.razr.amount / 100); // checkoutContent.innerHTML = html;
     // document.getElementById('spinner').style.display = 'none';
     // checkoutContent.style.display = '';
 
@@ -96303,7 +96309,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59328" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52086" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

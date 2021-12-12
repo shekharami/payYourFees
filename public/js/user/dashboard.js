@@ -108,7 +108,7 @@ if (addToCart.length) {
           }
         });
         if (res.data.status === 'success') {
-          alert(res.data.data);
+          alert('added successfully!');
           location.reload(true);
         }
       } catch (err) {
